@@ -221,8 +221,6 @@ button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
 <script>
 (function(){
   const slidesEl = document.getElementById('slides');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
   const slides = Array.from(slidesEl.querySelectorAll('.slide'));
   const total = slides.length;
   let index = 0;
@@ -238,8 +236,6 @@ button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
     slides.forEach((s, idx) => s.setAttribute('aria-hidden', idx !== index ? 'true' : 'false'));
   }
 
-  if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
-  if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
 
   document.addEventListener('keydown', e => {
     if(e.key === 'ArrowLeft') { goTo(index - 1); stopAuto(); }
@@ -327,10 +323,6 @@ button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
     }
   });
 
-  // small project navigation handlers (optional behavior: can be wired to real pages)
-  document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet0.html'; });
-  document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
-
   // initialise
   goTo(0);
   startAuto();
@@ -338,5 +330,6 @@ button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
 </script>
 </body>
 </html>
+
 
 
