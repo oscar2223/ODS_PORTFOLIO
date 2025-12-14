@@ -188,14 +188,15 @@ J’ai également conçu la charte graphique du projet, en définissant son univ
   <!-- LIGHTBOX (navigation prev/next + close) -->
   <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Aperçu de l'image">
     <div class="lightbox-inner" role="document">
-      <button class="nav-btn nav-prev" id="lightboxPrev" aria-label="Image précédente" title="Image précédente" type="button">
+      <!-- Prev / Next buttons: higher z-index and keyboard accessible -->
+      <button class="nav-btn nav-prev" id="lightboxPrev" aria-label="Image précédente" title="Image précédente" type="button" tabindex="0">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="16 4 8 12 16 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
       </button>
 
-      <img id="lightboxImage" src="" alt="">
+      <img id="lightboxImage" src="" alt="" />
       <div class="caption" id="lightboxCaption" aria-live="polite"></div>
 
-      <button class="nav-btn nav-next" id="lightboxNext" aria-label="Image suivante" title="Image suivante" type="button">
+      <button class="nav-btn nav-next" id="lightboxNext" aria-label="Image suivante" title="Image suivante" type="button" tabindex="0">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="8 4 16 12 8 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
       </button>
 
@@ -260,6 +261,9 @@ J’ai également conçu la charte graphique du projet, en définissant son univ
         lightboxImage.alt = img.alt || '';
         lightboxCaption.textContent = caption;
         lightbox.setAttribute('aria-hidden', 'false');
+        // ensure controls are focusable and visible
+        lightboxPrev?.setAttribute('tabindex','0');
+        lightboxNext?.setAttribute('tabindex','0');
       }
 
       function openLightbox(i){
@@ -267,7 +271,8 @@ J’ai également conçu la charte graphique du projet, en définissant son univ
         document.body.classList.add('noscroll');
         lightbox.classList.add('active');
         lightbox.setAttribute('aria-hidden', 'false');
-        lightboxClose.focus();
+        // focus the next button for keyboard users (so arrows are available)
+        lightboxNext?.focus();
         stopAuto();
       }
 
@@ -295,11 +300,17 @@ J’ai également conçu la charte graphique du projet, en définissant son univ
         img.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
       });
 
-      if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-      if(lightboxPrev) lightboxPrev.addEventListener('click', prevLight);
-      if(lightboxNext) lightboxNext.addEventListener('click', nextLight);
+      // nav button event handlers (click + keyboard)
+      if(lightboxPrev){
+        lightboxPrev.addEventListener('click', () => { prevLight(); });
+        lightboxPrev.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); prevLight(); } });
+      }
+      if(lightboxNext){
+        lightboxNext.addEventListener('click', () => { nextLight(); });
+        lightboxNext.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nextLight(); } });
+      }
 
-      // close when clicking outside inner area
+      if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
       lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
 
       // keyboard controls while lightbox open
