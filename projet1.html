@@ -27,8 +27,7 @@
     .nav a{color:#fff;font-size:clamp(24px,1.6vw,28px);letter-spacing:.6px;padding:8px 6px;position:relative;transition: transform .18s}
     .nav a:hover{transform:translateY(-3px)}
     .logo img{height:88px;width:auto;object-fit:contain;display:block}
-        .nav-left{ justify-self:end; margin-right:6px; }
-    .nav-right{ justify-self:start; margin-left:6px; }
+ 
 
 
     /* Main */
@@ -108,21 +107,22 @@
 <body>
   <div class="frame">
 
-    <!-- Header -->
-    <header class="site-header" role="navigation" aria-label="Navigation principale">
-      <nav class="nav nav-left">
+   <header class="site-header" role="navigation" aria-label="Navigation principale">
+      <nav class="nav nav-left" aria-label="Gauche">
         <a href="index.html">Home</a>
         <a href="projets.html">Projets</a>
       </nav>
 
-      <div class="logo">
-        <img src="images/logo-ods.png" alt="Logo ODS">
+      <div class="logo" aria-label="Logo ODS">
+        <img src="images/logo-ods.png" alt="logo ODS">
+        <!-- <span class="logo-badge">ODS</span> -->
       </div>
 
-      <nav class="nav nav-right">
-        <a href="contact.html">Contact</a>
-      </nav>
-    </header>
+      <div class="right-wrap" style="display:flex;align-items:center;gap:12px;">
+        <nav class="nav nav-right" aria-label="Droite">
+          <a href="apropos.html">À Propos</a>
+          <a href="contact.html">Contact</a>
+        </nav>
 
     <!-- Main -->
     <main class="content" role="main">
@@ -304,6 +304,7 @@ Grâce à la SAE 105, j’ai conçu et développé un site web structuré, acces
   </script>
 </body>
 </html>
+
 
 
 
