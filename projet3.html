@@ -81,23 +81,23 @@
     footer.site-footer a{ color:#fff; text-decoration:underline }
 
     /* ---------------- Lightbox (modal) styles ---------------- */
-    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);z-index:2000;padding:20px}
+    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);z-index:4000;padding:20px}
     .lightbox.active{ display:flex; }
     .lightbox-inner{max-width:95vw;max-height:92vh;display:flex;align-items:center;justify-content:center;position:relative}
-    .lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#000;display:block}
+    .lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#000;display:block;z-index:1000}
     .lightbox .caption{position:absolute;left:18px;bottom:14px;color:#fff;font-weight:600;text-shadow:0 6px 24px rgba(0,0,0,0.6)}
-    .lightbox .close-btn{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.95);color:#000;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.2)}
+    .lightbox .close-btn{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.95);color:#000;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.2);z-index:2000}
 
     /* Prev/Next buttons inside lightbox */
-    .lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);color:#000;border:none;cursor:pointer;z-index:12}
+    .lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);color:#000;border:none;cursor:pointer;z-index:3000;pointer-events:auto}
     .lightbox .nav-btn:hover{transform:translateY(-50%) scale(1.03)}
-    .lightbox .nav-prev{left:12px}
-    .lightbox .nav-next{right:12px}
-    .lightbox .nav-btn svg{width:26px;height:26px;stroke:#000;stroke-width:6;fill:none}
+    .lightbox .nav-prev{left:8px}
+    .lightbox .nav-next{right:8px}
+    .lightbox .nav-btn svg{width:30px;height:30px;stroke:#000;stroke-width:6;fill:none}
 
     /* small responsive adjustments */
     @media (max-width:960px){.experience-row{ grid-template-columns: 1fr } .experience-label{ text-align:center; order:1; display:block; padding-top:0; font-size:26px } .experience-text{ order:2; text-align:left } .slider-stage .slide img{ height:200px } .slide-caption{ font-size:18px } .skill-icons img{ height:120px }}
-    @media (max-width:520px){ .slider-stage .slide img{ height:150px } .logo img{ height:56px } .nav a{ font-size:16px } .page-title{ font-size:24px } .btn{ padding:10px 18px; font-size:16px } .skill-icons img{ height:90px }}
+    @media (max-width:520px){ .slider-stage .slide img{ height:150px } .logo img{ height:56px } .nav a{ font-size:16px } .page-title{ font-size:24px } .btn{ padding:10px 18px; font-size:16px } .skill-icons img{ height:90px } .lightbox .nav-btn{ width:48px;height:48px } .lightbox .nav-btn svg{ width:22px;height:22px } }
   </style>
 </head>
 <body>
@@ -188,7 +188,7 @@
     </footer>
   </div>
 
-  <!-- LIGHTBOX (avec boutons Prev/Next) -->
+  <!-- LIGHTBOX (avec boutons Prev/Next + visibilité assurée) -->
   <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Aperçu de l'image">
     <div class="lightbox-inner" role="document">
       <button class="nav-btn nav-prev" id="lightboxPrev" aria-label="Image précédente" title="Image précédente" type="button" tabindex="0">
@@ -270,6 +270,7 @@
         const img = slideImages[currentLightIndex];
         const src = img.dataset.full || img.src;
         const caption = img.dataset.caption || img.alt || '';
+        // set image then ensure it's on a lower stacking level than nav buttons
         lightboxImage.src = src;
         lightboxImage.alt = img.alt || '';
         lightboxCaption.textContent = caption;
