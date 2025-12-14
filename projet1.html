@@ -6,335 +6,180 @@
   <title>Projet 1 — ODS</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset & base */
-    *{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    html,body{height:100%;margin:0;font-family:'Cormorant Garamond',serif;color:#0b0b0b;background:#f6f6f6}
-    img{display:block;max-width:100%;height:auto;border:0}
-    a{color:inherit;text-decoration:none}
-    button{font-family:inherit}
-
-    @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+    *{box-sizing:border-box}
+    html,body{margin:0;font-family:'Cormorant Garamond',serif;background:#f6f6f6;color:#0b0b0b}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
 
     /* Frame */
-    .frame{width:100%;max-width:2000px;margin:0 auto;background:#dcdcdc;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+    .frame{max-width:2000px;margin:auto;min-height:100vh;display:flex;flex-direction:column}
 
     /* Header */
-    header.site-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:14px 4vw;background:#000;color:#fff;position:relative}
-    .nav{display:flex;gap:18px;align-items:center;white-space:nowrap}
-    .nav a{color:#fff;font-size:clamp(24px,1.6vw,28px);transition:transform .18s}
-    .nav a:hover{transform:translateY(-3px)}
-    .logo img{height:88px;width:auto;object-fit:contain;display:block}
+    header.site-header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:60px;
+      padding:14px 4vw;
+      background:#000;
+      color:#fff;
+    }
+    .nav{display:flex;gap:30px}
+    .nav a{font-size:22px}
+    .logo img{height:80px}
 
     /* Main */
-    main.content{padding:28px 6vw 48px;display:flex;flex-direction:column;gap:28px;background:transparent}
-    .page-title{color:#000;font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,40px);margin:6px 0;text-align:center}
+    main{padding:40px 6vw}
+    .page-title{text-align:center;font-family:'Playfair Display',serif;font-size:38px;margin-bottom:30px}
 
     /* Slider */
-    .slider-wrap{display:flex;align-items:center;justify-content:center;position:relative;margin:8px auto 18px;width:100%}
-    .slider-stage{width:760px;max-width:100%;background:#8f8f8f;padding:0;position:relative;overflow:hidden;border-radius:2px;box-shadow:0 6px 24px rgba(0,0,0,.12)}
-    .slides{display:flex;transition:transform .6s cubic-bezier(.2,.9,.2,1);will-change:transform}
-    .slide{min-width:100%;position:relative;user-select:none;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-    .slide img{display:block;width:100%;height:260px;object-fit:cover;vertical-align:middle;cursor:zoom-in}
-    .slide-caption{position:absolute;left:18px;bottom:18px;color:black;font-size:20px;font-weight:700;text-shadow:0 4px 18px rgba(255,255,255,.3);letter-spacing:.6px;background:rgba(255,255,255,0.85);padding:6px 10px;border-radius:4px}
+    .slider-wrap{position:relative;max-width:800px;margin:auto}
+    .slider-stage{overflow:hidden}
+    .slides{display:flex;transition:transform .6s ease}
+    .slide{min-width:100%}
+    .slide img{height:260px;object-fit:cover;cursor:zoom-in}
 
-    /* Arrows */
-    .arrow{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:transparent;color:#000;cursor:pointer;z-index:12;transition:transform .18s;user-select:none;border:0}
-    .arrow:hover{transform:translateY(-50%) scale(1.05)}
-    .arrow-left{left:10px}
-    .arrow-right{right:10px}
-    .arrow svg{width:30px;height:30px;stroke:#000;stroke-width:6;fill:none}
+    .arrow{
+      position:absolute;top:50%;transform:translateY(-50%);
+      background:#fff;border:none;border-radius:50%;
+      width:50px;height:50px;cursor:pointer
+    }
+    .arrow-left{left:-70px}
+    .arrow-right{right:-70px}
 
-    /* Content below */
-    .content-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:end}
-    .experience-row{display:grid;grid-template-columns:140px 1fr;gap:20px;align-items:center}
-    .experience-label{font-family:'Playfair Display',serif;font-size:30px;color:#0b0b0b;padding-top:6px;text-align:left}
-    .experience-text{color:#111;font-size:16.5px;line-height:1.8;text-align:center;display:block}
-
-    .skills{text-align:center;margin-top:8px}
-    .skills h3{font-family:'Playfair Display',serif;font-size:24px;margin:18px 0 6px}
-    .skill-icons{display:flex;gap:18px;justify-content:center;align-items:center;margin-top:8px}
-    .skill-icons img{height:350px;width:auto;display:block}
-
-    .nav-buttons-row{display:flex;gap:18px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-    .btn{background:#fff;border:0;padding:14px 28px;border-radius:28px;box-shadow:0 6px 0 rgba(0,0,0,.12);font-size:18px;cursor:pointer;transition:transform .18s,box-shadow .18s}
-    .btn:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.12)}
-
-    footer.site-footer{background:#000;color:#fff;padding:18px 4vw;display:flex;justify-content:center;align-items:center}
-    footer.site-footer a{color:#fff;text-decoration:underline}
-
-    /* lightbox */
+    /* Lightbox */
     body.noscroll{overflow:hidden}
-    .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);z-index:2000;padding:20px}
+    .lightbox{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.92);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:2000;
+    }
     .lightbox.active{display:flex}
-    .lightbox-inner{max-width:95vw;max-height:92vh;display:flex;align-items:center;justify-content:center;position:relative}
-    .lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#000;display:block}
-    .lightbox .caption{position:absolute;left:18px;bottom:14px;color:#fff;font-weight:600;text-shadow:0 6px 24px rgba(0,0,0,0.6)}
-    .lightbox .close-btn{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.95);color:#000;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.2)}
+    .lightbox-inner{position:relative;max-width:90vw;max-height:90vh}
+    .lightbox img{max-height:90vh}
 
-    /* Accessibility focus */
-    button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
+    .lb-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(255,255,255,.9);
+      border:none;
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:26px;
+      font-weight:bold;
+    }
+    .lb-prev{left:-70px}
+    .lb-next{right:-70px}
 
-    /* Responsive */
-    @media(max-width:960px){
-      .experience-row{grid-template-columns:1fr}
-      .experience-label{text-align:center;order:1;display:block;padding-top:0;font-size:26px}
-      .experience-text{order:2;text-align:left}
-      .slider-stage .slide img{height:200px}
-      .skill-icons img{height:120px}
-    }
-    @media(max-width:520px){
-      .slider-stage .slide img{height:150px}
-      .logo img{height:56px}
-      .nav a{font-size:16px}
-      .page-title{font-size:24px}
-      .skill-icons img{height:90px}
-    }
+    footer{background:#000;color:#fff;text-align:center;padding:18px;margin-top:60px}
   </style>
 </head>
+
 <body>
-  <div class="frame">
+<div class="frame">
 
-    <!-- Header -->
-    <header class="site-header" role="navigation" aria-label="Navigation principale">
-      <nav class="nav nav-left" aria-label="Gauche">
-        <a href="projets.html">Réalisations</a>
-        <a href="apropos.html">À propos</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-
-      <div class="logo" aria-label="Logo ODS">
-        <img src="images/logo-ods.png" alt="Logo ODS">
-      </div>
-
-      <div class="right-wrap" style="display:flex;align-items:center;gap:12px;">
-        <nav class="nav nav-right" aria-label="Droite"><a href="#"></a></nav>
-        <button class="hamburger" aria-label="Ouvrir le menu" id="hamburger" style="display:none;"><span></span><span></span><span></span></button>
-      </div>
-    </header>
-
-    <!-- Main -->
-    <main class="content" role="main">
-      <div><div class="page-title">Projet 1 </div></div>
-
-      <!-- Slider -->
-      <div class="slider-wrap" aria-hidden="false">
-        <button class="arrow arrow-left" id="prevBtn" aria-label="Projet précédent" type="button">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="16 4 8 12 16 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-        </button>
-
-        <div class="slider-stage" role="region" aria-roledescription="carousel" aria-label="Galerie du projet">
-          <div class="slides" id="slides">
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 1">
-              <img src="images/site_drap.jpg" alt="Site La Cité Drap'Hier" data-full="images/site_drap.jpg" data-caption="Site CMS — La Cité Drap'Hier">
-              <div class="slide-caption">Site CMS du projet La Cité Drap'Hier</div>
-            </div>
-
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 2">
-              <img src="images/imageCMS1.png" alt="Site CMS — capture 2" data-full="images/imageCMS1.png" data-caption="Capture — Site CMS">
-              <div class="slide-caption">Site de CMS 1</div>
-            </div>
-
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 3">
-              <img src="images/IMAGECMS2.png" alt="Site CMS — capture 3" data-full="images/IMAGECMS2.png" data-caption="Capture — Site CMS">
-              <div class="slide-caption">Site de CMS 2</div>
-            </div>
-
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 4">
-              <img src="images/imageCMS3.png" alt="Site CMS — capture 4" data-full="images/imageCMS3.png" data-caption="Capture — Site CMS">
-              <div class="slide-caption">Site de CMS 3 </div>
-            </div>
-
-            <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 5">
-              <img src="images/sitesae203.jpg" alt="Site billetterie" data-full="images/sitesae203.jpg" data-caption="Site billetterie">
-              <div class="slide-caption">Site de billetterie</div>
-            </div>
-
-              <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 6">
-              <img src="images/site-1-reservation-billet.png" alt="Page de Réservation" data-full="images/site-1-reservation-billet.png" data-caption="Réservations">
-              <div class="slide-caption">Page de Réservation</div>
-            </div>
-<div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 7">
-              <img src="images/site-billet-mesreserve.png" alt="Page mes Réservations" data-full="images/site-billet-mesreserve.png" data-caption="Mes Réservations">
-              <div class="slide-caption">Page de mes Réservation</div>
-          </div>
-
-<div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 8">
-              <img src="images/sitebilletterie1.png" alt="Coté ADMIN" data-full="images/sitebilletterie1.png" data-caption="Page Admin">
-              <div class="slide-caption">Page Admin</div>
-          </div>
-
-
-        <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 9">
-              <img src="images/site-billet-admin.png" alt="Page mes Réservations" data-full="images/site-billet-admin.png" data-caption="ADMINISTRATEUR">
-              <div class="slide-caption">Page de l'ADMINISTRATEUR</div>
-          </div>
-          </div>
-        </div>
-        <button class="arrow arrow-right" id="nextBtn" aria-label="Projet suivant" type="button">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="8 4 16 12 8 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-        </button>
-      </div>
-
-      <!-- Experience & skills -->
-      <div class="content-grid">
-        <div class="experience-row">
-          <div class="experience-label">Experience :</div>
-          <div class="experience-text">
-Grâce à la SAE 105, j’ai conçu et développé un site web structuré, accessible et responsive (HTML, CSS, JavaScript), en appliquant une sémantique HTML correcte ainsi que diverses animations.
-
-La SAE 203 m’a amené à créer une billetterie en ligne (PHP, MySQL, TPWEB) intégrant l’inscription, un espace Mon compte, l’envoi d’e-mails de confirmation via Sogo, ainsi que la gestion des transactions et un système de verrouillage pour éviter les sur-réservations. J’ai également modélisé la base de données (Events, Users, Reservations, côté Admin, Billet), et mis en place la possibilité d’ajouter, modifier ou supprimer des événements directement depuis le site. Enfin, j’ai sécurisé l’application (hachage des mots de passe, validation côté serveur, gestion des sessions).
-
-Pour la SAE 202, nous avons réalisé un site vitrine culturel pour le projet La Cité Drap’Hier. L’objectif était de plonger l’utilisateur dans l’histoire de la ville d’Elbeuf grâce à différentes pages : À propos, Blog, Événements, Galerie, ainsi qu’une newsletter et un système de vente de billets.          </div>
-        </div>
-
-        <div class="skills">
-          <h3>Compétences techniques :</h3>
-          <div class="skill-icons">
-            <img src="images/nume1-compet__1__page-0001-removebg-preview.png" alt="Compétences numériques">
-          </div>
-        </div>
-
-        <div style="display:flex;justify-content:center;">
-          <div class="nav-buttons-row" role="navigation" aria-label="Navigation projets">
-            <button class="btn" id="prevProject">← Revenir au Projet Précédent</button>
-            <button class="btn" id="nextProject">Aller au Projet Suivant →</button>
-            <a class="btn" href="projets.html" role="button">Retour au portfolio</a>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div>© 2025 Oscar Da Silva | <a href="contact.html">Contact</a></div>
-    </footer>
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="projets.html">Projets</a>
+  </nav>
+  <div class="logo">
+    <img src="images/logo-ods.png" alt="Logo ODS">
   </div>
+</header>
 
-  <!-- Lightbox modal -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Aperçu de l'image">
-    <div class="lightbox-inner" role="document">
-      <img id="lightboxImage" src="" alt="">
-      <div class="caption" id="lightboxCaption"></div>
-      <button class="close-btn" id="lightboxClose" aria-label="Fermer l'aperçu">Quitter</button>
+<main>
+  <h1 class="page-title">Projet 1</h1>
+
+  <div class="slider-wrap">
+    <button class="arrow arrow-left" id="prevBtn">←</button>
+
+    <div class="slider-stage">
+      <div class="slides" id="slides">
+        <div class="slide"><img src="images/site_drap.jpg" alt=""></div>
+        <div class="slide"><img src="images/imageCMS1.png" alt=""></div>
+        <div class="slide"><img src="images/IMAGECMS2.png" alt=""></div>
+      </div>
     </div>
+
+    <button class="arrow arrow-right" id="nextBtn">→</button>
   </div>
+</main>
 
-  <script>
-    (function(){
-      const slidesEl = document.getElementById('slides');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const slides = Array.from(slidesEl.querySelectorAll('.slide'));
-      const total = slides.length;
-      let index = 0;
+<footer>
+  © 2025 Oscar Da Silva
+</footer>
 
-      function goTo(i){
-        index = (i + total) % total;
-        slidesEl.style.transform = `translateX(${-index * 100}%)`;
-        slides.forEach((s, idx) => s.setAttribute('aria-hidden', idx !== index));
-      }
+</div>
 
-      if(prevBtn) prevBtn.addEventListener('click', ()=> goTo(index - 1));
-      if(nextBtn) nextBtn.addEventListener('click', ()=> goTo(index + 1));
-      document.addEventListener('keydown', e => {
-        if(e.key === 'ArrowLeft') goTo(index - 1);
-        if(e.key === 'ArrowRight') goTo(index + 1);
-      });
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lb-arrow lb-prev" id="lbPrev">←</button>
+    <img id="lightboxImg" src="" alt="">
+    <button class="lb-arrow lb-next" id="lbNext">→</button>
+  </div>
+</div>
 
-      // autoplay
-      let timer = null, autoplay = true;
-      function startAuto(){ if(!autoplay) return; timer = setInterval(()=> goTo(index+1), 6000); }
-      function stopAuto(){ if(timer){ clearInterval(timer); timer = null; } }
-      const stage = document.querySelector('.slider-stage');
-      if(stage){ stage.addEventListener('mouseenter', stopAuto); stage.addEventListener('mouseleave', startAuto); }
+<script>
+(() => {
+  const slides = document.querySelectorAll('.slide img');
+  const slidesWrap = document.getElementById('slides');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  let index = 0;
 
-      // Lightbox elements
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImage = document.getElementById('lightboxImage');
-      const lightboxCaption = document.getElementById('lightboxCaption');
-      const lightboxClose = document.getElementById('lightboxClose');
+  function updateSlider(){
+    slidesWrap.style.transform = `translateX(${-index * 100}%)`;
+  }
 
-      function openLightbox(src, caption){
-        lightboxImage.src = src || '';
-        lightboxImage.alt = caption || '';
-        lightboxCaption.textContent = caption || '';
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden','false');
-        document.body.classList.add('noscroll');
-      }
+  slides.forEach((img,i)=>{
+    img.addEventListener('click',()=>{
+      index = i;
+      openLightbox();
+    });
+  });
 
-      function closeLightbox(){
-        lightbox.classList.remove('active');
-        lightbox.setAttribute('aria-hidden','true');
-        lightboxImage.src = '';
-        lightboxCaption.textContent = '';
-        document.body.classList.remove('noscroll');
-      }
+  function openLightbox(){
+    lightbox.classList.add('active');
+    document.body.classList.add('noscroll');
+    lightboxImg.src = slides[index].src;
+  }
 
-      // Click on slide image to open lightbox
-      slides.forEach((slide, slideIndex) => {
-        const img = slide.querySelector('img');
-        if(!img) return;
-        img.addEventListener('click', (e) => {
-          const full = img.dataset.full || img.src;
-          const caption = img.dataset.caption || img.alt || '';
-          openLightbox(full, caption);
-          // sync slider index with clicked image
-          goTo(slideIndex);
-        });
+  function closeLightbox(){
+    lightbox.classList.remove('active');
+    document.body.classList.remove('noscroll');
+  }
 
-        // keyboard accessibility on image (Enter/Space)
-        img.tabIndex = 0;
-        img.addEventListener('keydown', (e) => {
-          if(e.key === 'Enter' || e.key === ' '){
-            e.preventDefault();
-            img.click();
-          }
-        });
-      });
+  document.getElementById('prevBtn').onclick=()=>{index=(index-1+slides.length)%slides.length;updateSlider();}
+  document.getElementById('nextBtn').onclick=()=>{index=(index+1)%slides.length;updateSlider();}
 
-      // Close handlers
-      lightboxClose.addEventListener('click', closeLightbox);
-      lightbox.addEventListener('click', (e) => {
-        // if click on overlay (not on inner image), close
-        if(e.target === lightbox) closeLightbox();
-      });
+  document.getElementById('lbPrev').onclick=()=>{index=(index-1+slides.length)%slides.length;openLightbox();}
+  document.getElementById('lbNext').onclick=()=>{index=(index+1)%slides.length;openLightbox();}
 
-      // Esc to close
-      document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
-      });
+  lightbox.addEventListener('click',e=>{
+    if(e.target===lightbox) closeLightbox();
+  });
 
-      // Navigate slides while lightbox open with arrows
-      document.addEventListener('keydown', (e) => {
-        if(!lightbox.classList.contains('active')) return;
-        if(e.key === 'ArrowLeft'){
-          const newIndex = (index - 1 + total) % total;
-          const newImg = slides[newIndex].querySelector('img');
-          openLightbox(newImg.dataset.full || newImg.src, newImg.dataset.caption || newImg.alt || '');
-          goTo(newIndex);
-        }
-        if(e.key === 'ArrowRight'){
-          const newIndex = (index + 1) % total;
-          const newImg = slides[newIndex].querySelector('img');
-          openLightbox(newImg.dataset.full || newImg.src, newImg.dataset.caption || newImg.alt || '');
-          goTo(newIndex);
-        }
-      });
+  document.addEventListener('keydown',e=>{
+    if(!lightbox.classList.contains('active')) return;
+    if(e.key==='ArrowLeft'){index=(index-1+slides.length)%slides.length;openLightbox();}
+    if(e.key==='ArrowRight'){index=(index+1)%slides.length;openLightbox();}
+    if(e.key==='Escape') closeLightbox();
+  });
 
-      // Prev/Next project buttons (adapter si besoin)
-      const prevProject = document.getElementById('prevProject');
-      const nextProject = document.getElementById('nextProject');
-      if(prevProject) prevProject.addEventListener('click', ()=> window.location.href='projet4.html');
-      if(nextProject) nextProject.addEventListener('click', ()=> window.location.href='projet2.html');
+  updateSlider();
+})();
+</script>
 
-      // Init
-      goTo(0);
-      startAuto();
-    })();
-  </script>
 </body>
 </html>
