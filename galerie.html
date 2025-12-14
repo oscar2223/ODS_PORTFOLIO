@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- COPIE EXACTE DU CSS DE index.html (pour cohérence totale) --- */
+    /* --- COPIE DU CSS DE index.html (cohérence) --- */
     * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
     html,body{height:100%;margin:0;font-family: 'Cormorant Garamond', serif;color:#0b0b0b;background:#000}
     img{max-width:100%;height:auto;display:block;border:0}
@@ -156,7 +156,6 @@
     h1 span.break{display:block}
 
     /* --- STYLES SPÉCIFIQUES À LA GALERIE (complètent le style existant) --- */
-    /* Force la page galerie à utiliser une seule colonne principale */
     body.gallery-page main{ grid-template-columns: 1fr; gap:0; padding:6vh 6vw 8vh; align-items:start; }
 
     .gallery-header{
@@ -173,9 +172,10 @@
       opacity:.95;
     }
 
+    /* ajusté pour 2 colonnes par défaut */
     .gallery-grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap:22px;
       align-items:stretch;
     }
@@ -191,7 +191,7 @@
     }
     .gallery-card img{
       width:100%;
-      height:220px;
+      height:320px;
       object-fit:cover;
       display:block;
       filter:grayscale(100%) contrast(.96);
@@ -208,10 +208,6 @@
     /* apparition séquencée */
     .gallery-card[data-order="1"]{ animation:slideUp .48s .08s ease forwards; }
     .gallery-card[data-order="2"]{ animation:slideUp .48s .16s ease forwards; }
-    .gallery-card[data-order="3"]{ animation:slideUp .48s .24s ease forwards; }
-    .gallery-card[data-order="4"]{ animation:slideUp .48s .32s ease forwards; }
-    .gallery-card[data-order="5"]{ animation:slideUp .48s .40s ease forwards; }
-    .gallery-card[data-order="6"]{ animation:slideUp .48s .48s ease forwards; }
 
     @keyframes slideUp{
       from{opacity:0; transform:translateY(18px)}
@@ -221,17 +217,11 @@
     /* responsive */
     @media (max-width:980px){
       .gallery-grid{ grid-template-columns: repeat(2, 1fr); }
-      .gallery-card img{ height:200px; }
+      .gallery-card img{ height:260px; }
     }
     @media (max-width:560px){
       .gallery-grid{ grid-template-columns: 1fr; gap:16px; }
-      .gallery-card img{ height:180px; }
-    }
-
-    /* style bouton retour propre */
-    .gallery-actions{ margin-top:26px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-    .btn-ghost{
-      background:transparent;border:1px solid rgba(11,11,11,.06);padding:12px 18px;border-radius:12px;color:#111;text-decoration:none;font-size:16px;
+      .gallery-card img{ height:220px; }
     }
   </style>
 </head>
@@ -264,81 +254,37 @@
       </div>
     </header>
 
-    <!-- MAIN : contenu galerie -->
+    <!-- MAIN : contenu galerie (2 blocs uniquement) -->
     <main>
       <section class="hero" aria-labelledby="galerie-title" style="padding:0">
         <div class="gallery-header">
           <h1 id="galerie-title">Galerie</h1>
-          <p class="gallery-intro">Sélection de visuels et projets. Clique sur une image pour l'agrandir (option lightbox possible si tu veux).</p>
+          <p class="gallery-intro">Sélection de visuels. Clique sur une image pour l'agrandir (ouverture dans un nouvel onglet).</p>
         </div>
 
         <div class="gallery-grid" role="list" aria-label="Grille de la galerie">
           <article class="gallery-card" role="listitem" data-order="1">
-            <img src="images/galerie1.jpg" alt="Projet 1 — visuel">
+            <img src="images/hamilton.jpg" alt="Affiche Hamilton — visuel">
             <div class="gallery-meta">
-              <h3 class="gallery-title">Projet 1</h3>
-              <p class="gallery-desc">Illustration / design</p>
+              <h3 class="gallery-title">Affiche Hamilton</h3>
+              <p class="gallery-desc">Affiche — Hamilton (théâtre / spectacle)</p>
             </div>
           </article>
 
           <article class="gallery-card" role="listitem" data-order="2">
-            <img src="images/galerie2.jpg" alt="Projet 2 — visuel">
+            <img src="images/f1.jpg" alt="Affiche F1 — visuel">
             <div class="gallery-meta">
-              <h3 class="gallery-title">Projet 2</h3>
-              <p class="gallery-desc">Photomontage</p>
-            </div>
-          </article>
-
-          <article class="gallery-card" role="listitem" data-order="3">
-            <img src="images/galerie3.jpg" alt="Projet 3 — visuel">
-            <div class="gallery-meta">
-              <h3 class="gallery-title">Projet 3</h3>
-              <p class="gallery-desc">Web design</p>
-            </div>
-          </article>
-
-          <article class="gallery-card" role="listitem" data-order="4">
-            <img src="images/galerie4.jpg" alt="Projet 4 — visuel">
-            <div class="gallery-meta">
-              <h3 class="gallery-title">Projet 4</h3>
-              <p class="gallery-desc">Affiche / communication</p>
-            </div>
-          </article>
-
-          <article class="gallery-card" role="listitem" data-order="5">
-            <img src="images/galerie5.jpg" alt="Projet 5 — visuel">
-            <div class="gallery-meta">
-              <h3 class="gallery-title">Projet 5</h3>
-              <p class="gallery-desc">Motion frame</p>
-            </div>
-          </article>
-
-          <article class="gallery-card" role="listitem" data-order="6">
-            <img src="images/galerie6.jpg" alt="Projet 6 — visuel">
-            <div class="gallery-meta">
-              <h3 class="gallery-title">Projet 6</h3>
-              <p class="gallery-desc">Identité visuelle</p>
+              <h3 class="gallery-title">Affiche F1</h3>
+              <p class="gallery-desc">Affiche — F1 (événement sportif)</p>
             </div>
           </article>
         </div>
 
-        <div class="gallery-actions">
+        <div class="gallery-actions" style="margin-top:22px;display:flex;gap:12px;">
           <a class="cta" href="projets.html">Voir les projets</a>
-          <a class="btn-ghost" href="index.html">Retour à l’accueil</a>
+          <a class="cta" href="index.html">Retour à l’accueil</a>
         </div>
       </section>
-
-      <!-- côte droit pour rester cohérent (affiche ton portrait & contact comme sur index) -->
-      <aside class="side" aria-label="Contact et portrait">
-        <div class="portrait" aria-hidden="true" style="width:300px;height:320px;">
-          <img src="images/Rectangle 3.png" alt="Portrait">
-        </div>
-
-        <div class="contact" style="margin-top:18px;">
-          <a href="mailto:oscar23ds@icloud.com">oscar23ds@icloud.com</a>
-          <div class="tel">07 63 40 69 09</div>
-        </div>
-      </aside>
 
     </main>
 
@@ -395,7 +341,7 @@
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
     hamburger.addEventListener('keyup', (e)=>{ if(e.key === 'Enter' || e.key === ' '){ hamburger.click(); } });
 
-    // Optionnel : clic sur une image pour l'ouvrir dans un nouvel onglet (simple "lightbox" basique)
+    // clic sur une image pour l'ouvrir dans un nouvel onglet (lightbox basique)
     document.querySelectorAll('.gallery-card img').forEach(img=>{
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', ()=>{ window.open(img.src, '_blank'); });
@@ -403,4 +349,3 @@
   </script>
 </body>
 </html>
-
