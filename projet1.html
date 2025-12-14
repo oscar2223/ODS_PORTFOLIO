@@ -68,6 +68,11 @@ body.noscroll{overflow:hidden}
 .lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#000;display:block}
 .lightbox .caption{position:absolute;left:18px;bottom:14px;color:#fff;font-weight:600;text-shadow:0 6px 24px rgba(0,0,0,0.6)}
 .lightbox .close-btn{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.95);color:#000;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.2)}
+.lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);color:#000;border:none;cursor:pointer;z-index:12}
+.lightbox .nav-btn:hover{transform:translateY(-50%) scale(1.03)}
+.lightbox .nav-prev{left:12px}
+.lightbox .nav-next{right:12px}
+.lightbox .nav-btn svg{width:26px;height:26px;stroke:#000;stroke-width:6;fill:none}
 
 /* Accessibility focus */
 button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
@@ -195,12 +200,21 @@ button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
   </footer>
 </div>
 
-<!-- Lightbox modal -->
+<!-- Lightbox modal (le bouton "Quitter" a été remplacé par une navigation précédente/suivante) -->
 <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Aperçu de l'image">
   <div class="lightbox-inner" role="document">
+    <button class="nav-btn nav-prev" id="lightboxPrev" aria-label="Image précédente" title="Image précédente" type="button">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="16 4 8 12 16 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+    </button>
+
     <img id="lightboxImage" src="" alt="">
-    <div class="caption" id="lightboxCaption"></div>
-    <button class="close-btn" id="lightboxClose" aria-label="Fermer l'aperçu">Quitter</button>
+    <div class="caption" id="lightboxCaption" aria-live="polite"></div>
+
+    <button class="nav-btn nav-next" id="lightboxNext" aria-label="Image suivante" title="Image suivante" type="button">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="8 4 16 12 8 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+    </button>
+
+    <button class="close-btn" id="lightboxClose" aria-label="Fermer l'aperçu">Fermer</button>
   </div>
 </div>
 
@@ -215,21 +229,24 @@ button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
   let timer = null;
   const autoplay = true;
 
+  // ensure slides have aria-hidden set
+  slides.forEach((s, i) => s.setAttribute('aria-hidden', i !== 0 ? 'true' : 'false'));
+
   function goTo(i){
     index = (i + total) % total;
-    slidesEl.style.transform = `translateX(${-index * 100}%)`;
-    slides.forEach((s, idx) => s.setAttribute('aria-hidden', idx !== index));
+    slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
+    slides.forEach((s, idx) => s.setAttribute('aria-hidden', idx !== index ? 'true' : 'false'));
   }
 
-  if(prevBtn) prevBtn.addEventListener('click', ()=> goTo(index - 1));
-  if(nextBtn) nextBtn.addEventListener('click', ()=> goTo(index + 1));
+  if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
+  if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
 
   document.addEventListener('keydown', e => {
-    if(e.key === 'ArrowLeft') goTo(index - 1);
-    if(e.key === 'ArrowRight') goTo(index + 1);
+    if(e.key === 'ArrowLeft') { goTo(index - 1); stopAuto(); }
+    if(e.key === 'ArrowRight') { goTo(index + 1); stopAuto(); }
   });
 
-  function startAuto(){ if(autoplay) timer = setInterval(()=> goTo(index+1), 6000); }
+  function startAuto(){ if(autoplay && !timer) timer = setInterval(()=> goTo(index+1), 6000); }
   function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
 
   const stage = document.querySelector('.slider-stage');
@@ -243,8 +260,81 @@ button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
   const lightboxImage = document.getElementById('lightboxImage');
   const lightboxCaption = document.getElementById('lightboxCaption');
   const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
 
-  function openLightbox(src, caption){
-    lightboxImage.src = src || '';
-    lightbox
+  const slideImages = Array.from(slidesEl.querySelectorAll('.slide img'));
+  let currentLightIndex = 0;
 
+  function updateLightboxContent(i){
+    currentLightIndex = (i + slideImages.length) % slideImages.length;
+    const img = slideImages[currentLightIndex];
+    const src = img.dataset.full || img.src;
+    const caption = img.dataset.caption || img.alt || '';
+    lightboxImage.src = src;
+    lightboxImage.alt = img.alt || '';
+    lightboxCaption.textContent = caption;
+    // set focus for accessibility
+    lightbox.setAttribute('aria-hidden', 'false');
+  }
+
+  function openLightbox(i){
+    updateLightboxContent(i);
+    document.body.classList.add('noscroll');
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    // focus close button for keyboard users
+    lightboxClose.focus();
+    stopAuto();
+  }
+
+  function closeLightbox(){
+    document.body.classList.remove('noscroll');
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImage.src = '';
+    startAuto();
+  }
+
+  function prevLight(){ updateLightboxContent(currentLightIndex - 1); }
+  function nextLight(){ updateLightboxContent(currentLightIndex + 1); }
+
+  // open lightbox when clicking any slide image
+  slideImages.forEach((img, i) => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => openLightbox(i));
+    // keyboard accessibility for thumbnails
+    img.tabIndex = 0;
+    img.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
+  });
+
+  // lightbox controls
+  if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if(lightboxPrev) lightboxPrev.addEventListener('click', prevLight);
+  if(lightboxNext) lightboxNext.addEventListener('click', nextLight);
+
+  // close when clicking outside inner area
+  lightbox.addEventListener('click', (e) => {
+    if(e.target === lightbox) closeLightbox();
+  });
+
+  // keyboard controls while lightbox open
+  document.addEventListener('keydown', (e) => {
+    if(lightbox.classList.contains('active')){
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') prevLight();
+      if(e.key === 'ArrowRight') nextLight();
+    }
+  });
+
+  // small project navigation handlers (optional behavior: can be wired to real pages)
+  document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet0.html'; });
+  document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
+
+  // initialise
+  goTo(0);
+  startAuto();
+})();
+</script>
+</body>
+</html>
