@@ -5,308 +5,312 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>À propos — ODS</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    :root {
+      --bg-color: #080808;
+      --text-color: #eaeaea;
+      --accent-color: #8c8c8c;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Cormorant Garamond', serif;
+      --font-ui: 'Manrope', sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    
     html { scroll-behavior: smooth; }
-    html,body{height:100%;margin:0;font-family:'Cormorant Garamond', serif;color:#0b0b0b;background:#000}
-    img{display:block;max-width:100%;height:auto;border:0}
-
-    .frame{width:100%;max-width:2000px;margin:0 auto;background:#dcdcdc;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
-
-    header.site-header{
-      display:grid;
-      grid-template-columns:1fr auto 1fr;
-      align-items:center;
-      gap: 8px;
-      padding:14px 4vw;
-      background:#000;
-      color:#fff;
-      position: relative;
-      z-index: 10;
-      /* Animation d'entrée du header */
-      animation: fadeDown 1s ease-out forwards;
-    }
     
-    .nav{ display:flex; gap:18px; align-items:center; white-space:nowrap; }
-    .nav a{ 
-      color:#fff; 
-      text-decoration:none; 
-      font-size:clamp(24px,1.6vw,28px); 
-      transition: all .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      overflow-x: hidden;
     }
-    
+
+    /* Effet de Grain (Noise) pour la texture sophistiquée */
+    .noise-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* --- Header --- */
+    header.site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 4vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      mix-blend-mode: difference; /* Rend le menu visible même sur image blanche */
+      transition: transform 0.3s ease;
+    }
+
+    .nav { display: flex; gap: 30px; }
+    .nav a {
+      text-decoration: none;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .nav a:hover, .nav a[aria-current="page"] { opacity: 1; }
     .nav a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 1px;
-      bottom: 0;
-      left: 0;
-      background-color: #fff;
-      transition: width 0.3s ease;
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: #fff; transition: width 0.3s ease;
     }
     .nav a:hover::after { width: 100%; }
-    .nav a:hover{ transform:translateY(-2px); opacity: 0.8; }
 
-    main.content{
-      display:flex;
-      gap:40px;
-      padding:6vh 6vw;
-      flex:1;
-      align-items:stretch;
+    /* --- Layout Principal --- */
+    main.content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      padding-top: 120px; /* Espace pour le header */
+      padding-bottom: 100px;
+      max-width: 1600px;
+      margin: 0 auto;
+      gap: 60px;
     }
 
-    .left-col{
-      width:40%;
-      min-width:300px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
-      gap:18px;
-    }
-
-    .portrait-wrapper {
+    /* --- Colonne Gauche (Sticky) --- */
+    .left-col {
+      padding-left: 4vw;
       position: relative;
+    }
+
+    .sticky-wrapper {
+      position: sticky;
+      top: 120px; /* Colle l'image quand on scroll */
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .portrait-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 3/4;
       overflow: hidden;
-      border-radius: 4px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.08);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1s ease;
+      border-radius: 4px; /* Très léger radius */
     }
-    .portrait-wrapper.visible {
-      opacity: 1;
-      transform: translateY(0);
+
+    .portrait-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+      transition: filter 0.5s ease, transform 0.7s ease;
+      transform: scale(1.05);
     }
-    
-    .portrait{
-      width:100%;
-      max-width:420px;
-      height:auto;
-      background:#bbb;
-      overflow:hidden;
-    }
-    
-    .portrait img{ 
-      display:block; 
-      width:100%; 
-      height:auto; 
-      object-fit:cover; 
-      filter:grayscale(100%); 
-      transform: scale(1.1); /* Zoom initial */
-      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s ease;
-    }
-    
-    .portrait-wrapper.visible img {
+
+    .portrait-container:hover img {
+      filter: grayscale(0%) contrast(1);
       transform: scale(1);
     }
+
+    .contact-info {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--accent-color);
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
     
-    .portrait:hover img {
-      transform: scale(1.05);
-      filter: grayscale(0%);
+    .contact-info a { color: inherit; text-decoration: none; transition: color 0.3s; }
+    .contact-info a:hover { color: #fff; }
+
+    /* --- Colonne Droite (Scroll) --- */
+    .right-col {
+      padding-right: 4vw;
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 120px; /* Grand espace entre les blocs pour respirer */
     }
 
-    .left-contact{
-      margin-top:8px;
-      font-size:22px;
-      line-height:1.2;
-      opacity: 0; /* Caché par défaut pour anim */
-      transform: translateY(10px);
-      transition: all 0.8s ease 0.3s; /* Delay 0.3s */
-    }
-    .left-contact.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .left-contact a{
-      color:#0b0b0b;
-      text-decoration:none;
-      display:inline-block;
-      margin-bottom:6px;
-      font-size:24px;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    .left-contact a::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      bottom: 0;
-      left: 0;
-      background-color: #0b0b0b;
-      transform: scaleX(1);
-      transform-origin: right;
-      transition: transform 0.4s ease;
-    }
-    .left-contact a:hover::before {
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-
-    .right-col{
-      width:60%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap:28px;
-      padding-left:24px;
-    }
-
-    .block {
-      margin-bottom:24px;
+    .big-title {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 5vw, 80px);
+      line-height: 1;
+      margin: 0 0 40px 0;
+      font-weight: 400;
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      animation: fadeUp 1s ease forwards;
     }
-    
-    .block.visible {
+
+    .big-title span {
+      display: block;
+      font-style: italic;
+      color: var(--accent-color);
+    }
+
+    .text-block {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-left: 1px solid rgba(255,255,255,0.1);
+      padding-left: 30px;
+    }
+
+    .text-block.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .block h3{
-      margin:0 0 8px;
-      font-family:'Playfair Display', serif;
-      font-size:28px;
-      text-align:center;
-    }
-    .block p{
-      margin:0;
-      font-size:20px;
-      line-height:1.7;
-      text-align:center;
-      max-width:680px;
-      margin-left:auto;
-      margin-right:auto;
+    .text-block h3 {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-color);
+      margin-bottom: 16px;
     }
 
-    footer.site-footer{
-      background:#000;
-      color:#fff;
-      padding:18px 4vw;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size: 24px;
+    .text-block p {
+      font-size: clamp(20px, 2vw, 26px);
+      line-height: 1.4;
+      margin: 0;
+      font-weight: 300;
     }
-    footer a{ color:#fff; text-decoration:underline; transition: opacity 0.3s; }
-    footer a:hover { opacity: 0.7; }
 
-    @media (max-width:1100px){
-      main.content{ padding:5vh 5vw; gap:28px; }
-      .left-col{ width:42%; }
-      .right-col{ width:58%; padding-left:18px; }
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 40px 4vw;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--accent-color);
+      margin-top: auto;
     }
-    @media (max-width:880px){
-      main.content{
-        flex-direction:column;
-        align-items:center;
-        padding:4.5vh 5vw;
+
+    /* --- Responsive --- */
+    @media (max-width: 900px) {
+      main.content {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
-      .left-col, .right-col{ width:100%; padding:0; }
-      .right-col{ order:2; margin-top:18px; }
-      .left-col{ order:1; align-items:center; }
-      .block p, .about-text{ text-align:left; max-width:100%; }
-      .left-contact{ text-align:center; }
-      
-    
-    @media (max-width:520px){
-      .block h3{ font-size:22px; }
-      .block p{ font-size:16px; line-height:1.5; }
-      .left-contact a{ font-size:18px; }
+      .sticky-wrapper {
+        position: relative;
+        top: 0;
+      }
+      .portrait-container {
+        max-width: 100%;
+        aspect-ratio: 16/9;
+      }
+      .right-col {
+        padding-top: 0;
+        gap: 60px;
+        padding-left: 4vw;
+      }
+      .big-title { font-size: 42px; }
     }
 
-  
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
-  <div class="frame">
-    <header class="site-header" role="navigation" aria-label="Navigation principale">
-      <nav class="nav nav-left" aria-label="Navigation gauche">
-        <a href="projets.html">Projets</a>
-        <a href="apropos.html" aria-current="page" style="opacity:0.6;">À Propos</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <div class="logo"></div> 
-      <div class="nav-right"></div>
-    </header>
+  <div class="noise-overlay"></div>
 
-    <main class="content" role="main">
-      <div class="left-col" aria-label="Portrait et contact">
-        <div class="portrait-wrapper js-reveal">
-          <div class="portrait">
-            <img src="images/Rectangle 3.png" alt="Portrait Oscar Da Silva">
-          </div>
+  <header class="site-header">
+    <div style="font-weight:700; font-family:var(--font-ui); letter-spacing:1px;">ODS.</div>
+    <nav class="nav">
+      <a href="projets.html">Projets</a>
+      <a href="apropos.html" aria-current="page">À Propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    
+    <div class="left-col">
+      <div class="sticky-wrapper">
+        <div class="portrait-container">
+          <img src="images/Rectangle 3.png" alt="Portrait Oscar Da Silva">
         </div>
-
-        <div class="left-contact js-reveal">
-          <a href="mailto:oscar23ds@icloud.com">oscar23ds@icloud.com</a>
-          <div style="font-size:22px;margin-top:6px;">07 63 40 69 09</div>
-        </div>
-      </div>
-
-      <div class="right-col" aria-label="À propos texte">
         
-        <div class="block js-stagger">
-          <h3>Qui suis-je ?</h3>
-          <p>Je suis Oscar Da Silva, étudiant en BUT MMI 2, actuellement à la recherche d’un stage afin de valider mon année.</p>        
+        <div class="contact-info">
+          <span>Basé en Normandie, FR</span>
+          <a href="mailto:oscar23ds@icloud.com">oscar23ds@icloud.com</a>
+          <a href="tel:+33763406909">07 63 40 69 09</a>
         </div>
-
-        <div class="block js-stagger">
-          <h3>Mon Parcours :</h3>
-          <p>Je suis titulaire d’un baccalauréat STI2D, avec les spécialités ITEC et SIN, qui m’ont particulièrement intéressé et ont renforcé mon attrait pour l’innovation et le numérique.</p>        
-        </div>
-
-        <div class="block js-stagger">
-          <h3>Projet professionnel :</h3>
-          <p>Je souhaite aujourd’hui me spécialiser dans les métiers du développement web ou du multimédia.</p>    
-        </div>
-
       </div>
-    </main>
+    </div>
 
-    <footer class="site-footer">
-      <div>© 2025 Oscar Da Silva | <a href="contact.html">Contact</a></div>
-    </footer>
-  </div>
+    <div class="right-col">
+      
+      <h1 class="big-title">
+        Créatif numérique <br>
+        <span>en devenir.</span>
+      </h1>
+
+      <div class="text-block js-scroll">
+        <h3>Qui suis-je ?</h3>
+        <p>Je m'appelle Oscar Da Silva. Actuellement étudiant en deuxième année de BUT MMI, je suis passionné par l'intersection entre le design et la technologie. Je cherche à créer des expériences web qui marquent les esprits.</p>
+      </div>
+
+      <div class="text-block js-scroll">
+        <h3>Mon Background</h3>
+        <p>Issu d'un Bac STI2D (ITEC & SIN), j'ai toujours eu un pied dans la technique et l'autre dans l'innovation. Cette dualité me permet aujourd'hui de comprendre à la fois les contraintes du code et les exigences du design.</p>
+      </div>
+
+      <div class="text-block js-scroll">
+        <h3>Vision & Ambition</h3>
+        <p>Je souhaite me spécialiser dans le développement Front-End créatif. Mon objectif est de valider mon année par un stage où je pourrai transformer des concepts visuels en interfaces interactives réelles.</p>
+      </div>
+      
+      <div class="text-block js-scroll" style="margin-top:20px;">
+        <a href="contact.html" style="font-family:var(--font-ui); text-decoration:none; border:1px solid #fff; padding:15px 30px; display:inline-block; color:#fff; transition:all 0.3s;">
+          Me contacter
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div>© 2025 Oscar Da Silva</div>
+    <div>Portfolio Étudiant MMI</div>
+  </footer>
 
   <script>
+    // Animation au scroll simple et efficace
     document.addEventListener("DOMContentLoaded", function() {
       
-      // Configuration de l'observateur (déclenche quand 15% de l'élément est visible)
-      const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-      };
-
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // Une fois animé, on arrête d'observer pour ne pas rejouer l'anim
-            observer.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.1 }); // Se déclenche quand 10% du bloc est visible
 
-      // 1. Animer le portrait et le contact
-      const revealElements = document.querySelectorAll('.js-reveal');
-      revealElements.forEach(el => observer.observe(el));
-
-      // 2. Animer les blocs de texte avec un délai (cascade)
-      const staggerElements = document.querySelectorAll('.js-stagger');
-      staggerElements.forEach((el, index) => {
-        // Ajoute un délai progressif via le style inline
-        el.style.transitionDelay = `${index * 0.2}s`; // 0s, 0.2s, 0.4s...
-        observer.observe(el);
-      });
+      const elements = document.querySelectorAll('.js-scroll');
+      elements.forEach(el => observer.observe(el));
     });
   </script>
 
