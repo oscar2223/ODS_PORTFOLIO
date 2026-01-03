@@ -11,7 +11,24 @@
     * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
     html,body{height:100%;margin:0;font-family: 'Cormorant Garamond', serif;color:#0b0b0b;background:#000}
     img{max-width:100%;height:auto;display:block;border:0}
-
+/* Largeur de la barre */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Le fond de la barre (track) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* La partie qu'on attrape (thumb) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+  border: 2px solid #f1f1f1; /* Crée un petit espace autour */
+}
+/* Au survol */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
     .frame{width:100%;max-width:2000px;margin:0 auto;background:#dcdcdc;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
 
     header.site-header{
@@ -85,7 +102,24 @@
     h1{font-size:clamp(48px, 8vw, 120px);margin:0 0 20px;line-height:0.95;font-family:'Playfair Display', serif;letter-spacing:1px; transition:letter-spacing .35s}
     h1:hover{ letter-spacing:2px; }
     p.lead{max-width:720px;font-size:clamp(15px,1.6vw,18px);margin:0 0 36px;color:#222;opacity:0.96}
-
+.typewriter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-weight: 300;
+  margin-bottom: 20px;
+  color: #444;
+  min-height: 1.2em;
+}
+#typing-text {
+  font-weight: 600;
+  color: #000;
+  border-right: 2px solid #000; /* Le curseur */
+  animation: blink 0.75s step-end infinite;
+}
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #000; }
+}
     .cta{
       display:inline-block;background:#fff;padding:14px 26px;border-radius:18px;box-shadow:0 6px 0 rgba(0,0,0,0.15);text-decoration:none;font-size:clamp(16px,1.6vw,20px);color:#000;
       transition: transform .18s ease, box-shadow .18s ease, filter .18s;
@@ -189,7 +223,7 @@
     <main>
       <section class="hero">
         <h1>Oscar <span class="break">Da Silva</span></h1>
-
+        <h2 class="typewriter">Je crée des expériences <span id="typing-text"></span></h2>
         <p class="lead">Je suis actuellement étudiant à l'université de Rouen Normandie, sur le campus d'Elbeuf, dans la formation BUT MMI en deuxième année à la recherche d'un stage.</p>
 
         <a class="cta" href="projets.html">Voir les projets</a>
@@ -291,6 +325,38 @@
     hamburger.addEventListener('keyup', (e)=>{
       if(e.key === 'Enter' || e.key === ' '){ hamburger.click(); }
     });
+
+    const textElement = document.getElementById('typing-text');
+const words = ["digitales.", "interactives.", "créatives."];
+let wordIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function type() {
+  const currentWord = words[wordIndex];
+  if (isDeleting) {
+    textElement.textContent = currentWord.substring(0, charIndex - 1);
+    charIndex--;
+  } else {
+    textElement.textContent = currentWord.substring(0, charIndex + 1);
+    charIndex++;
+  }
+
+  let typeSpeed = isDeleting ? 50 : 150;
+
+  if (!isDeleting && charIndex === currentWord.length) {
+    isDeleting = true;
+    typeSpeed = 2000; // Pause à la fin du mot
+  } else if (isDeleting && charIndex === 0) {
+    isDeleting = false;
+    wordIndex = (wordIndex + 1) % words.length;
+    typeSpeed = 500;
+  }
+
+  setTimeout(type, typeSpeed);
+}
+// Lancer l'animation si l'élément existe
+if(textElement) type();
   </script>
 </body>
 </html>
