@@ -5,193 +5,264 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contact — ODS</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-    /* reset */
+    :root {
+      --bg-color: #080808;
+      --text-color: #eaeaea;
+      --accent-color: #8c8c8c;
+      --border-color: rgba(255, 255, 255, 0.15);
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Cormorant Garamond', serif;
+      --font-ui: 'Manrope', sans-serif;
+    }
+
     * { box-sizing: border-box; }
-    html,body{height:100%;margin:0;font-family:'Cormorant Garamond', serif;color:#0b0b0b;background:#000}
-
-    /* outer frame - same style as ta page d'accueil */
-    .frame{width:100%;max-width:2000px;margin:0 auto;background:#dcdcdc;min-height:100vh;display:flex;flex-direction:column}
-
-    /* header - same layout as homepage (3-col grid) */
-    header.site-header{
-      display:grid;
-      grid-template-columns:1fr auto 1fr;
-      align-items:center;
-      padding:14px 4vw;
-      background:#000;
-      color:#fff;
-    }
-    .nav{ display:flex; gap:18px; align-items:center; white-space:nowrap; }
-    .nav a{ color:#fff; text-decoration:none; font-size:clamp(24px,1.6vw,28px); }
-    .nav-left{ justify-self:start; margin-right:6px; }
-
-    /* page content */
-    .content{
-      padding:48px 6vw;
-      width:100%;
-      flex:1;
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      height: 100%;
+      overflow-x: hidden;
     }
 
-    /* page header (Contact) */
-    .page-header{
-      text-align:center;
-      margin:6px 0 46px;
-    }
-    .page-header h1{
-      font-family:'Playfair Display', serif;
-      font-size: clamp(36px,6.5vw,84px);
-      margin:0 0 18px;
-      color:#000;
-    }
-    .page-header p.lead{
-      max-width:860px;
-      margin:0 auto;
-      color:#111;
-      font-size:clamp(15px,1.6vw,18px);
-      line-height:1.45;
-      font-weight:600;
-    }
-    .page-header p.small{
-      margin-top:18px;
-      font-weight:400;
-      color:#222;
+    /* --- Texture Grain (Noise) --- */
+    .noise-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* layout: form area (now button area) */
-    .form-wrap{
-      margin-top:44px;
-      display:grid;
-      grid-template-columns: 1fr 320px; /* left: info, right: action button area */
-      gap:36px;
-      align-items:start;
+    /* --- Header --- */
+    header.site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 4vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      mix-blend-mode: difference;
     }
 
-    /* Left side: simple contact info */
-    .fields{
-      padding-right:12px;
+    .nav { display: flex; gap: 30px; }
+    .nav a {
+      text-decoration: none;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      transition: opacity 0.3s, transform 0.3s;
     }
-    .fields p{ font-size:16px; color:#111; line-height:1.6; }
+    .nav a:hover, .nav a[aria-current="page"] { opacity: 1; transform: translateY(-2px); }
 
-    label{
-      display:block;
-      font-size: clamp(26px,2.6vw,38px);
-      margin:28px 0 12px;
-      color:#111;
-      font-family:'Playfair Display', serif;
-    }
-
-    /* Right side: big send button aligned bottom-right */
-    .side-action{
-      display:flex;
-      flex-direction:column;
-      align-items:flex-end;
-      justify-content:flex-start;
-    }
-    .send-wrap{ margin-top: auto; } /* pousse le bouton vers le bas */
-
-    /* NOTE: selector changed from button.send to .send so it works on <a> or <button> */
-    .send{
-      display:inline-block;
-      text-align:center;
-      text-decoration:none;
-      color:inherit;
-      background:#fff;
-      border:0;
-      padding:20px 46px;
-      font-size:28px;
-      border-radius:4px;
-      box-shadow:0 6px 0 rgba(0,0,0,0.12);
-      cursor:pointer;
-      transition: transform .18s ease, box-shadow .18s ease, filter .18s;
-    }
-    .send:hover{ transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.12); filter:brightness(1.02); }
-
-    /* small helper / messages */
-    .msg{ margin-top:12px; font-size:15px; color:#222; text-align:center; }
-
-    /* Footer (same as accueil) */
-    footer{ background:#000; color:#fff; padding:18px 4vw; display:flex; justify-content:center; align-items:center; }
-    footer .foot-inner{ text-align:center; font-size:24px; }
-
-    /* Overlay/loader (kept if besoin futur) */
-    .notice{
-      position:fixed; left:50%; top:20%; transform:translateX(-50%); background:#fff; color:#000; padding:16px 20px; border-radius:8px; box-shadow:0 14px 40px rgba(0,0,0,0.18); display:none; z-index:1200;
-    }
-    .notice.show{ display:block; }
-
-    /* responsive */
-    @media (max-width:980px){
-      .form-wrap{ grid-template-columns: 1fr; }
-      .side-action{ align-items:center; }
-      .send-wrap{ margin-top:18px; }
-      .send{ font-size:20px; padding:14px 28px; }
+    /* --- Layout Principal --- */
+    main.content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      padding-top: 140px;
+      padding-bottom: 80px;
+      max-width: 1600px;
+      margin: 0 auto;
+      gap: 60px;
     }
 
-    @media (max-width:520px){
-      label{ font-size: clamp(20px,5.6vw,30px); }
-      .page-header h1{ font-size: clamp(28px,10vw,44px); }
-      .page-header p.lead{ padding:0 10px; }
+    /* Colonne Gauche (Titre Fixe) */
+    .left-col {
+      padding-left: 4vw;
+      position: relative;
+    }
+
+    .sticky-title {
+      position: sticky;
+      top: 140px;
+    }
+
+    h1.page-title {
+      font-family: var(--font-serif);
+      font-size: clamp(48px, 6vw, 90px);
+      line-height: 1;
+      margin: 0 0 24px 0;
+      font-weight: 400;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    p.intro-text {
+      font-size: clamp(18px, 1.5vw, 22px);
+      color: var(--accent-color);
+      max-width: 450px;
+      line-height: 1.5;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease 0.2s forwards;
+    }
+
+    /* Colonne Droite (Liens) */
+    .right-col {
+      padding-right: 4vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    /* --- Cartes de Contact --- */
+    .contact-card {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+      border-top: 1px solid var(--border-color);
+      padding: 30px 0;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    /* Délais d'animation en cascade */
+    .contact-card:nth-child(1) { animation-delay: 0.4s; }
+    .contact-card:nth-child(2) { animation-delay: 0.5s; }
+    .contact-card:nth-child(3) { animation-delay: 0.6s; }
+
+    .contact-card:hover {
+      border-top-color: #fff;
+      padding-left: 10px; /* Petit mouvement vers la droite */
+    }
+
+    .card-label {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-color);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .card-value {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 3vw, 42px);
+      margin: 0;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .arrow-icon {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+      font-size: 24px;
+    }
+
+    .contact-card:hover .arrow-icon {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Footer */
+    footer {
+      position: fixed;
+      bottom: 20px;
+      left: 4vw;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--accent-color);
+      z-index: 10;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 900px) {
+      main.content {
+        grid-template-columns: 1fr;
+        padding-top: 100px;
+        gap: 40px;
+      }
+      .sticky-title { position: static; }
+      .right-col { padding-left: 4vw; }
+      footer { position: static; padding: 40px 4vw; border-top: 1px solid var(--border-color); margin-top: 40px;}
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <div class="frame">
+  <div class="noise-overlay"></div>
 
-    <!-- Header identique à la page d'accueil -->
-    <header class="site-header" role="navigation" aria-label="Navigation principale">
-      <nav class="nav nav-left">
-        <a href="projets.html">Projets</a>
-        <a href="apropos.html">À propos</a>
-        <a href="index.html">Home</a>
-      </nav>
+  <header class="site-header">
+    <div style="font-weight:700; font-family:var(--font-ui); letter-spacing:1px;">ODS.</div>
+    <nav class="nav">
+      <a href="projets.html">Projets</a>
+      <a href="apropos.html">À Propos</a>
+      <a href="contact.html" aria-current="page" style="opacity:1; border-bottom:1px solid #fff;">Contact</a>
+    </nav>
+  </header>
 
-      <div class="nav nav-right" style="visibility:hidden">
-        <!-- on laisse la colonne droite vide mais présente pour centrer le logo comme sur l'accueil -->
-        <a href="#"></a>
+  <main class="content">
+    
+    <div class="left-col">
+      <div class="sticky-title">
+        <h1 class="page-title">
+          Parlons de <br>
+          votre projet.
+        </h1>
+        <p class="intro-text">
+          Je suis actuellement disponible pour des opportunités de stage ou de collaboration freelance. N'hésitez pas à me faire signe.
+        </p>
       </div>
-    </header>
+    </div>
 
-    <main class="content" role="main">
-      <section class="page-header">
-        <h1>Contact</h1>
-        <p class="lead">N’hésitez pas à me contacter pour échanger sur vos projets ou propositions de collaboration.<br>Je serai ravi d’échanger avec vous !</p>
-        <p class="small">Vous pouvez également me joindre via LinkedIn, mail ou au numéro suivant : <strong>07 63 40 69 09</strong></p>
-      </section>
+    <div class="right-col">
+      
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=luisds2545@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="card-label">M'envoyer un mail (Gmail)</span>
+        <span class="card-value">
+          luisds2545@gmail.com
+          <span class="arrow-icon">↗</span>
+        </span>
+      </a>
 
-      <section class="form-wrap" aria-label="Zone de contact">
-        <!-- LEFT: simple texte d'information -->
-        <div class="fields" aria-hidden="false">
-          <p>Pour m’écrire directement, cliquez sur le bouton à droite : une nouvelle fenêtre Gmail s’ouvrira avec mon adresse déjà renseignée.</p>
-          <p style="margin-top:8px;">Adresse mail : <strong>luisds2545@gmail.com</strong></p>
-        </div>
+      <a href="tel:+33763406909" class="contact-card">
+        <span class="card-label">M'appeler directement</span>
+        <span class="card-value">
+          07 63 40 69 09
+          <span class="arrow-icon">→</span>
+        </span>
+      </a>
 
-        <!-- RIGHT: bouton qui redirige vers la rédaction Gmail (ouvre dans un nouvel onglet) -->
-        <div class="side-action" aria-hidden="false">
-          <div class="send-wrap">
-            <!-- Ouvre la fenêtre de composition Gmail avec le destinataire pré-rempli -->
-            <a class="send" id="sendBtn"
-               href="https://mail.google.com/mail/?view=cm&fs=1&to=luisds2545@gmail.com"
-               target="_blank" rel="noopener noreferrer" aria-label="Ouvrir Gmail pour écrire à luisds2545@gmail.com">
-              Envoyer un mail
-            </a>
+      <a href="https://linkedin.com" target="_blank" class="contact-card" style="border-bottom: 1px solid var(--border-color);">
+        <span class="card-label">Réseaux Sociaux</span>
+        <span class="card-value">
+          LinkedIn
+          <span class="arrow-icon">↗</span>
+        </span>
+      </a>
 
-          </div>
-        </div>
-      </section>
-    </main>
+    </div>
+  </main>
 
-    <footer>
-      <div class="foot-inner">© 2025 Oscar Da Silva | <a href="contact.html" style="color:#fff;text-decoration:underline">Contact</a></div>
-    </footer>
-  </div>
+  <footer>
+    © 2025 Oscar Da Silva — Portfolio
+  </footer>
 
-  <div class="notice" id="notice" role="status" aria-live="polite"></div>
-
-  <!-- Pas de gestion de formulaire côté site : lien direct vers Gmail -->
 </body>
 </html>
