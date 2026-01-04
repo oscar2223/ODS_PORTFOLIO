@@ -5,289 +5,350 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projets — ODS</title>
 
-  <!-- Fonts (comme ta page d'accueil) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
-   
-    * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    html,body{height:100%;margin:0;font-family: 'Cormorant Garamond', serif;color:#0b0b0b;background:#000}
-    img{max-width:100%;height:auto;display:block;border:0}
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition: none !important; animation: none !important; }
+    :root {
+      --bg-color: #080808;
+      --text-color: #eaeaea;
+      --accent-color: #8c8c8c;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Cormorant Garamond', serif;
+      --font-ui: 'Manrope', sans-serif;
     }
 
-    .frame{width:100%;max-width:2000px;margin:0 auto;background:#dcdcdc;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+    * { box-sizing: border-box; }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
 
-    header.site-header{
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+    /* --- Texture Grain --- */
+    .noise-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* --- Header --- */
+    header.site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 4vw;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      padding: 14px 4vw;
-      background:#000;
-      color:#fff;
-      position:relative;
+      z-index: 100;
+      mix-blend-mode: difference;
     }
 
-    .nav{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      white-space:nowrap;
+    .nav { display: flex; gap: 30px; }
+    .nav a {
+      text-decoration: none;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.7;
+      transition: opacity 0.3s, transform 0.3s;
     }
-    .nav a{
-      color:#fff;
-      text-decoration:none;
-      font-size:clamp(24px, 1.6vw, 28px);
-      letter-spacing:0.6px;
-      padding:8px 6px;
-      position:relative;
-      transition: transform .18s ease, color .18s ease;
-      transform-origin:center;
-    }
-    .nav a::after{
-      content:"";
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%) scaleX(0);
-      bottom:4px;
-      height:2px;
-      width:60%;
-      background:#fff;
-      transform-origin:center;
-      transition: transform .22s cubic-bezier(.2,.9,.2,1);
-    }
-    .nav a:hover,
-    .nav a:focus{
-      color:#fff;
-      transform:translateY(-3px) scale(1.02);
-    }
-    .nav a:hover::after,
-    .nav a:focus::after{
-      transform:translateX(-50%) scaleX(1);
+    .nav a:hover, .nav a[aria-current="page"] { opacity: 1; transform: translateY(-2px); }
+    .nav a[aria-current="page"] { border-bottom: 1px solid #fff; }
+
+    /* --- Layout Principal --- */
+    main.content {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr; /* Colonne de droite plus large pour les images */
+      min-height: 100vh;
+      padding-top: 140px;
+      padding-bottom: 100px;
+      max-width: 1600px;
+      margin: 0 auto;
+      gap: 60px;
     }
 
-    .nav-left{ justify-self:end; margin-right:6px; }
-    .nav-right{ justify-self:start; margin-left:6px; }
-
-    .logo{ justify-self:center; font-weight:700;font-family: 'Playfair Display', serif; display:flex; align-items:center; gap:10px; cursor:default; transition: transform .22s ease, box-shadow .22s ease; }
-    .logo img{ height:88px; width:auto; object-fit:contain; display:block; border-radius:6px; }
-    .logo:hover{ transform:translateY(-4px) scale(1.02); box-shadow:0 12px 30px rgba(0,0,0,0.18); }
-
-    .logo .logo-badge{ background:#fff;color:#000;padding:6px 12px;border-radius:8px;box-shadow:0 4px 0 rgba(0,0,0,0.25); font-size:20px; }
-
-    .hamburger{width:44px;height:36px;display:none;flex-direction:column;justify-content:space-between;cursor:pointer;border:none;background:transparent;padding:6px;align-items:center}
-    .hamburger span{display:block;height:3px;background:#fff;border-radius:3px;width:100%;transition:transform .28s cubic-bezier(.2,.9,.2,1), opacity .2s .02s, background .18s}
-    .hamburger.open span:nth-child(1){ transform: translateY(11px) rotate(45deg); }
-    .hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(.1); }
-    .hamburger.open span:nth-child(3){ transform: translateY(-11px) rotate(-45deg); }
-
-    body{background:#f6f6f6; color:#0b0b0b}
-    .projects-frame{ width:100%; max-width:1200px; margin:0 auto; padding-bottom:40px; background:transparent; }
-
-    .tabs{display:flex;gap:40px;justify-content:center;padding:18px 0;border-bottom:1px solid rgba(0,0,0,0.08); margin-top:18px}
-    .tabs a{font-family:'Playfair Display',serif;text-decoration:none;color:#111;padding:8px 6px;position:relative}
-    .tabs a:hover{transform:translateY(-3px)}
-    .tabs a.active::after{content:'';position:absolute;left:0;right:0;bottom:-12px;height:2px;background:#111}
-
-    .projects{padding:24px 6vw 40px 6vw;display:flex;flex-direction:column;gap:36px}
-    .project-row{display:grid;grid-template-columns:220px 1fr 120px;align-items:center;gap:20px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06); background:transparent}
-    .proj-title{font-family:'Playfair Display',serif;font-size:36px;padding-left:8px}
-    .proj-thumb{display:flex;justify-content:center}
-    .proj-thumb img{width:360px;max-width:100%;height:auto;border-radius:4px;box-shadow:0 8px 24px rgba(0,0,0,0.08);transition:transform .25s,filter .25s}
-    .proj-thumb a{display:block}
-    .proj-thumb img:hover{ transform:translateY(-8px) scale(1.02); filter:brightness(1.02) }
-
-    .proj-space{height:1px;background:transparent}
-
-    /* footer classes from template */
-    footer{background:#000;color:#fff;padding:18px 4vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-    .footer-links{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-    .footer-links a{color:#fff;text-decoration:none;font-size:24px;transition:transform .18s, color .18s}
-    .footer-links a:hover{ transform:translateX(-6px); color:#ddd; }
-
-    .overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,0.92);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;
-      opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .28s ease, transform .28s ease;
+    /* Colonne Gauche (Titre Fixe) */
+    .left-col {
+      padding-left: 4vw;
+      position: relative;
     }
-    .overlay.active{ opacity:1; pointer-events:auto; transform:none; }
-    .overlay a{
-      font-size: clamp(30px, 6.5vw, 48px);
-      text-decoration:none;color:#fff;margin:12px 0;opacity:.98;transition:transform .18s ease;
-    }
-    .overlay a:hover{ transform:translateX(6px); }
 
-    /* Responsive adjustments */
-    @media (max-width:1100px){
-      .nav{gap:14px}
-      .logo img{height:72px}
-      .hamburger{ display:flex; }
-      .projects{padding:18px 5vw}
-      .project-row{grid-template-columns:1fr;gap:12px}
-      .proj-title{font-size:28px;padding-left:0}
-      .proj-thumb img{width:80%}
+    .sticky-header {
+      position: sticky;
+      top: 140px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-    @media (max-width:880px){
-      .nav{ display:none; }
-      .hamburger{ display:flex; }
-      .logo img{height:56px}
+
+    h1.page-title {
+      font-family: var(--font-serif);
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1;
+      margin: 0;
+      font-weight: 400;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
     }
-    @media (max-width:520px){
-      .nav a{font-size:18px}
-      .proj-thumb img{width:100%}
+
+    .subtitle {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-color);
+      max-width: 300px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeUp 1s ease 0.2s forwards;
+    }
+
+    /* Colonne Droite (Liste Projets) */
+    .right-col {
+      padding-right: 4vw;
+      display: flex;
+      flex-direction: column;
+      gap: 100px; /* Grand espace entre les projets */
+    }
+
+    .project-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .project-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .image-wrapper {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      background-color: #1a1a1a;
+      position: relative;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+      transform: scale(1);
+      transition: filter 0.5s ease, transform 0.7s ease;
+    }
+
+    .project-card:hover .image-wrapper img {
+      filter: grayscale(0%) contrast(1);
+      transform: scale(1.03); /* Zoom subtil */
+    }
+
+    .project-info {
+      display: grid;
+      grid-template-columns: auto 1fr auto; /* Numéro - Titre/Desc - Flèche */
+      gap: 20px;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      transition: border-color 0.3s;
+    }
+
+    .project-card:hover .project-info {
+      border-bottom-color: #fff;
+    }
+
+    .project-num {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--accent-color);
+    }
+
+    .project-details h2 {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      margin: 0 0 8px 0;
+      font-weight: 400;
+    }
+
+    .project-details p {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--accent-color);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .project-arrow {
+      font-size: 24px;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover .project-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 4vw;
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--accent-color);
+      margin-top: auto;
+    }
+    footer a { color: inherit; text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* --- Responsive --- */
+    @media (max-width: 900px) {
+      main.content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        padding-top: 100px;
+      }
+      .sticky-header { position: static; margin-bottom: 20px; }
+      .right-col { padding-left: 4vw; gap: 60px; }
+      h1.page-title { font-size: 48px; }
+      .project-details h2 { font-size: 26px; }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <div class="frame">
+  <div class="noise-overlay"></div>
 
-    <!-- HEADER (modifié selon ton template fourni) -->
-    <header class="site-header" role="navigation" aria-label="Navigation principale">
-      <nav class="nav nav-left" aria-label="Gauche">
-        <a href="index.html">Home</a>
-        <a href="projets.html">Projets</a>
-      </nav>
+  <header class="site-header">
+    <div style="font-weight:700; font-family:var(--font-ui); letter-spacing:1px;">ODS.</div>
+    <nav class="nav">
+      <a href="projets.html" aria-current="page">Projets</a>
+      <a href="apropos.html">À Propos</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-      <div class="logo" aria-label="Logo ODS">
-        <img src="images/logo-ods.png" alt="logo ODS">
+  <main class="content">
+    
+    <div class="left-col">
+      <div class="sticky-header">
+        <h1 class="page-title">
+          Travaux <br>
+          Sélectionnés
+        </h1>
+        <p class="subtitle">
+          Une collection de projets réalisés dans le cadre de mon BUT MMI, alliant développement web, design graphique et stratégie digitale.
+        </p>
       </div>
-
-      <div class="right-wrap" style="display:flex;align-items:center;gap:12px;">
-        <nav class="nav nav-right" aria-label="Droite">
-          <a href="apropos.html">À Propos</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-
-        <!-- Hamburger -->
-        <button class="hamburger" aria-label="Ouvrir le menu" id="hamburger" aria-expanded="false" aria-controls="overlay">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </header>
-
-    <!-- MAIN: Projects content (kept from previous projets.html) -->
-    <div class="projects-frame">
-      <div class="tabs" role="tablist" aria-label="Projets">
-        <a href="projet1.html" class="active">Projet 1</a>
-        <a href="projet2.html" class="active">Projet 2</a>
-        <a href="projet3.html" class="active">Projet 3</a>
-        <a href="projet4.html" class="active">Projet 4</a>
-      </div>
-
-      <section class="projects" role="main" aria-label="Liste des projets">
-        <!-- Row 1 -->
-        <article class="project-row">
-          <div class="proj-title">Projet 1</div>
-          <div class="proj-thumb">
-            <a href="projet1.html" title="Voir Projet 1">
-              <img src="images/dev webprojet1.png" alt="Projet 1">
-            </a>
-          </div>
-          <div class="proj-space"></div>
-        </article>
-
-        <!-- Row 2 -->
-        <article class="project-row">
-          <div class="proj-title">Projet 2</div>
-          <div class="proj-thumb">
-            <a href="projet2.html" title="Voir Projet 2">
-              <img src="images/oscar 1.png" alt="Projet 2">
-            </a>
-          </div>
-          <div class="proj-space"></div>
-        </article>
-
-        <!-- Row 3 -->
-        <article class="project-row">
-          <div class="proj-title">Projet 3</div>
-          <div class="proj-thumb">
-            <a href="projet3.html" title="Voir Projet 3">
-              <img src="images/audiovisuelprojet3.png" alt="Projet 3">
-            </a>
-          </div>
-          <div class="proj-space"></div>
-        </article>
-
-        <!-- Row 4 -->
-        <article class="project-row">
-          <div class="proj-title">Projet 4</div>
-          <div class="proj-thumb">
-            <a href="projet4.html" title="Voir Projet 4">
-              <img src="images/marketingprojet4.png" alt="Projet 4">
-            </a>
-          </div>
-          <div class="proj-space"></div>
-        </article>
-      </section>
     </div>
 
-    <!-- FOOTER (modifié selon ton template fourni) -->
-    <footer>
-      <div>©2025 Oscar Da Silva Tous droits réservés</div>
-      <div class="footer-links">
-        <a href="Cv.oscardasilva (1).pdf"><u>Télécharger mon CV</u></a>
-        <a href="projets.html">Projets</a>
-        <a href="apropos.html">À propos</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </footer>
-  </div>
+    <div class="right-col">
+      
+      <a href="projet1.html" class="project-card js-scroll">
+        <div class="image-wrapper">
+          <img src="images/dev webprojet1.png" alt="Aperçu Projet 1">
+        </div>
+        <div class="project-info">
+          <span class="project-num">01</span>
+          <div class="project-details">
+            <h2>Développement Web</h2>
+            <p>Front-End / Intégration</p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
 
-  <!-- Mobile menu overlay (identique) -->
-  <div id="overlay" class="overlay" aria-hidden="true" role="dialog" aria-label="Menu mobile">
-    <a href="index.html">Home</a>
-    <a href="projets.html">Projets</a>
-    <a href="apropos.html">À Propos</a>
-    <a href="contact.html">Contact</a>
-    <button id="closeOverlay" style="margin-top:28px;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;background:#fff;color:#000">Fermer</button>
-  </div>
+      <a href="projet2.html" class="project-card js-scroll">
+        <div class="image-wrapper">
+          <img src="images/oscar 1.png" alt="Aperçu Projet 2">
+        </div>
+        <div class="project-info">
+          <span class="project-num">02</span>
+          <div class="project-details">
+            <h2>Design Graphique</h2>
+            <p>Branding / Identité Visuelle</p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a href="projet3.html" class="project-card js-scroll">
+        <div class="image-wrapper">
+          <img src="images/audiovisuelprojet3.png" alt="Aperçu Projet 3">
+        </div>
+        <div class="project-info">
+          <span class="project-num">03</span>
+          <div class="project-details">
+            <h2>Audiovisuel</h2>
+            <p>Montage / Motion Design</p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+      <a href="projet4.html" class="project-card js-scroll">
+        <div class="image-wrapper">
+          <img src="images/marketingprojet4.png" alt="Aperçu Projet 4">
+        </div>
+        <div class="project-info">
+          <span class="project-num">04</span>
+          <div class="project-details">
+            <h2>Marketing Digital</h2>
+            <p>Stratégie / Social Media</p>
+          </div>
+          <span class="project-arrow">↗</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    <div>© 2025 Oscar Da Silva</div>
+    <div><a href="Cv.oscardasilva (1).pdf" target="_blank">Télécharger CV</a></div>
+  </footer>
 
   <script>
-    // animate in content after load (keeps same UX as homepage)
-    document.addEventListener('DOMContentLoaded', ()=> document.body.classList.add('animated'));
+    document.addEventListener("DOMContentLoaded", function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
 
-    // hamburger / overlay (same logic as your template)
-    const hamburger = document.getElementById('hamburger');
-    const overlay = document.getElementById('overlay');
-    const closeOverlay = document.getElementById('closeOverlay');
-
-    function openMenu(){
-      overlay.classList.add('active');
-      overlay.setAttribute('aria-hidden','false');
-      hamburger.classList.add('open');
-      hamburger.setAttribute('aria-expanded','true');
-      const first = overlay.querySelector('a');
-      if(first) first.focus();
-    }
-    function closeMenu(){
-      overlay.classList.remove('active');
-      overlay.setAttribute('aria-hidden','true');
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded','false');
-      hamburger.focus();
-    }
-
-    if(hamburger) hamburger.addEventListener('click', ()=> {
-      const isOpen = hamburger.classList.contains('open');
-      isOpen ? closeMenu() : openMenu();
+      const elements = document.querySelectorAll('.js-scroll');
+      elements.forEach(el => observer.observe(el));
     });
-    if(closeOverlay) closeOverlay.addEventListener('click', closeMenu);
-
-    overlay.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
-
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
-
-    // accessibility: Enter/Space toggles hamburger
-    if(hamburger){
-      hamburger.addEventListener('keyup', (e)=>{
-        if(e.key === 'Enter' || e.key === ' '){ hamburger.click(); }
-      });
-    }
   </script>
+
 </body>
 </html>
