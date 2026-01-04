@@ -1,340 +1,418 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Projet 1 — ODS</title>
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
-<style>
-/* Reset & base */
-*{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-html,body{height:100%;margin:0;font-family:'Cormorant Garamond',serif;color:#0b0b0b;background:#f6f6f6}
-img{display:block;max-width:100%;height:auto;border:0}
-a{color:inherit;text-decoration:none}
-button{font-family:inherit}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projet 1 — ODS</title>
 
-/* Frame */
-.frame{width:100%;max-width:2000px;margin:0 auto;background:#dcdcdc;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400&display=swap" rel="stylesheet">
 
-/* Header */
-header.site-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:14px 4vw;background:#000;color:#fff;position:relative}
-.nav{display:flex;gap:18px;align-items:center;white-space:nowrap}
-.nav a{color:#fff;font-size:clamp(24px,1.6vw,28px);transition:transform .18s}
-.nav a:hover{transform:translateY(-3px)}
-.logo img{height:88px;width:auto;object-fit:contain;display:block}
+  <style>
+    :root {
+      --bg-color: #080808;
+      --text-color: #eaeaea;
+      --accent-color: #8c8c8c;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Cormorant Garamond', serif;
+      --font-ui: 'Manrope', sans-serif;
+    }
 
-/* Main */
-main.content{padding:28px 6vw 48px;display:flex;flex-direction:column;gap:28px;background:transparent}
-.page-title{color:#000;font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,40px);margin:6px 0;text-align:center}
+    /* --- Base Reset & Style --- */
+    * { box-sizing: border-box; }
+    
+    html { scroll-behavior: smooth; }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
 
-/* Slider */
-.slider-wrap{display:flex;align-items:center;justify-content:center;position:relative;margin:8px auto 18px;width:100%}
-.slider-stage{width:760px;max-width:100%;background:#8f8f8f;padding:0;position:relative;overflow:hidden;border-radius:2px;box-shadow:0 6px 24px rgba(0,0,0,.12)}
-.slides{display:flex;transition:transform .6s cubic-bezier(.2,.9,.2,1);will-change:transform}
-.slide{min-width:100%;position:relative;user-select:none;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.slide img{display:block;width:100%;height:260px;object-fit:cover;vertical-align:middle;cursor:zoom-in}
-.slide-caption{position:absolute;left:18px;bottom:18px;color:black;font-size:20px;font-weight:700;text-shadow:0 4px 18px rgba(255,255,255,.3);letter-spacing:.6px;background:rgba(255,255,255,0.85);padding:6px 10px;border-radius:4px}
+    img { display: block; max-width: 100%; height: auto; }
+    button { font-family: inherit; cursor: pointer; }
+    a { color: inherit; text-decoration: none; transition: opacity 0.3s; }
 
-/* Arrows */
-.arrow{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:transparent;color:#000;cursor:pointer;z-index:12;transition:transform .18s;user-select:none;border:0}
-.arrow:hover{transform:translateY(-50%) scale(1.05)}
-.arrow-left{left:10px}
-.arrow-right{right:10px}
-.arrow svg{width:30px;height:30px;stroke:#000;stroke-width:6;fill:none}
+    /* --- Noise Overlay --- */
+    .noise-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
 
-/* Content below */
-.content-grid{display:grid;grid-template-columns:1fr;gap:22px;align-items:end}
-.experience-row{display:grid;grid-template-columns:140px 1fr;gap:20px;align-items:center}
-.experience-label{font-family:'Playfair Display',serif;font-size:30px;color:#0b0b0b;padding-top:6px;text-align:left}
-.experience-text{color:#111;font-size:16.5px;line-height:1.8;text-align:center;display:block}
-.skills{text-align:center;margin-top:8px}
-.skills h3{font-family:'Playfair Display',serif;font-size:24px;margin:18px 0 6px}
-.skill-icons{display:flex;gap:18px;justify-content:center;align-items:center;margin-top:8px}
-.skill-icons img{height:350px;width:auto;display:block}
-.nav-buttons-row{display:flex;gap:18px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-.btn{background:#fff;border:0;padding:14px 28px;border-radius:28px;box-shadow:0 6px 0 rgba(0,0,0,.12);font-size:18px;cursor:pointer;transition:transform .18s,box-shadow .18s}
-.btn:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.12)}
+    /* --- Header --- */
+    header.site-header {
+      position: fixed;
+      top: 0; width: 100%; padding: 20px 4vw;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 100; mix-blend-mode: difference;
+    }
+    .logo-text { font-weight: 700; font-family: var(--font-ui); letter-spacing: 1px; color: #fff; }
 
-footer.site-footer{background:#000;color:#fff;padding:18px 4vw;display:flex;justify-content:center;align-items:center}
-footer.site-footer a{color:#fff;text-decoration:underline}
+    .nav { display: flex; gap: 30px; }
+    .nav a {
+      color: #fff; font-family: var(--font-ui); font-size: 14px;
+      text-transform: uppercase; letter-spacing: 1px;
+      opacity: 0.7; position: relative;
+    }
+    .nav a:hover, .nav a.active { opacity: 1; }
+    .nav a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: #fff; transition: width 0.3s ease;
+    }
+    .nav a:hover::after { width: 100%; }
 
-/* lightbox */
-body.noscroll{overflow:hidden}
-.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.92);z-index:2000;padding:20px}
-.lightbox.active{display:flex}
-.lightbox-inner{max-width:95vw;max-height:92vh;display:flex;align-items:center;justify-content:center;position:relative}
-.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.6);background:#000;display:block}
-.lightbox .caption{position:absolute;left:18px;bottom:14px;color:#fff;font-weight:600;text-shadow:0 6px 24px rgba(0,0,0,0.6)}
-.lightbox .close-btn{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.95);color:#000;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.2)}
-.lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.92);color:#000;border:none;cursor:pointer;z-index:12}
-.lightbox .nav-btn:hover{transform:translateY(-50%) scale(1.03)}
-.lightbox .nav-prev{left:12px}
-.lightbox .nav-next{right:12px}
-.lightbox .nav-btn svg{width:26px;height:26px;stroke:#000;stroke-width:6;fill:none}
+    /* --- Main Layout (Split) --- */
+    main.content {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      min-height: 100vh; padding-top: 120px; padding-bottom: 100px;
+      max-width: 1600px; margin: 0 auto; gap: 60px;
+    }
 
-/* Accessibility focus */
-button:focus, a:focus { outline:3px solid rgba(0,0,0,.12); outline-offset:3px; }
+    /* --- Left Column (Sticky) --- */
+    .left-col { padding-left: 4vw; position: relative; }
+    .sticky-wrapper {
+      position: sticky; top: 140px;
+      display: flex; flex-direction: column; gap: 30px;
+    }
 
-/* Responsive */
-@media(max-width:960px){
-  .experience-row{grid-template-columns:1fr}
-  .experience-label{text-align:center;order:1;display:block;padding-top:0;font-size:26px}
-  .experience-text{order:2;text-align:left}
-  .slider-stage .slide img{height:200px}
-  .skill-icons img{height:120px}
-}
-@media(max-width:520px){
-  .slider-stage .slide img{height:150px}
-  .logo img{height:56px}
-  .nav a{font-size:16px}
-  .page-title{font-size:24px}
-  .skill-icons img{height:90px}
-}
-</style>
+    .project-meta {
+      font-family: var(--font-ui); font-size: 14px; color: var(--accent-color);
+      border-left: 1px solid rgba(255,255,255,0.2); padding-left: 20px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .meta-item strong { display: block; color: #fff; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
+
+    /* --- Right Column (Scroll) --- */
+    .right-col { padding-right: 4vw; display: flex; flex-direction: column; gap: 80px; padding-top: 10px; }
+
+    .big-title {
+      font-family: var(--font-serif); font-size: clamp(40px, 4vw, 70px);
+      line-height: 1.1; margin: 0; font-weight: 400;
+    }
+    .big-title span { font-style: italic; color: var(--accent-color); display: block; font-size: 0.6em; margin-top: 10px; }
+
+    .text-block {
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .text-block.visible { opacity: 1; transform: translateY(0); }
+
+    .text-block h3 {
+      font-family: var(--font-ui); font-size: 12px; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--accent-color); margin-bottom: 20px;
+    }
+    .text-block p {
+      font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; color: #dcdcdc;
+    }
+
+    /* --- Slider Styling (Dark Theme) --- */
+    .slider-section { width: 100%; margin: 20px 0; }
+    .slider-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
+    
+    .slider-stage {
+      width: 100%; overflow: hidden; border-radius: 2px;
+      background: #111; /* Fond sombre pour le slider */
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .slides { display: flex; transition: transform 0.6s cubic-bezier(.2,.9,.2,1); }
+    .slide { min-width: 100%; position: relative; display: flex; justify-content: center; }
+    .slide img {
+      width: 100%; height: 400px; object-fit: cover; cursor: zoom-in; opacity: 0.9; transition: opacity 0.3s;
+    }
+    .slide img:hover { opacity: 1; }
+
+    .slide-caption {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      color: #fff; padding: 20px 20px 10px;
+      font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.5px;
+    }
+
+    .arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2); cursor: pointer; z-index: 10;
+      transition: all 0.3s; color: #fff;
+    }
+    .arrow:hover { background: #fff; color: #000; }
+    .arrow-left { left: -22px; }
+    .arrow-right { right: -22px; }
+    .arrow svg { width: 20px; height: 20px; stroke-width: 2; fill: none; stroke: currentColor; }
+
+    /* --- Skills & Nav --- */
+    .skills-grid {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;
+    }
+    .skill-tag {
+      border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px;
+      font-family: var(--font-ui); font-size: 13px; color: #fff; border-radius: 20px;
+    }
+
+    .nav-buttons-row { display: flex; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
+    .btn-outline {
+      background: transparent; border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; padding: 14px 28px; font-family: var(--font-ui);
+      font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-2px); }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 40px 4vw; display: flex; justify-content: space-between;
+      font-family: var(--font-ui); font-size: 12px; color: var(--accent-color);
+    }
+    footer a { color: #fff; text-decoration: underline; }
+
+    /* --- Lightbox (Dark optimized) --- */
+    .lightbox {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.95); z-index: 2000;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+    .lightbox img { max-height: 85vh; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+    
+    .lightbox .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: transparent; color: #fff; border: none; cursor: pointer;
+      padding: 10px; transition: transform 0.2s;
+    }
+    .lightbox .nav-btn:hover { transform: translateY(-50%) scale(1.2); }
+    .lightbox .nav-prev { left: -50px; }
+    .lightbox .nav-next { right: -50px; }
+    .lightbox svg { width: 30px; height: 30px; stroke: #fff; stroke-width: 2; fill: none; }
+    
+    .lightbox .close-btn {
+      position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none;
+      font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 900px) {
+      main.content { grid-template-columns: 1fr; gap: 40px; }
+      .sticky-wrapper { position: relative; top: 0; margin-bottom: 20px; }
+      .right-col { padding-top: 0; }
+      .arrow-left { left: 10px; }
+      .arrow-right { right: 10px; }
+      .slide img { height: 250px; }
+      .lightbox .nav-prev { left: 10px; }
+      .lightbox .nav-next { right: 10px; }
+    }
+  </style>
 </head>
 <body>
-<div class="frame">
-  <!-- Header -->
-  <header class="site-header" role="navigation" aria-label="Navigation principale">
-    <nav class="nav nav-left" aria-label="Gauche">
-      <a href="projets.html">Réalisations</a>
-      <a href="apropos.html">À propos</a>
+
+  <div class="noise-overlay"></div>
+
+  <header class="site-header">
+    <div class="logo-text">ODS.</div>
+    <nav class="nav">
+      <a href="apropos.html">À Propos</a>
+      <a href="index.html">Home</a>
+      <a href="projets.html" class="active">Projets</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="logo" aria-label="Logo ODS">
-      <img src="images/logo-ods.png" alt="Logo ODS">
-    </div>
-    <div class="right-wrap" style="display:flex;align-items:center;gap:12px;">
-      <nav class="nav nav-right" aria-label="Droite"><a href="#"></a></nav>
-      <button class="hamburger" aria-label="Ouvrir le menu" id="hamburger" style="display:none;"><span></span><span></span><span></span></button>
-    </div>
   </header>
 
-  <!-- Main -->
-  <main class="content" role="main">
-    <div><div class="page-title">Projet 1</div></div>
-
-    <!-- Slider -->
-    <div class="slider-wrap" aria-hidden="false">
-      <button class="arrow arrow-left" id="prevBtn" aria-label="Projet précédent" type="button">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <polyline points="16 4 8 12 16 20" stroke-linecap="round" stroke-linejoin="round"></polyline>
-        </svg>
-      </button>
-      <div class="slider-stage" role="region" aria-roledescription="carousel" aria-label="Galerie du projet">
-        <div class="slides" id="slides">
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 1">
-            <img src="images/site_drap.jpg" alt="Site La Cité Drap'Hier" data-full="images/site_drap.jpg" data-caption="Site CMS — La Cité Drap'Hier">
-            <div class="slide-caption">Site CMS du projet La Cité Drap'Hier</div>
+  <main class="content">
+    
+    <div class="left-col">
+      <div class="sticky-wrapper">
+        <h1 class="big-title">
+          La Cité Drap'Hier
+          <span>Projet SAE 105 & 203</span>
+        </h1>
+        
+        <div class="project-meta js-scroll">
+          <div class="meta-item">
+            <strong>Rôle</strong>
+            Développement Fullstack & Design
           </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 2">
-            <img src="images/imageCMS1.png" alt="Site CMS — capture 2" data-full="images/imageCMS1.png" data-caption="Capture — Site CMS">
-            <div class="slide-caption">Site de CMS 1</div>
+          <div class="meta-item">
+            <strong>Contexte</strong>
+            BUT MMI - 2024
           </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 3">
-            <img src="images/IMAGECMS2.png" alt="Site CMS — capture 3" data-full="images/IMAGECMS2.png" data-caption="Capture — Site CMS">
-            <div class="slide-caption">Site de CMS 2</div>
-          </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 4">
-            <img src="images/imageCMS3.png" alt="Site CMS — capture 4" data-full="images/imageCMS3.png" data-caption="Capture — Site CMS">
-            <div class="slide-caption">Site de CMS 3</div>
-          </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 5">
-            <img src="images/sitesae203.jpg" alt="Site billetterie" data-full="images/sitesae203.jpg" data-caption="Site billetterie">
-            <div class="slide-caption">Site de billetterie</div>
-          </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 6">
-            <img src="images/site-1-reservation-billet.png" alt="Page de Réservation" data-full="images/site-1-reservation-billet.png" data-caption="Réservations">
-            <div class="slide-caption">Page de Réservation</div>
-          </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 7">
-            <img src="images/site-billet-mesreserve.png" alt="Page mes Réservations" data-full="images/site-billet-mesreserve.png" data-caption="Mes Réservations">
-            <div class="slide-caption">Page de mes Réservation</div>
-          </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 8">
-            <img src="images/sitebilletterie1.png" alt="Coté ADMIN" data-full="images/sitebilletterie1.png" data-caption="Page Admin">
-            <div class="slide-caption">Page Admin</div>
-          </div>
-          <div class="slide" role="group" aria-roledescription="slide" aria-label="Slide 9">
-            <img src="images/site-billet-admin.png" alt="Page mes Réservations" data-full="images/site-billet-admin.png" data-caption="ADMINISTRATEUR">
-            <div class="slide-caption">Page de l'ADMINISTRATEUR</div>
+          <div class="meta-item">
+            <strong>Stack</strong>
+            HTML, CSS, JS, PHP, MySQL
           </div>
         </div>
       </div>
-      <button class="arrow arrow-right" id="nextBtn" aria-label="Projet suivant" type="button">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <polyline points="8 4 16 12 8 20" stroke-linecap="round" stroke-linejoin="round"></polyline>
-        </svg>
-      </button>
     </div>
 
-    <!-- Experience & skills -->
-    <div class="content-grid">
-      <div class="experience-row">
-        <div class="experience-label">Experience :</div>
-        <div class="experience-text">
-          Grâce à la SAE 105, j’ai conçu et développé un site web structuré, accessible et responsive (HTML, CSS, JavaScript), en appliquant une sémantique HTML correcte ainsi que diverses animations. La SAE 203 m’a amené à créer une billetterie en ligne (PHP, MySQL, TPWEB) intégrant l’inscription, un espace Mon compte, l’envoi d’e-mails de confirmation via Sogo, ainsi que la gestion des transactions et un système de verrouillage pour éviter les sur-réservations. J’ai également modélisé la base de données (Events, Users, Reservations, côté Admin, Billet), et mis en place la possibilité d’ajouter, modifier ou supprimer des événements directement depuis le site. Enfin, j’ai sécurisé l’application (hachage des mots de passe, validation côté serveur, gestion des sessions). Pour la SAE 202, nous avons réalisé un site vitrine culturel pour le projet La Cité Drap’Hier. L’objectif était de plonger l’utilisateur dans l’histoire de la ville d’Elbeuf grâce à différentes pages : À propos, Blog, Événements, Galerie, ainsi qu’une newsletter et un système de vente de billets.
+    <div class="right-col">
+      
+      <div class="text-block js-scroll">
+        <h3>Le Challenge</h3>
+        <p>L'objectif était de concevoir un écosystème web complet pour la ville d'Elbeuf. Le projet s'est articulé autour de la création d'un site vitrine immersif et d'une billetterie fonctionnelle.</p>
+      </div>
+
+      <div class="slider-section js-scroll">
+        <div class="slider-wrap">
+          <button class="arrow arrow-left" id="prevBtn" type="button">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+          </button>
+          
+          <div class="slider-stage">
+            <div class="slides" id="slides">
+              <div class="slide"><img src="images/site_drap.jpg" alt="Site La Cité Drap'Hier" data-caption="Accueil - Site Vitrine"><div class="slide-caption">Accueil - Site Vitrine</div></div>
+              <div class="slide"><img src="images/imageCMS1.png" alt="CMS Interface" data-caption="Interface CMS"><div class="slide-caption">Interface CMS</div></div>
+              <div class="slide"><img src="images/sitesae203.jpg" alt="Site Billetterie" data-caption="Accueil Billetterie"><div class="slide-caption">Accueil Billetterie</div></div>
+              <div class="slide"><img src="images/site-1-reservation-billet.png" alt="Réservation" data-caption="Module de Réservation"><div class="slide-caption">Module de Réservation</div></div>
+              <div class="slide"><img src="images/sitebilletterie1.png" alt="Admin Dashboard" data-caption="Back-office Admin"><div class="slide-caption">Back-office Admin</div></div>
+            </div>
+          </div>
+
+          <button class="arrow arrow-right" id="nextBtn" type="button">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+          </button>
         </div>
       </div>
-      <div class="skills">
-        <h3>Compétences techniques :</h3>
-        <div class="skill-icons">
-          <img src="images/nume1-compet__1__page-0001-removebg-preview.png" alt="Compétences numériques">
+
+      <div class="text-block js-scroll">
+        <h3>Développement & Technique</h3>
+        <p>
+          Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données (Events, Users, Reservations) et implémenté toute la logique PHP : inscription, sécurisation des mots de passe, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.
+        </p>
+        <p style="margin-top:20px;">
+          Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.
+        </p>
+      </div>
+
+      <div class="text-block js-scroll">
+        <h3>Compétences Acquises</h3>
+        <div class="skills-grid">
+          <span class="skill-tag">Développement PHP/MySQL</span>
+          <span class="skill-tag">Architecture MVC</span>
+          <span class="skill-tag">Sécurité Web</span>
+          <span class="skill-tag">Design Responsive</span>
+          <span class="skill-tag">Gestion de Base de Données</span>
         </div>
       </div>
-      <div style="display:flex;justify-content:center;">
-        <div class="nav-buttons-row" role="navigation" aria-label="Navigation projets">
-          <button class="btn" id="prevProject">← Revenir au Projet Précédent</button>
-          <button class="btn" id="nextProject">Aller au Projet Suivant →</button>
-          <a class="btn" href="projets.html" role="button">Retour au portfolio</a>
-        </div>
+
+      <div class="nav-buttons-row js-scroll">
+        <button class="btn-outline" id="prevProject">← Projet Précédent</button>
+        <button class="btn-outline" id="nextProject">Projet Suivant →</button>
+        <a href="projets.html" class="btn-outline">Retour au Portfolio</a>
       </div>
+
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div>© 2025 Oscar Da Silva | <a href="contact.html">Contact</a></div>
+  <footer>
+    <div>© 2025 Oscar Da Silva</div>
+    <div><a href="contact.html">Contact</a></div>
   </footer>
-</div>
 
-<!-- Lightbox modal (le bouton "Quitter" a été remplacé par une navigation précédente/suivante) -->
-<div id="lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Aperçu de l'image">
-  <div class="lightbox-inner" role="document">
-    <button class="nav-btn nav-prev" id="lightboxPrev" aria-label="Image précédente" title="Image précédente" type="button">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="16 4 8 12 16 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-    </button>
-
-    <img id="lightboxImage" src="" alt="">
-    <div class="caption" id="lightboxCaption" aria-live="polite"></div>
-
-    <button class="nav-btn nav-next" id="lightboxNext" aria-label="Image suivante" title="Image suivante" type="button">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="8 4 16 12 8 20" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-    </button>
-
-    <button class="close-btn" id="lightboxClose" aria-label="Fermer l'aperçu">Fermer</button>
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-inner">
+      <button class="close-btn" id="lightboxClose">Fermer [ESC]</button>
+      <button class="nav-btn nav-prev" id="lightboxPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <img id="lightboxImage" src="" alt="">
+      <button class="nav-btn nav-next" id="lightboxNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+    </div>
   </div>
-</div>
 
-<script>
-(function(){
-  const slidesEl = document.getElementById('slides');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const slides = Array.from(slidesEl.querySelectorAll('.slide'));
-  const total = slides.length;
-  let index = 0;
-  let timer = null;
-  const autoplay = true;
+  <script>
+    // --- 1. Animation au Scroll (Style Apropos) ---
+    document.addEventListener("DOMContentLoaded", function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
+    });
 
-  // ensure slides have aria-hidden set
-  slides.forEach((s, i) => s.setAttribute('aria-hidden', i !== 0 ? 'true' : 'false'));
+    // --- 2. Slider Logic ---
+    (function(){
+      const slidesEl = document.getElementById('slides');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const slides = Array.from(slidesEl.querySelectorAll('.slide'));
+      const total = slides.length;
+      let index = 0;
+      let timer = null;
+      const autoplay = true;
 
-  function goTo(i){
-    index = (i + total) % total;
-    slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
-    slides.forEach((s, idx) => s.setAttribute('aria-hidden', idx !== index ? 'true' : 'false'));
-  }
+      function goTo(i){
+        index = (i + total) % total;
+        slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
+      }
 
-  if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
-  if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
+      if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
+      if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
 
-  document.addEventListener('keydown', e => {
-    if(e.key === 'ArrowLeft') { goTo(index - 1); stopAuto(); }
-    if(e.key === 'ArrowRight') { goTo(index + 1); stopAuto(); }
-  });
+      function startAuto(){ if(autoplay && !timer) timer = setInterval(()=> goTo(index+1), 5000); }
+      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
 
-  function startAuto(){ if(autoplay && !timer) timer = setInterval(()=> goTo(index+1), 6000); }
-  function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+      const stage = document.querySelector('.slider-stage');
+      if(stage){
+        stage.addEventListener('mouseenter', stopAuto);
+        stage.addEventListener('mouseleave', startAuto);
+      }
+      
+      startAuto();
 
-  const stage = document.querySelector('.slider-stage');
-  if(stage){
-    stage.addEventListener('mouseenter', stopAuto);
-    stage.addEventListener('mouseleave', startAuto);
-  }
+      // --- 3. Lightbox Logic ---
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightboxImage');
+      const lbClose = document.getElementById('lightboxClose');
+      const lbPrev = document.getElementById('lightboxPrev');
+      const lbNext = document.getElementById('lightboxNext');
+      
+      const imgs = Array.from(slidesEl.querySelectorAll('img'));
+      let lbIndex = 0;
 
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImage = document.getElementById('lightboxImage');
-  const lightboxCaption = document.getElementById('lightboxCaption');
-  const lightboxClose = document.getElementById('lightboxClose');
-  const lightboxPrev = document.getElementById('lightboxPrev');
-  const lightboxNext = document.getElementById('lightboxNext');
+      function openLb(i){
+        lbIndex = (i + imgs.length) % imgs.length;
+        lbImg.src = imgs[lbIndex].src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        stopAuto();
+      }
+      function closeLb(){
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        startAuto();
+      }
 
-  const slideImages = Array.from(slidesEl.querySelectorAll('.slide img'));
-  let currentLightIndex = 0;
+      imgs.forEach((img, i) => {
+        img.addEventListener('click', () => openLb(i));
+      });
 
-  function updateLightboxContent(i){
-    currentLightIndex = (i + slideImages.length) % slideImages.length;
-    const img = slideImages[currentLightIndex];
-    const src = img.dataset.full || img.src;
-    const caption = img.dataset.caption || img.alt || '';
-    lightboxImage.src = src;
-    lightboxImage.alt = img.alt || '';
-    lightboxCaption.textContent = caption;
-    // set focus for accessibility
-    lightbox.setAttribute('aria-hidden', 'false');
-  }
+      if(lbClose) lbClose.addEventListener('click', closeLb);
+      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex - 1); });
+      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex + 1); });
+      
+      lightbox.addEventListener('click', (e) => {
+        if(e.target === lightbox) closeLb();
+      });
 
-  function openLightbox(i){
-    updateLightboxContent(i);
-    document.body.classList.add('noscroll');
-    lightbox.classList.add('active');
-    lightbox.setAttribute('aria-hidden', 'false');
-    // focus close button for keyboard users
-    lightboxClose.focus();
-    stopAuto();
-  }
+      document.addEventListener('keydown', e => {
+        if(lightbox.classList.contains('active')) {
+          if(e.key === 'Escape') closeLb();
+          if(e.key === 'ArrowLeft') openLb(lbIndex - 1);
+          if(e.key === 'ArrowRight') openLb(lbIndex + 1);
+        }
+      });
 
-  function closeLightbox(){
-    document.body.classList.remove('noscroll');
-    lightbox.classList.remove('active');
-    lightbox.setAttribute('aria-hidden', 'true');
-    lightboxImage.src = '';
-    startAuto();
-  }
-
-  function prevLight(){ updateLightboxContent(currentLightIndex - 1); }
-  function nextLight(){ updateLightboxContent(currentLightIndex + 1); }
-
-  // open lightbox when clicking any slide image
-  slideImages.forEach((img, i) => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => openLightbox(i));
-    // keyboard accessibility for thumbnails
-    img.tabIndex = 0;
-    img.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
-  });
-
-  // lightbox controls
-  if(lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-  if(lightboxPrev) lightboxPrev.addEventListener('click', prevLight);
-  if(lightboxNext) lightboxNext.addEventListener('click', nextLight);
-
-  // close when clicking outside inner area
-  lightbox.addEventListener('click', (e) => {
-    if(e.target === lightbox) closeLightbox();
-  });
-
-  // keyboard controls while lightbox open
-  document.addEventListener('keydown', (e) => {
-    if(lightbox.classList.contains('active')){
-      if(e.key === 'Escape') closeLightbox();
-      if(e.key === 'ArrowLeft') prevLight();
-      if(e.key === 'ArrowRight') nextLight();
-    }
-  });
-
-  // small project navigation handlers (optional behavior: can be wired to real pages)
-  document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet0.html'; });
-  document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
-
-  // initialise
-  goTo(0);
-  startAuto();
-})();
-</script>
+      // Navigation Projets
+      document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projets.html'; }); // Modifier le lien si besoin
+      document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projets.html'; });
+    })();
+  </script>
 </body>
 </html>
