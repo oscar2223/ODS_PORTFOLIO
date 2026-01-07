@@ -320,7 +320,7 @@
   </div>
 
   <script>
-    // Animation scroll
+    // --- 1. Animation au Scroll (Apparition fluide) ---
     document.addEventListener("DOMContentLoaded", function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -330,44 +330,74 @@
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
     });
 
-    // Slider & Lightbox
+    // --- 2. Logique du Slider (Identique au Projet 3) ---
     (function(){
       const slidesEl = document.getElementById('slides');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
       const slides = Array.from(slidesEl.querySelectorAll('.slide'));
+      const total = slides.length;
       let index = 0;
+      let timer = null;
+      const autoplay = true;
 
       function goTo(i){
-        index = (i + slides.length) % slides.length;
+        index = (i + total) % total;
         slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
       }
 
-      prevBtn?.addEventListener('click', () => goTo(index - 1));
-      nextBtn?.addEventListener('click', () => goTo(index + 1));
+      // Événements boutons
+      if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
+      if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
 
-      // Lightbox
+      // Gestion Autoplay
+      function startAuto(){ if(autoplay && !timer) timer = setInterval(()=> goTo(index+1), 5000); }
+      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+
+      const stage = document.querySelector('.slider-stage');
+      if(stage){
+        stage.addEventListener('mouseenter', stopAuto);
+        stage.addEventListener('mouseleave', startAuto);
+      }
+      
+      startAuto();
+
+      // --- 3. Logique Lightbox (Identique au Projet 3) ---
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
+      const lbClose = document.getElementById('lightboxClose');
+      
       const imgs = Array.from(slidesEl.querySelectorAll('img'));
 
-      imgs.forEach((img) => {
-        img.addEventListener('click', () => {
-          lbImg.src = img.src;
-          lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        });
-      });
+      function openLb(imgElement){
+        lbImg.src = imgElement.src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        stopAuto();
+      }
 
-      document.getElementById('lightboxClose')?.addEventListener('click', () => {
+      function closeLb(){
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
+        startAuto();
+      }
+
+      imgs.forEach((img) => {
+        img.addEventListener('click', () => openLb(img));
       });
 
-      // Navigation Projets
+      if(lbClose) lbClose.addEventListener('click', closeLb);
+      
+      // Fermeture clic extérieur ou touche Echap
+      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
+      document.addEventListener('keydown', e => {
+        if(lightbox.classList.contains('active') && e.key === 'Escape') closeLb();
+      });
+
       document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet3.html'; });
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet1.html'; });
     })();
   </script>
 </body>
 </html>
+
