@@ -19,7 +19,6 @@
 
     /* --- Base Reset & Style --- */
     * { box-sizing: border-box; }
-    
     html { scroll-behavior: smooth; }
     
     body {
@@ -111,13 +110,13 @@
       font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; color: #dcdcdc;
     }
 
-    /* --- Slider Styling (Dark Theme) --- */
+    /* --- Slider Styling --- */
     .slider-section { width: 100%; margin: 20px 0; }
     .slider-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
     
     .slider-stage {
       width: 100%; overflow: hidden; border-radius: 2px;
-      background: #111; /* Fond sombre pour le slider */
+      background: #111; 
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
       border: 1px solid rgba(255,255,255,0.1);
     }
@@ -175,7 +174,7 @@
     }
     footer a { color: #fff; text-decoration: underline; }
 
-    /* --- Lightbox (Dark optimized) --- */
+    /* --- Lightbox --- */
     .lightbox {
       position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
       background: rgba(0,0,0,0.95); z-index: 2000;
@@ -199,7 +198,6 @@
       font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
     }
 
-    /* --- Responsive --- */
     @media (max-width: 900px) {
       main.content { grid-template-columns: 1fr; gap: 40px; }
       .sticky-wrapper { position: relative; top: 0; margin-bottom: 20px; }
@@ -284,7 +282,7 @@
       <div class="text-block js-scroll">
         <h3>Développement & Technique</h3>
         <p>
-          Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données (Events, Users, Reservations) et implémenté toute la logique PHP : inscription, sécurisation des mots de passe, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.
+          Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données et implémenté toute la logique PHP : inscription, sécurisation, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.
         </p>
         <p style="margin-top:20px;">
           Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.
@@ -326,18 +324,16 @@
   </div>
 
   <script>
-    // --- 1. Animation au Scroll (Style Apropos) ---
     document.addEventListener("DOMContentLoaded", function() {
+      // 1. Animation au Scroll
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
         });
       }, { threshold: 0.1 });
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
-    });
 
-    // --- 2. Slider Logic ---
-    (function(){
+      // 2. Slider Logic
       const slidesEl = document.getElementById('slides');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
@@ -345,7 +341,6 @@
       const total = slides.length;
       let index = 0;
       let timer = null;
-      const autoplay = true;
 
       function goTo(i){
         index = (i + total) % total;
@@ -355,7 +350,7 @@
       if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
       if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
 
-      function startAuto(){ if(autoplay && !timer) timer = setInterval(()=> goTo(index+1), 5000); }
+      function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
       function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
 
       const stage = document.querySelector('.slider-stage');
@@ -363,16 +358,14 @@
         stage.addEventListener('mouseenter', stopAuto);
         stage.addEventListener('mouseleave', startAuto);
       }
-      
       startAuto();
 
-      // --- 3. Lightbox Logic ---
+      // 3. Lightbox Logic
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
       const lbPrev = document.getElementById('lightboxPrev');
       const lbNext = document.getElementById('lightboxNext');
-      
       const imgs = Array.from(slidesEl.querySelectorAll('img'));
       let lbIndex = 0;
 
@@ -389,17 +382,11 @@
         startAuto();
       }
 
-      imgs.forEach((img, i) => 
-        img.addEventListener('click', () => openLb(i));
-      });
-
+      imgs.forEach((img, i) => img.addEventListener('click', () => openLb(i)));
       if(lbClose) lbClose.addEventListener('click', closeLb);
       if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex - 1); });
       if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex + 1); });
-      
-      lightbox.addEventListener('click', (e) => {
-        if(e.target === lightbox) closeLb();
-      });
+      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
 
       document.addEventListener('keydown', e => {
         if(lightbox.classList.contains('active')) {
@@ -409,12 +396,10 @@
         }
       });
 
-      // Navigation Projets
-      document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; }); // Modifier le lien si besoin
+      // 4. Navigation Inter-projets
+      document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
-    })();
+    });
   </script>
 </body>
 </html>
-
-
