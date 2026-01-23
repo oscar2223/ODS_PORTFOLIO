@@ -320,7 +320,7 @@
   </div>
 
   <script>
-    // --- 1. Animation au Scroll (Apparition fluide) ---
+   // Animation au Scroll
     document.addEventListener("DOMContentLoaded", function() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -330,7 +330,7 @@
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
     });
 
-    // --- 2. Logique du Slider (Identique au Projet 3) ---
+    // Slider Logic
     (function(){
       const slidesEl = document.getElementById('slides');
       const prevBtn = document.getElementById('prevBtn');
@@ -339,19 +339,16 @@
       const total = slides.length;
       let index = 0;
       let timer = null;
-      const autoplay = true;
 
       function goTo(i){
         index = (i + total) % total;
         slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
       }
 
-      // Événements boutons
       if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
       if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
 
-      // Gestion Autoplay
-      function startAuto(){ if(autoplay && !timer) timer = setInterval(()=> goTo(index+1), 5000); }
+      function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
       function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
 
       const stage = document.querySelector('.slider-stage');
@@ -362,42 +359,11 @@
       
       startAuto();
 
-      // --- 3. Logique Lightbox (Identique au Projet 3) ---
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightboxImage');
-      const lbClose = document.getElementById('lightboxClose');
-      
-      const imgs = Array.from(slidesEl.querySelectorAll('img'));
-
-      function openLb(imgElement){
-        lbImg.src = imgElement.src;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        stopAuto();
-      }
-
-      function closeLb(){
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        startAuto();
-      }
-
-      imgs.forEach((img) => {
-        img.addEventListener('click', () => openLb(img));
-      });
-
-      if(lbClose) lbClose.addEventListener('click', closeLb);
-      
-      // Fermeture clic extérieur ou touche Echap
-      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
-      document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active') && e.key === 'Escape') closeLb();
-      });
-
       document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet3.html'; });
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet1.html'; });
     })();
   </script>
 </body>
 </html>
+
 
