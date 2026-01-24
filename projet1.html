@@ -328,7 +328,7 @@ Durant la SAE 303, j’ai réalisé un dashboard portant sur l’évolution clim
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
         });
-      }, 
+      }, { threshold: 0.1 });
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
 
       const slidesEl = document.getElementById('slides');
@@ -396,5 +396,7 @@ Durant la SAE 303, j’ai réalisé un dashboard portant sur l’évolution clim
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
     });
   </script>
+  </script>
 </body>
 </html>
+
