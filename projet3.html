@@ -18,7 +18,6 @@
     }
 
     * { box-sizing: border-box; }
-    
     html { scroll-behavior: smooth; }
     
     body {
@@ -31,7 +30,7 @@
     }
 
     img { display: block; max-width: 100%; height: auto; }
-    button { font-family: inherit; cursor: pointer; }
+    button { font-family: inherit; cursor: pointer; border: none; outline: none; }
     a { color: inherit; text-decoration: none; transition: opacity 0.3s; }
 
     .noise-overlay {
@@ -91,11 +90,12 @@
     }
     .big-title span { font-style: italic; color: var(--accent-color); display: block; font-size: 0.6em; margin-top: 10px; }
 
-    .text-block {
+    /* Animation Scroll */
+    .js-scroll {
       opacity: 0; transform: translateY(30px);
       transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
-    .text-block.visible { opacity: 1; transform: translateY(0); }
+    .js-scroll.visible { opacity: 1; transform: translateY(0); }
 
     .text-block h3 {
       font-family: var(--font-ui); font-size: 12px; text-transform: uppercase;
@@ -105,6 +105,7 @@
       font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; color: #dcdcdc;
     }
 
+    /* Slider */
     .slider-section { width: 100%; margin: 20px 0; }
     .slider-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
     
@@ -116,10 +117,9 @@
     }
     
     .slides { display: flex; transition: transform 0.6s cubic-bezier(.2,.9,.2,1); }
-    .slide { min-width: 100%; position: relative; display: flex; justify-content: center; }
-    .slide a { display: block; width: 100%; height: 100%; }
+    .slide { min-width: 100%; position: relative; }
     .slide img {
-      width: 100%; height: 400px; object-fit: cover; cursor: pointer; opacity: 0.9; transition: opacity 0.3s, transform 0.5s;
+      width: 100%; height: 400px; object-fit: cover; opacity: 0.9; transition: opacity 0.3s, transform 0.5s;
     }
     .slide img:hover { opacity: 1; transform: scale(1.02); }
 
@@ -128,7 +128,7 @@
       background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
       color: #fff; padding: 20px 20px 10px;
       font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.5px;
-      pointer-events: none; /* Laisse passer le clic vers le lien */
+      pointer-events: none;
     }
 
     .arrow {
@@ -157,7 +157,7 @@
       background: transparent; border: 1px solid rgba(255,255,255,0.3);
       color: #fff; padding: 14px 28px; font-family: var(--font-ui);
       font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
-      transition: all 0.3s;
+      transition: all 0.3s; display: inline-block;
     }
     .btn-outline:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-2px); }
 
@@ -166,12 +166,10 @@
       padding: 40px 4vw; display: flex; justify-content: space-between;
       font-family: var(--font-ui); font-size: 12px; color: var(--accent-color);
     }
-    footer a { color: #fff; text-decoration: underline; }
 
     @media (max-width: 900px) {
       main.content { grid-template-columns: 1fr; gap: 40px; }
       .sticky-wrapper { position: relative; top: 0; margin-bottom: 20px; }
-      .right-col { padding-top: 0; }
       .arrow-left { left: 10px; }
       .arrow-right { right: 10px; }
       .slide img { height: 250px; }
@@ -212,7 +210,7 @@
           </div>
           <div class="meta-item">
             <strong>Outils</strong>
-            Premiere Pro,Audition & After Effects 
+            Premiere Pro, Audition & After Effects 
           </div>
         </div>
       </div>
@@ -245,7 +243,6 @@
                     <div class="slide-caption">Cliquez pour voir : Interview Maison Sport Santé</div>
                 </a>
               </div>
-
               <div class="slide">
                 <a href="https://youtu.be/kFdugk7YmxY" target="_blank">
                     <img src="images/film-crescendo.PNG" alt="Interview Vidéo">
@@ -262,11 +259,8 @@
       </div>
 
       <div class="text-block js-scroll">
-        <h3>Montage & Son </h3>
-        <p>
-         En <strong>audiovisuel</strong>, nous avons acquis de nombreuses compétences en réalisant des courts-métrages, notamment des films noirs et des films à crescendo. Grâce à des logiciels tels qu’Adobe Premiere Pro et Adobe Audition, j’ai réalisé le montage, le mixage audio et l’étalonnage de mes productions. 
-        </p>
-       
+        <h3>Montage & Son</h3>
+        <p>En <strong>audiovisuel</strong>, nous avons acquis de nombreuses compétences en réalisant des courts-métrages, notamment des films noirs et des films à crescendo. Grâce à des logiciels tels qu’Adobe Premiere Pro et Adobe Audition, j’ai réalisé le montage, le mixage audio et l’étalonnage de mes productions.</p>
       </div>
 
       <div class="text-block js-scroll">
@@ -294,13 +288,17 @@
   </footer>
 
   <script>
-   document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
+      
       // 1. Animation au Scroll
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
       }, { threshold: 0.1 });
+      
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
 
       // 2. Slider Logic
@@ -320,8 +318,12 @@
       if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
       if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
 
-      function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
-      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+      function startAuto(){ 
+        if(!timer) timer = setInterval(()=> goTo(index+1), 5000); 
+      }
+      function stopAuto(){ 
+        if(timer){ clearInterval(timer); timer=null; } 
+      }
 
       const stage = document.querySelector('.slider-stage');
       if(stage){
@@ -330,48 +332,14 @@
       }
       startAuto();
 
-      // 3. Lightbox Logic
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightboxImage');
-      const lbClose = document.getElementById('lightboxClose');
-      const lbPrev = document.getElementById('lightboxPrev');
-      const lbNext = document.getElementById('lightboxNext');
-      const imgs = Array.from(slidesEl.querySelectorAll('img'));
-      let lbIndex = 0;
-
-      function openLb(i){
-        lbIndex = (i + imgs.length) % imgs.length;
-        lbImg.src = imgs[lbIndex].src;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        stopAuto();
-      }
-      function closeLb(){
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        startAuto();
-      }
-
-      imgs.forEach((img, i) => img.addEventListener('click', () => openLb(i)));
-      if(lbClose) lbClose.addEventListener('click', closeLb);
-      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex - 1); });
-      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex + 1); });
-      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
-
-      document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active')) {
-          if(e.key === 'Escape') closeLb();
-          if(e.key === 'ArrowLeft') openLb(lbIndex - 1);
-          if(e.key === 'ArrowRight') openLb(lbIndex + 1);
-        }
+      // 3. Navigation Inter-projets
+      document.getElementById('prevProject')?.addEventListener('click', () => { 
+        window.location.href = 'projet2.html'; 
       });
-
-      // 4. Navigation Inter-projets
-      document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
-      document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
+      document.getElementById('nextProject')?.addEventListener('click', () => { 
+        window.location.href = 'projet4.html'; 
+      });
     });
-  </script>
   </script>
 </body>
 </html>
-
