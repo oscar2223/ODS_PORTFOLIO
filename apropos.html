@@ -291,6 +291,7 @@
   </footer>
 
   <script>
+    <script>
     document.addEventListener("DOMContentLoaded", function() {
       
       const observer = new IntersectionObserver((entries) => {
@@ -299,13 +300,15 @@
             entry.target.classList.add('visible');
           }
         });
-      };
+      }); 
 
       const elements = document.querySelectorAll('.js-scroll');
       elements.forEach(el => observer.observe(el));
     });
   </script>
+  </script>
 
 </body>
 </html>
+
 
