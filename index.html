@@ -17,7 +17,6 @@
       --font-ui: 'Manrope', sans-serif;
     }
 
-    /* --- Base Reset & Style --- */
     * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
     html, body {
       margin: 0; padding: 0; height: 100%;
@@ -30,7 +29,6 @@
     img { display: block; max-width: 100%; height: auto; }
     a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-    /* --- Noise Overlay --- */
     .noise-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 9999; opacity: 0.05;
@@ -43,12 +41,11 @@
       position: relative; z-index: 1;
     }
 
-    /* --- Header Centré (Modifié) --- */
     header.site-header {
-      display: flex; /* Utilisation de Flexbox pour le centrage */
-      justify-content: center; /* Centre tout le contenu horizontalement */
+      display: flex; 
+      justify-content: center; /
       align-items: center;
-      gap: 60px; /* Espace entre les groupes (Nav Gauch - Logo - Nav Droite) */
+      gap: 60px;
       padding: 30px 4vw;
       background: transparent;
       z-index: 100;
@@ -73,14 +70,12 @@
     .logo img { height: 120px; transition: transform 0.3s;}
     .logo:hover { transform: scale(1.05); }
 
-    /* Wrapper Droite (pour garder Nav + Burger ensemble si besoin) */
     .right-wrap { display: flex; align-items: center; gap: 20px; }
 
-    /* Hamburger */
     .hamburger {
       width: 30px; height: 24px; display: none; flex-direction: column;
       justify-content: space-between; cursor: pointer; border: none; background: transparent; padding: 0;
-      z-index: 1001; /* Au-dessus de tout */
+      z-index: 1001; 
     }
     .hamburger span {
       display: block; height: 2px; background: #fff; width: 100%;
@@ -90,7 +85,6 @@
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
 
-    /* --- Main Content --- */
     main {
       flex: 1; display: grid; grid-template-columns: 1fr 400px;
       gap: 60px; padding: 80px 4vw; align-items: start;
@@ -176,7 +170,6 @@
     }
     .overlay a:hover { opacity: 1; letter-spacing: 1px; }
 
-    /* --- Responsive --- */
     @media (max-width: 1100px) {
       main { grid-template-columns: 1fr; gap: 40px; }
       .side { align-items: flex-start; margin-top: 40px; }
@@ -328,16 +321,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
