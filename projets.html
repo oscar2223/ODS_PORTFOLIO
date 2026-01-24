@@ -29,7 +29,6 @@
       overflow-x: hidden;
     }
 
-    /* --- Texture Grain --- */
     .noise-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -39,7 +38,6 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* --- Header --- */
     header.site-header {
       position: fixed;
       top: 0;
@@ -66,7 +64,6 @@
     .nav a:hover, .nav a[aria-current="page"] { opacity: 1; transform: translateY(-2px); }
     .nav a[aria-current="page"] { border-bottom: 1px solid #fff; }
 
-    /* --- Layout Principal --- */
     main.content {
       display: grid;
       grid-template-columns: 1fr 1.5fr; /* Colonne de droite plus large pour les images */
@@ -78,7 +75,6 @@
       gap: 60px;
     }
 
-    /* Colonne Gauche (Titre Fixe) */
     .left-col {
       padding-left: 4vw;
       position: relative;
@@ -115,12 +111,11 @@
       animation: fadeUp 1s ease 0.2s forwards;
     }
 
-    /* Colonne Droite (Liste Projets) */
     .right-col {
       padding-right: 4vw;
       display: flex;
       flex-direction: column;
-      gap: 100px; /* Grand espace entre les projets */
+      gap: 100px; 
     }
 
     .project-card {
@@ -164,7 +159,7 @@
 
     .project-info {
       display: grid;
-      grid-template-columns: auto 1fr auto; /* Numéro - Titre/Desc - Flèche */
+      grid-template-columns: auto 1fr auto; 
       gap: 20px;
       align-items: baseline;
       border-bottom: 1px solid var(--border-color);
@@ -224,7 +219,6 @@
     footer a { color: inherit; text-decoration: none; }
     footer a:hover { color: #fff; }
 
-    /* --- Responsive --- */
     @media (max-width: 900px) {
       main.content {
         grid-template-columns: 1fr;
@@ -344,7 +338,7 @@
             entry.target.classList.add('visible');
           }
         });
-      }, { threshold: 0.1 });
+      }
 
       const elements = document.querySelectorAll('.js-scroll');
       elements.forEach(el => observer.observe(el));
@@ -353,8 +347,6 @@
 
 </body>
 </html>
-
-
 
 
 
