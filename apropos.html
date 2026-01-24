@@ -30,7 +30,6 @@
       overflow-x: hidden;
     }
 
-    /* Effet de Grain (Noise) pour la texture sophistiquée */
     .noise-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -40,7 +39,6 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* --- Header --- */
     header.site-header {
       position: fixed;
       top: 0;
@@ -50,7 +48,6 @@
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      mix-blend-mode: difference; /* Rend le menu visible même sur image blanche */
       transition: transform 0.3s ease;
     }
 
@@ -73,19 +70,17 @@
     }
     .nav a:hover::after { width: 100%; }
 
-    /* --- Layout Principal --- */
     main.content {
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 100vh;
-      padding-top: 120px; /* Espace pour le header */
+      padding-top: 120px; 
       padding-bottom: 100px;
       max-width: 1600px;
       margin: 0 auto;
       gap: 60px;
     }
 
-    /* --- Colonne Gauche (Sticky) --- */
     .left-col {
       padding-left: 4vw;
       position: relative;
@@ -93,7 +88,7 @@
 
     .sticky-wrapper {
       position: sticky;
-      top: 120px; /* Colle l'image quand on scroll */
+      top: 120px; 
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -105,7 +100,7 @@
       max-width: 400px;
       aspect-ratio: 3/4;
       overflow: hidden;
-      border-radius: 4px; /* Très léger radius */
+      border-radius: 4px; 
     }
 
     .portrait-container img {
@@ -138,13 +133,12 @@
     .contact-info a { color: inherit; text-decoration: none; transition: color 0.3s; }
     .contact-info a:hover { color: #fff; }
 
-    /* --- Colonne Droite (Scroll) --- */
     .right-col {
       padding-right: 4vw;
       padding-top: 40px;
       display: flex;
       flex-direction: column;
-      gap: 120px; /* Grand espace entre les blocs pour respirer */
+      gap: 120px; 
     }
 
     .big-title {
@@ -193,7 +187,6 @@
       font-weight: 300;
     }
 
-    /* --- Footer --- */
     footer {
       border-top: 1px solid rgba(255,255,255,0.1);
       padding: 40px 4vw;
@@ -205,7 +198,6 @@
       margin-top: auto;
     }
 
-    /* --- Responsive --- */
     @media (max-width: 900px) {
       main.content {
         grid-template-columns: 1fr;
@@ -299,7 +291,6 @@
   </footer>
 
   <script>
-    // Animation au scroll simple et efficace
     document.addEventListener("DOMContentLoaded", function() {
       
       const observer = new IntersectionObserver((entries) => {
@@ -308,7 +299,7 @@
             entry.target.classList.add('visible');
           }
         });
-      }, { threshold: 0.1 }); // Se déclenche quand 10% du bloc est visible
+      }, 
 
       const elements = document.querySelectorAll('.js-scroll');
       elements.forEach(el => observer.observe(el));
