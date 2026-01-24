@@ -48,7 +48,7 @@
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      transition: transform 0.3s ease;
+      mix-blend-mode: difference; /* Pour la lisibilité sur les images */
     }
 
     .nav { display: flex; gap: 30px; }
@@ -74,7 +74,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 100vh;
-      padding-top: 120px; 
+      padding-top: 140px; 
       padding-bottom: 100px;
       max-width: 1600px;
       margin: 0 auto;
@@ -88,7 +88,7 @@
 
     .sticky-wrapper {
       position: sticky;
-      top: 120px; 
+      top: 140px; 
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -101,6 +101,7 @@
       aspect-ratio: 3/4;
       overflow: hidden;
       border-radius: 4px; 
+      background-color: #1a1a1a;
     }
 
     .portrait-container img {
@@ -185,6 +186,27 @@
       line-height: 1.4;
       margin: 0;
       font-weight: 300;
+      color: #ccc;
+    }
+
+    .btn-contact {
+      font-family: var(--font-ui);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 15px 30px;
+      display: inline-block;
+      color: #fff;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .btn-contact:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      transform: translateY(-3px);
     }
 
     footer {
@@ -195,13 +217,14 @@
       font-family: var(--font-ui);
       font-size: 12px;
       color: var(--accent-color);
-      margin-top: auto;
+      margin-top: 100px;
     }
 
     @media (max-width: 900px) {
       main.content {
         grid-template-columns: 1fr;
         gap: 40px;
+        padding-top: 100px;
       }
       .sticky-wrapper {
         position: relative;
@@ -209,7 +232,7 @@
       }
       .portrait-container {
         max-width: 100%;
-        aspect-ratio: 16/9;
+        aspect-ratio: 1/1;
       }
       .right-col {
         padding-top: 0;
@@ -263,21 +286,21 @@
 
       <div class="text-block js-scroll">
         <h3>Qui suis-je ?</h3>
-        <p>Je m'appelle Oscar Da Silva. Actuellement étudiant en deuxième année de BUT MMI, je suis passionné par le design et la technologie. </p>
+        <p>Je m'appelle Oscar Da Silva. Actuellement étudiant en deuxième année de BUT MMI, je suis passionné par l'alliance entre le design épuré et la technologie.</p>
       </div>
 
       <div class="text-block js-scroll">
         <h3>Mon Background</h3>
-        <p>Issu d'un Bac STI2D (ITEC & SIN), j'ai toujours eu un pied dans la technique et l'autre dans l'innovation. </p>
+        <p>Issu d'un Bac STI2D (ITEC & SIN), j'ai toujours eu un pied dans la technique et l'autre dans l'innovation créative.</p>
       </div>
 
       <div class="text-block js-scroll">
         <h3>Vision & Ambition</h3>
-        <p>Je souhaite me spécialiser dans le développement Front-End créatif. Mon objectif est de valider mon année par un stage où je pourrai transformer des concepts visuels en interfaces interactives réelles.</p>
+        <p>Je souhaite me spécialiser dans le développement Front-End créatif. Mon objectif actuel est de transformer des concepts visuels en interfaces interactives fluides.</p>
       </div>
       
-      <div class="text-block js-scroll" style="margin-top:20px;">
-        <a href="contact.html" style="font-family:var(--font-ui); text-decoration:none; border:1px solid #fff; padding:15px 30px; display:inline-block; color:#fff; transition:all 0.3s;">
+      <div class="text-block js-scroll" style="border:none;">
+        <a href="contact.html" class="btn-contact">
           Me contacter
         </a>
       </div>
@@ -291,32 +314,26 @@
   </footer>
 
   <script>
-    <script>
-   document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
       
       const observerOptions = {
-        root: null, 
-        threshold: 0.1, 
-        rootMargin: "0px" 
+        threshold: 0.1
       };
 
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-           
+            // Optionnel : on arrête d'observer une fois l'élément affiché
+            observer.unobserve(entry.target);
           }
         });
-      }, observerOptions); 
+      }, observerOptions);
 
       const elements = document.querySelectorAll('.js-scroll');
       elements.forEach(el => observer.observe(el));
-    });;
-  </script>
+    });
   </script>
 
 </body>
 </html>
-
-
-
