@@ -331,14 +331,21 @@
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+   document.addEventListener("DOMContentLoaded", function() {
+      
+      const observerOptions = {
+        threshold: 0.15 
+      };
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            // On arrête d'observer une fois que c'est affiché
+            observer.unobserve(entry.target);
           }
         });
-      };
+      }, observerOptions);
 
       const elements = document.querySelectorAll('.js-scroll');
       elements.forEach(el => observer.observe(el));
@@ -347,6 +354,7 @@
 
 </body>
 </html>
+
 
 
 
