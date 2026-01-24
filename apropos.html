@@ -292,23 +292,31 @@
 
   <script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
+   document.addEventListener("DOMContentLoaded", function() {
       
-      const observer = new IntersectionObserver((entries) => {
+      const observerOptions = {
+        root: null, 
+        threshold: 0.1, 
+        rootMargin: "0px" 
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+           
           }
         });
-      }); 
+      }, observerOptions); 
 
       const elements = document.querySelectorAll('.js-scroll');
       elements.forEach(el => observer.observe(el));
-    });
+    });;
   </script>
   </script>
 
 </body>
 </html>
+
 
 
