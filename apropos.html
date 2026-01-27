@@ -324,7 +324,7 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            // Optionnel : on arrête d'observer une fois l'élément affiché
+            // on arrête d'observer une fois l'élément affiché
             observer.unobserve(entry.target);
           }
         });
@@ -337,4 +337,5 @@
 
 </body>
 </html>
+
 
