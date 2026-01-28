@@ -29,7 +29,6 @@
     img { display: block; max-width: 100%; height: auto; }
     a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-    /* Noise */
     .noise-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 9999; opacity: 0.05;
@@ -42,12 +41,11 @@
       position: relative; z-index: 1;
     }
 
-    /* --- Header Centré --- */
     header.site-header {
-      display: flex; /* Flexbox pour centrer */
-      justify-content: center; /* Tout au centre */
+      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 60px; /* Ecart harmonieux */
+      gap: 60px;
       padding: 30px 4vw;
       background: transparent;
     }
@@ -68,7 +66,6 @@
     .logo img { height: 120px; transition: transform 0.3s; }
     .logo:hover img { transform: scale(1.05); }
 
-    /* --- Main --- */
     main {
       flex: 1; padding: 60px 4vw;
       opacity: 0; transform: translateY(20px);
@@ -156,7 +153,7 @@
 
     @media(max-width:800px){
       header.site-header { justify-content: center; flex-direction: column; gap: 20px; }
-      .nav { display: none; } /* En mobile, simplifier ou ajouter un burger si voulu */
+      .nav { display: none; }
       .nav-prev { left: 10px; }
       .nav-next { right: 10px; }
     }
@@ -210,7 +207,7 @@
         </div>
       </article>
 
-       <article class="gallery-card" data-index="2">
+       <article class="gallery-card" data-index="3">
         <img src="images/Affiche-Hamilton.png" alt="Affiche Hamilton F1">
         <div class="gallery-meta">
           <h3 class="gallery-title">Affiche Hamilton F1</h3>
@@ -254,9 +251,8 @@
     const images = [
       "images/HAMILTON.png",
       "images/Affiche-f1.png",
-      "images/Affiche-Mclaren F1.png"
+      "images/Affiche-Mclaren F1.png",
       "images/Affiche-Hamilton.png"
-
     ];
 
     let index = 0;
