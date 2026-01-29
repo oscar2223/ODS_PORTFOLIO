@@ -270,6 +270,17 @@
                 <img src="images/image-marathon.jpeg" alt="Image Marathon" data-caption="Image Marathon">
                 <div class="slide-caption">Image Marathon</div>
               </div>
+
+               <div class="slide">
+                <img src="images/Seine-Marathon 76-1.jpg" alt="Image Maquette Mobile" data-caption="Image Maquette Mobile Marathon">
+                <div class="slide-caption">Image Maquette Mobile</div>
+              </div>
+
+ <div class="slide">
+                <img src="images/Seine-Marathon 76-2.jpg" alt="Image Maquette Desktop" data-caption="Image Maquette Desktop Marathon">
+                <div class="slide-caption">Image Maquette Desktop</div>
+              </div>
+
             </div>
           </div>
 
@@ -333,7 +344,6 @@ Nous avons donc prototyper des interfaces au format mobile pour les candidats b√
 
   <script>
      document.addEventListener("DOMContentLoaded", function() {
-      // 1. Animation au Scroll
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -341,7 +351,6 @@ Nous avons donc prototyper des interfaces au format mobile pour les candidats b√
       }, { threshold: 0.1 });
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
 
-      // 2. Slider Logic
       const slidesEl = document.getElementById('slides');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
@@ -368,7 +377,6 @@ Nous avons donc prototyper des interfaces au format mobile pour les candidats b√
       }
       startAuto();
 
-      // 3. Lightbox Logic
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
@@ -404,7 +412,6 @@ Nous avons donc prototyper des interfaces au format mobile pour les candidats b√
         }
       });
 
-      // 4. Navigation Inter-projets
       document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet3.html'; });
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet1.html'; });
     });
@@ -412,3 +419,4 @@ Nous avons donc prototyper des interfaces au format mobile pour les candidats b√
   </script>
 </body>
 </html>
+
