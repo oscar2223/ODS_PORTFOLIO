@@ -122,25 +122,13 @@
     .arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
 
     .skills-grid { display: flex; gap: 15px; flex-wrap: wrap; }
-    .skill-tag {
-      border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px;
-      font-family: var(--font-ui); font-size: 12px; border-radius: 20px;
-    }
+    .skill-tag { border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; font-family: var(--font-ui); font-size: 12px; border-radius: 20px; }
 
     .nav-buttons-row { display: flex; gap: 20px; margin-top: 40px; }
-    .btn-outline {
-      background: transparent; border: 1px solid rgba(255,255,255,0.3);
-      color: #fff; padding: 14px 28px; font-family: var(--font-ui);
-      font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
-      transition: all 0.3s;
-    }
+    .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 14px 28px; font-family: var(--font-ui); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
     .btn-outline:hover { background: #fff; color: #000; }
 
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 40px 4vw; display: flex; justify-content: space-between;
-      font-family: var(--font-ui); font-size: 12px; color: var(--accent-color);
-    }
+    footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 4vw; display: flex; justify-content: space-between; font-family: var(--font-ui); font-size: 12px; color: var(--accent-color); }
 
     .lightbox {
       position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
@@ -149,16 +137,20 @@
     .lightbox.active { display: flex; }
     .lightbox-inner { position: relative; max-width: 90vw; }
     .lightbox img { max-height: 85vh; border: 1px solid #333; }
-    .lightbox .close-btn {
-      position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none;
-      font-family: var(--font-ui); text-transform: uppercase; font-size: 12px;
-    }
+    .lightbox .close-btn { position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none; font-family: var(--font-ui); text-transform: uppercase; font-size: 12px; }
+
+    .lightbox .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 22px; z-index: 2010; backdrop-filter: blur(4px); }
+    .lightbox .nav-btn:hover { background: rgba(255,255,255,0.12); color: #000; }
+    .lightbox .nav-prev { left: -60px; }
+    .lightbox .nav-next { right: -60px; }
 
     @media (max-width: 900px) {
       main.content { grid-template-columns: 1fr; }
       .sticky-wrapper { position: relative; top: 0; }
       .arrow-left { left: 10px; }
       .arrow-right { right: 10px; }
+      .lightbox .nav-prev { left: 10px; }
+      .lightbox .nav-next { right: 10px; }
     }
   </style>
 </head>
@@ -302,7 +294,9 @@
   <div id="lightbox" class="lightbox">
     <div class="lightbox-inner">
       <button class="close-btn" id="lightboxClose">Fermer</button>
+      <button class="nav-btn nav-prev" id="lightboxPrev">‹</button>
       <img id="lightboxImage" src="" alt="">
+      <button class="nav-btn nav-next" id="lightboxNext">›</button>
     </div>
   </div>
 
@@ -327,38 +321,61 @@
           function updateSlider() {
             slidesContainer.style.transform = `translateX(${ -currentIndex * 100 }%)`;
           }
-          nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
-          });
-          prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlider();
-          });
+          if(nextBtn) nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); });
+          if(prevBtn) prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); });
       });
 
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
-      
-      document.querySelectorAll('.right-col img').forEach((img) => {
-        img.addEventListener('click', () => {
-           lbImg.src = img.src;
-           lightbox.classList.add('active');
-           document.body.style.overflow = 'hidden';
+      const lbPrev = document.getElementById('lightboxPrev');
+      const lbNext = document.getElementById('lightboxNext');
+      const allImages = document.querySelectorAll('.right-col img:not([src*="svg"])');
+      const imagesList = Array.from(allImages);
+      let currentLightboxIndex = -1;
+
+      function openLightboxAt(index){
+        currentLightboxIndex = index;
+        lbImg.src = imagesList[index].src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      imagesList.forEach((img, idx) => {
+        img.addEventListener('click', (e) => {
+           if(img.parentElement && img.parentElement.tagName === 'A') return;
+           e.preventDefault();
+           openLightboxAt(idx);
         });
       });
 
-      lbClose.addEventListener('click', () => {
+      function closeLightbox(){
          lightbox.classList.remove('active');
          document.body.style.overflow = '';
-      });
+      }
 
-      lightbox.addEventListener('click', (e) => { 
-        if(e.target === lightbox) {
-          lightbox.classList.remove('active');
-          document.body.style.overflow = '';
-        }
+      function showNextLightbox(){
+        if(imagesList.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex + 1) % imagesList.length;
+        lbImg.src = imagesList[currentLightboxIndex].src;
+      }
+
+      function showPrevLightbox(){
+        if(imagesList.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex - 1 + imagesList.length) % imagesList.length;
+        lbImg.src = imagesList[currentLightboxIndex].src;
+      }
+
+      if(lbClose) lbClose.addEventListener('click', closeLightbox);
+      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevLightbox(); });
+      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); showNextLightbox(); });
+
+      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+      document.addEventListener('keydown', e => {
+        if(lightbox.classList.contains('active') && e.key === 'Escape') closeLightbox();
+        if(lightbox.classList.contains('active') && e.key === 'ArrowRight') showNextLightbox();
+        if(lightbox.classList.contains('active') && e.key === 'ArrowLeft') showPrevLightbox();
       });
 
       document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
