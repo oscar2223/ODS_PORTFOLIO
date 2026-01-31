@@ -105,6 +105,7 @@
       font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; color: #dcdcdc;
     }
 
+    /* --- SLIDER STYLES --- */
     .slider-section { width: 100%; margin: 20px 0; }
     .slider-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
     
@@ -141,6 +142,39 @@
     .arrow-left { left: -22px; }
     .arrow-right { right: -22px; }
     .arrow svg { width: 20px; height: 20px; stroke-width: 2; fill: none; stroke: currentColor; }
+
+    /* --- NOUVEAUX STYLES POUR LES BLOCS PROJETS --- */
+    .project-card {
+        margin-top: 30px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: #111;
+        padding: 20px;
+    }
+    .project-card img {
+        width: 100%; height: auto; border-radius: 2px;
+        transition: transform 0.3s;
+    }
+    .project-card:hover img { transform: scale(1.01); }
+    .caption-link {
+        display: block; text-align: right; font-family: var(--font-ui);
+        font-size: 12px; margin-top: 10px; color: var(--accent-color);
+        text-transform: uppercase; letter-spacing: 1px;
+    }
+    .caption-link:hover { color: #fff; text-decoration: underline; }
+
+    .mini-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px; margin-top: 30px; margin-bottom: 30px;
+    }
+    .mini-grid a { display: block; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    .mini-grid img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.5s; }
+    .mini-grid a:hover img { transform: scale(1.05); }
+    .mini-grid .grid-caption {
+        position: absolute; bottom: 0; left: 0; width: 100%;
+        background: rgba(0,0,0,0.7); color: #fff; font-size: 11px;
+        padding: 5px 10px; font-family: var(--font-ui);
+    }
+
 
     .skills-grid {
       display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;
@@ -263,62 +297,6 @@
             </div>
           </div>
 
-
-
-
-
-
-
-<div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left" id="prevBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-              
-               <div class="slide">
-  <a href="https://delauhu1.tpweb.univ-rouen.fr/Prestashop/2-accueil" title="Ouvrir le site — Site e-commerce Prestashop" aria-label="Ouvrir le site —  Site e-commerce Prestahop " target="_blank" rel="noopener noreferrer">
-    <img src="images/marketing-digital.PNG" alt="Site e-commerce Prestashop" data-caption="Marketing Digital">
-  </a></div>
-        </div>
-</div>
-
-
-
-
-          <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left" id="prevBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-              <div class="slide">
-                <img src="images/image-marathon.jpeg" alt="Image Marathon" data-caption="Image Marathon">
-                <div class="slide-caption">Image Marathon</div>
-              
-              </div>
-              <div class="slide">
-                <a href="https://www.figma.com/design/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=0-1&p=f&t=IZVnZttlLC0Gsgls-0" target="_blank">
-                    <img src="images/wireframe-maritime.PNG" alt="Affiche Wireframes App">
-                    <div class="slide-caption">Cliquez pour voir : Wireframes Seine-Marathon 76</div>
-                </a>
-              </div>
-
-               <div class="slide">
-                <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=57-26&p=f&t=wt4HFq37VXBnHyWy-1&scaling=min-zoom&content-scaling=fixed&page-id=11%3A2&starting-point-node-id=57%3A26" target="_blank">
-                <img src="images/Seine-Marathon 76-1.jpg" alt="Image Maquette Mobile" data-caption="Image Maquette Mobile Marathon">
-                    <div class="slide-caption">Cliquez pour voir : Maquette Mobile Seine-Marathon 76</div>
-                </a>
-              </div>
-
-               <div class="slide">
-                <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=123-63&t=97YAb5VIGgJ80A48-0&scaling=scale-down&content-scaling=fixed&page-id=11%3A3&starting-point-node-id=123%3A63" target="_blank">
-                <img src="images/Seine-Marathon 76-2.jpg" alt="Image Maquette Desktop" data-caption="Image Maquette Desktop Marathon">
-                    <div class="slide-caption">Cliquez pour voir : Maquette Desktop Seine-Marathon 76</div>
-                </a>
-              </div>
-
-            </div>
-          </div>
-
           <button class="arrow arrow-right" id="nextBtn" type="button">
             <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
           </button>
@@ -332,25 +310,59 @@
         </p>
       </div>
 
+      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
+
       <div class="text-block js-scroll">
-        <h3>Marketing Digital</h3>
+        <h3>1. Marketing Digital & E-commerce</h3>
         <p>
-Durant mon cursus, j’ai acquis des compétences en marketing digital en concevant un site e-commerce sous PrestaShop, en veillant à une mise en œuvre complète, illustrant les différentes options de paramétrage, le parcours client ainsi que l’intégration technique.
+            Durant mon cursus, j’ai acquis des compétences en marketing digital en concevant un site e-commerce sous PrestaShop. Le projet illustre une mise en œuvre complète : options de paramétrage, parcours client et intégration technique.
+        </p>
+        
+        <div class="project-card">
+            <a href="https://delauhu1.tpweb.univ-rouen.fr/Prestashop/2-accueil" target="_blank" rel="noopener noreferrer">
+                <img src="images/marketing-digital.PNG" alt="Site e-commerce Prestashop">
+            </a>
+            <a href="https://delauhu1.tpweb.univ-rouen.fr/Prestashop/2-accueil" target="_blank" class="caption-link">Voir le site en ligne →</a>
+        </div>
       </div>
 
-      
       <div class="text-block js-scroll">
-        <h3>Figma </h3>
+        <h3>2. Identité Visuelle - Seine Marathon</h3>
         <p>
-Durant mon cursus, j’ai acquis des compétences sur figma avec la SAE 301, nous étions en groupes de 5 membres pour répondre à cet appel d’offre. En tant qu’agence web simulé, nous devions répondre à la phase de prototypage de l’ensemble des fonctionnalités de la plateforme en faisant des propositions ergonomiques réfléchies et argumentées en respectant l’esthétique et les éléments graphiques du site vitrine de l’événement de Seine Maritime 76. 
-Nous avons donc prototyper des interfaces au format mobile pour les candidats bénévoles et au format desktop pour les organisateurs.
+           Création d'une identité visuelle impactante pour le Seine-Marathon 76. L'objectif était de dynamiser l'image de l'événement à travers des supports de communication print et web.
+        </p>
+        <div class="project-card">
+            <img src="images/image-marathon.jpeg" alt="Image Marathon" style="max-height: 500px; object-fit: contain;">
+        </div>
+      </div>
+
+      <div class="text-block js-scroll">
+        <h3>3. Prototypage UI/UX (Figma)</h3>
+        <p>
+            Dans le cadre de la SAE 301, notre équipe (agence simulée) a répondu à un appel d'offre pour le prototypage complet de la plateforme Seine Maritime 76. Nous avons conçu des interfaces mobile (bénévoles) et desktop (organisateurs) en respectant l'identité graphique existante.
+        </p>
+        
+        <div class="mini-grid">
+            <a href="https://www.figma.com/design/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=0-1&p=f&t=IZVnZttlLC0Gsgls-0" target="_blank">
+                <img src="images/wireframe-maritime.PNG" alt="Affiche Wireframes App">
+                <div class="grid-caption">Wireframes</div>
+            </a>
+            <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=57-26&p=f&t=wt4HFq37VXBnHyWy-1&scaling=min-zoom&content-scaling=fixed&page-id=11%3A2&starting-point-node-id=57%3A26" target="_blank">
+                <img src="images/Seine-Marathon 76-1.jpg" alt="Maquette Mobile">
+                <div class="grid-caption">Maquette Mobile</div>
+            </a>
+            <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=123-63&t=97YAb5VIGgJ80A48-0&scaling=scale-down&content-scaling=fixed&page-id=11%3A3&starting-point-node-id=123%3A63" target="_blank">
+                <img src="images/Seine-Marathon 76-2.jpg" alt="Maquette Desktop">
+                <div class="grid-caption">Maquette Desktop</div>
+            </a>
+        </div>
       </div>
       
       <div class="text-block js-scroll">
         <h3>Compétences Techniques</h3>
         <div class="skills-grid">
           <span class="skill-tag">Figma</span>
-          <span class="skill-tag">Canva</span>
+          <span class="skill-tag">Prestashop</span>
           <span class="skill-tag">Marketing Digital</span>
           <span class="skill-tag">Gestion de Projet</span>
         </div>
@@ -389,61 +401,71 @@ Nous avons donc prototyper des interfaces au format mobile pour les candidats b�
       const slidesEl = document.getElementById('slides');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
-      const slides = Array.from(slidesEl.querySelectorAll('.slide'));
-      const total = slides.length;
-      let index = 0;
-      let timer = null;
+      
+      // Verification si le slider existe avant de lancer le code
+      if(slidesEl && prevBtn && nextBtn) {
+          const slides = Array.from(slidesEl.querySelectorAll('.slide'));
+          const total = slides.length;
+          let index = 0;
+          let timer = null;
 
-      function goTo(i){
-        index = (i + total) % total;
-        slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
+          function goTo(i){
+            index = (i + total) % total;
+            slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
+          }
+
+          prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
+          nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
+
+          function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
+          function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+
+          const stage = document.querySelector('.slider-stage');
+          if(stage){
+            stage.addEventListener('mouseenter', stopAuto);
+            stage.addEventListener('mouseleave', startAuto);
+          }
+          startAuto();
       }
 
-      if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
-      if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
-
-      function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
-      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
-
-      const stage = document.querySelector('.slider-stage');
-      if(stage){
-        stage.addEventListener('mouseenter', stopAuto);
-        stage.addEventListener('mouseleave', startAuto);
-      }
-      startAuto();
-
+      // Lightbox Logic (S'applique à toutes les images dans .right-col sauf les icônes)
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
-      const lbPrev = document.getElementById('lightboxPrev');
-      const lbNext = document.getElementById('lightboxNext');
-      const imgs = Array.from(slidesEl.querySelectorAll('img'));
-      let lbIndex = 0;
+      
+      // On cible les images du slider ET les images des blocs projets
+      const allImages = document.querySelectorAll('.right-col img:not([src*="svg"])'); 
+      
+      allImages.forEach((img) => {
+        img.addEventListener('click', (e) => {
+            // Empêche le clic si l'image est dans un lien
+            if(img.parentElement.tagName === 'A') return; 
+            
+            e.preventDefault();
+            lbImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+      });
 
-      function openLb(i){
-        lbIndex = (i + imgs.length) % imgs.length;
-        lbImg.src = imgs[lbIndex].src;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        stopAuto();
-      }
-      function closeLb(){
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        startAuto();
+      if(lbClose) {
+          lbClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+          });
       }
 
-      imgs.forEach((img, i) => img.addEventListener('click', () => openLb(i)));
-      if(lbClose) lbClose.addEventListener('click', closeLb);
-      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex - 1); });
-      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex + 1); });
-      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
+      lightbox.addEventListener('click', (e) => { 
+          if(e.target === lightbox) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+      });
 
       document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active')) {
-          if(e.key === 'Escape') closeLb();
-          if(e.key === 'ArrowLeft') openLb(lbIndex - 1);
-          if(e.key === 'ArrowRight') openLb(lbIndex + 1);
+        if(lightbox.classList.contains('active') && e.key === 'Escape') {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
         }
       });
 
@@ -451,12 +473,5 @@ Nous avons donc prototyper des interfaces au format mobile pour les candidats b�
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet1.html'; });
     });
   </script>
-  </script>
 </body>
 </html>
-
-
-
-
-
-
