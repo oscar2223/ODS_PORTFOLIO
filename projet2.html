@@ -105,7 +105,7 @@
       font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; color: #dcdcdc;
     }
 
-s    .slider-section { width: 100%; margin: 20px 0; }
+    .slider-section { width: 100%; margin: 20px 0; }
     .slider-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
     
     .slider-stage {
@@ -179,12 +179,24 @@ s    .slider-section { width: 100%; margin: 20px 0; }
       font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
     }
 
+    .lightbox .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; cursor: pointer;
+      color: #fff; font-size: 22px; z-index: 2010; backdrop-filter: blur(4px);
+    }
+    .lightbox .nav-btn:hover { background: rgba(255,255,255,0.12); color: #000; }
+    .lightbox .nav-prev { left: -60px; }
+    .lightbox .nav-next { right: -60px; }
+
     @media (max-width: 900px) {
       main.content { grid-template-columns: 1fr; gap: 40px; }
       .sticky-wrapper { position: relative; top: 0; margin-bottom: 20px; }
       .right-col { padding-top: 0; }
       .arrow-left { left: 10px; }
       .arrow-right { right: 10px; }
+      .lightbox .nav-prev { left: 10px; }
+      .lightbox .nav-next { right: 10px; }
     }
   </style>
 </head>
@@ -359,7 +371,9 @@ s    .slider-section { width: 100%; margin: 20px 0; }
   <div id="lightbox" class="lightbox">
     <div class="lightbox-inner">
       <button class="close-btn" id="lightboxClose">Fermer [ESC]</button>
+      <button class="nav-btn nav-prev" id="lightboxPrev">‹</button>
       <img id="lightboxImage" src="" alt="">
+      <button class="nav-btn nav-next" id="lightboxNext">›</button>
     </div>
   </div>
 
@@ -428,38 +442,69 @@ s    .slider-section { width: 100%; margin: 20px 0; }
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
-      
+      const lbPrev = document.getElementById('lightboxPrev');
+      const lbNext = document.getElementById('lightboxNext');
       const allImages = document.querySelectorAll('.right-col img:not([src*="svg"])'); 
+      const imagesList = Array.from(allImages);
+      let currentLightboxIndex = -1;
 
-      allImages.forEach((img) => {
+      function openLightboxAt(index){
+        currentLightboxIndex = index;
+        lbImg.src = imagesList[index].src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      imagesList.forEach((img, idx) => {
         img.addEventListener('click', (e) => {
            if(img.parentElement.tagName === 'A') return;
 
            e.preventDefault();
-           lbImg.src = img.src;
-           lightbox.classList.add('active');
-           document.body.style.overflow = 'hidden';
+           openLightboxAt(idx);
         });
       });
 
+      function closeLightbox(){
+         lightbox.classList.remove('active');
+         document.body.style.overflow = '';
+      }
+
+      function showNextLightbox(){
+        if(imagesList.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex + 1) % imagesList.length;
+        lbImg.src = imagesList[currentLightboxIndex].src;
+      }
+
+      function showPrevLightbox(){
+        if(imagesList.length === 0) return;
+        currentLightboxIndex = (currentLightboxIndex - 1 + imagesList.length) % imagesList.length;
+        lbImg.src = imagesList[currentLightboxIndex].src;
+      }
+
       if(lbClose) {
-          lbClose.addEventListener('click', () => {
-             lightbox.classList.remove('active');
-             document.body.style.overflow = '';
-          });
+          lbClose.addEventListener('click', closeLightbox);
+      }
+
+      if(lbPrev) {
+        lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevLightbox(); });
+      }
+      if(lbNext) {
+        lbNext.addEventListener('click', (e) => { e.stopPropagation(); showNextLightbox(); });
       }
       
       lightbox.addEventListener('click', (e) => { 
-          if(e.target === lightbox) {
-             lightbox.classList.remove('active');
-             document.body.style.overflow = '';
-          }
+          if(e.target === lightbox) closeLightbox();
       });
 
       document.addEventListener('keydown', e => {
         if(lightbox.classList.contains('active') && e.key === 'Escape') {
-           lightbox.classList.remove('active');
-           document.body.style.overflow = '';
+           closeLightbox();
+        }
+        if(lightbox.classList.contains('active') && e.key === 'ArrowRight'){
+           showNextLightbox();
+        }
+        if(lightbox.classList.contains('active') && e.key === 'ArrowLeft'){
+           showPrevLightbox();
         }
       });
 
