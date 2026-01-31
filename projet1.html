@@ -57,6 +57,11 @@
       opacity: 0.7; position: relative;
     }
     .nav a:hover, .nav a.active { opacity: 1; }
+    .nav a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+      background: #fff; transition: width 0.3s ease;
+    }
+    .nav a:hover::after { width: 100%; }
 
     main.content {
       display: grid; grid-template-columns: 1fr 1.2fr;
@@ -65,7 +70,10 @@
     }
 
     .left-col { padding-left: 4vw; position: relative; }
-    .sticky-wrapper { position: sticky; top: 140px; display: flex; flex-direction: column; gap: 30px; }
+    .sticky-wrapper {
+      position: sticky; top: 140px;
+      display: flex; flex-direction: column; gap: 30px;
+    }
 
     .project-meta {
       font-family: var(--font-ui); font-size: 14px; color: var(--accent-color);
@@ -74,9 +82,13 @@
     }
     .meta-item strong { display: block; color: #fff; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
 
-    .right-col { padding-right: 4vw; display: flex; flex-direction: column; gap: 80px; }
+    .right-col { padding-right: 4vw; display: flex; flex-direction: column; gap: 80px; padding-top: 10px; }
 
-    .big-title { font-family: var(--font-serif); font-size: clamp(40px, 4vw, 70px); line-height: 1.1; margin: 0; }
+    .big-title {
+      font-family: var(--font-serif); font-size: clamp(40px, 4vw, 70px);
+      line-height: 1.1; margin: 0; font-weight: 400;
+    }
+    .big-title span { font-style: italic; color: var(--accent-color); display: block; font-size: 0.6em; margin-top: 10px; }
 
     .text-block {
       opacity: 0; transform: translateY(30px);
@@ -88,24 +100,32 @@
       font-family: var(--font-ui); font-size: 12px; text-transform: uppercase;
       letter-spacing: 2px; color: var(--accent-color); margin-bottom: 20px;
     }
-    .text-block p { font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; }
+    .text-block p {
+      font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; color: #dcdcdc;
+    }
 
     .slider-section { width: 100%; margin: 20px 0; }
     .slider-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
     
     .slider-stage {
       width: 100%; overflow: hidden; border-radius: 2px;
-      background: #111; border: 1px solid rgba(255,255,255,0.1);
+      background: #111; 
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
     }
     
     .slides { display: flex; transition: transform 0.6s cubic-bezier(.2,.9,.2,1); }
-    .slide { min-width: 100%; position: relative; }
-    .slide img { width: 100%; height: 500px; object-fit: cover; cursor: zoom-in; }
+    .slide { min-width: 100%; position: relative; display: flex; justify-content: center; }
+    .slide img {
+      width: 100%; height: 400px; object-fit: cover; cursor: zoom-in; opacity: 0.9; transition: opacity 0.3s;
+    }
+    .slide img:hover { opacity: 1; }
 
     .slide-caption {
       position: absolute; bottom: 0; left: 0; width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-      color: #fff; padding: 20px; font-family: var(--font-ui); font-size: 13px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      color: #fff; padding: 20px 20px 10px;
+      font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.5px;
     }
 
     .arrow {
@@ -119,36 +139,62 @@
     .arrow:hover { background: #fff; color: #000; }
     .arrow-left { left: -22px; }
     .arrow-right { right: -22px; }
-    .arrow svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+    .arrow svg { width: 20px; height: 20px; stroke-width: 2; fill: none; stroke: currentColor; }
 
-    .skills-grid { display: flex; gap: 15px; flex-wrap: wrap; }
-    .skill-tag { border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px; font-family: var(--font-ui); font-size: 12px; border-radius: 20px; }
+    .skills-grid {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;
+    }
+    .skill-tag {
+      border: 1px solid rgba(255,255,255,0.2); padding: 8px 16px;
+      font-family: var(--font-ui); font-size: 13px; color: #fff; border-radius: 20px;
+    }
 
-    .nav-buttons-row { display: flex; gap: 20px; margin-top: 40px; }
-    .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 14px 28px; font-family: var(--font-ui); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; }
-    .btn-outline:hover { background: #fff; color: #000; }
+    .nav-buttons-row { display: flex; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
+    .btn-outline {
+      background: transparent; border: 1px solid rgba(255,255,255,0.3);
+      color: #fff; padding: 14px 28px; font-family: var(--font-ui);
+      font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover { background: #fff; color: #000; border-color: #fff; transform: translateY(-2px); }
 
-    footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 4vw; display: flex; justify-content: space-between; font-family: var(--font-ui); font-size: 12px; color: var(--accent-color); }
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 40px 4vw; display: flex; justify-content: space-between;
+      font-family: var(--font-ui); font-size: 12px; color: var(--accent-color);
+    }
+    footer a { color: #fff; text-decoration: underline; }
 
     .lightbox {
       position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
       background: rgba(0,0,0,0.95); z-index: 2000;
     }
     .lightbox.active { display: flex; }
-    .lightbox-inner { position: relative; max-width: 90vw; }
-    .lightbox img { max-height: 85vh; border: 1px solid #333; }
-    .lightbox .close-btn { position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none; font-family: var(--font-ui); text-transform: uppercase; font-size: 12px; }
-
-    .lightbox .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff; font-size: 22px; z-index: 2010; backdrop-filter: blur(4px); }
-    .lightbox .nav-btn:hover { background: rgba(255,255,255,0.12); color: #000; }
-    .lightbox .nav-prev { left: -60px; }
-    .lightbox .nav-next { right: -60px; }
+    .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+    .lightbox img { max-height: 85vh; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+    
+    .lightbox .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: transparent; color: #fff; border: none; cursor: pointer;
+      padding: 10px; transition: transform 0.2s;
+    }
+    .lightbox .nav-btn:hover { transform: translateY(-50%) scale(1.2); }
+    .lightbox .nav-prev { left: -50px; }
+    .lightbox .nav-next { right: -50px; }
+    .lightbox svg { width: 30px; height: 30px; stroke: #fff; stroke-width: 2; fill: none; }
+    
+    .lightbox .close-btn {
+      position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none;
+      font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
+    }
 
     @media (max-width: 900px) {
-      main.content { grid-template-columns: 1fr; }
-      .sticky-wrapper { position: relative; top: 0; }
+      main.content { grid-template-columns: 1fr; gap: 40px; }
+      .sticky-wrapper { position: relative; top: 0; margin-bottom: 20px; }
+      .right-col { padding-top: 0; }
       .arrow-left { left: 10px; }
       .arrow-right { right: 10px; }
+      .slide img { height: 250px; }
       .lightbox .nav-prev { left: 10px; }
       .lightbox .nav-next { right: 10px; }
     }
@@ -169,120 +215,101 @@
   </header>
 
   <main class="content">
+    
     <div class="left-col">
       <div class="sticky-wrapper">
-        <h1 class="big-title">Audiovisuel & Post-Production</h1>
+        <h1 class="big-title">
+          Développement web
+        </h1>
+        
         <div class="project-meta js-scroll">
-          <div class="meta-item"><strong>Rôle</strong>Montage & Sound Design</div>
-          <div class="meta-item"><strong>Contexte</strong>BUT MMI - 2024</div>
-          <div class="meta-item"><strong>Outils</strong>Premiere Pro, After Effects, Audition</div>
+          <div class="meta-item">
+            <strong>Rôle</strong>
+            Développement Fullstack & Design 
+          </div>
+          <div class="meta-item">
+            <strong>Contexte</strong>
+            BUT MMI - 2024
+          </div>
+          <div class="meta-item">
+            <strong>Stack</strong>
+            HTML, CSS, JS, PHP, MySQL, Jquery
+          </div>
         </div>
       </div>
     </div>
 
     <div class="right-col">
+      
       <div class="text-block js-scroll">
-        <h3>Interview & Montage</h3>
-        <p>Production d'une interview complète, incluant la prise de vue, la gestion de l'éclairage et le montage dynamique pour captiver l'audience.</p>
+        <h3>Le Challenge</h3>
+        <p>Voici l’ensemble des projets que j’ai réalisés durant ma formation en BUT MMI, parcours développement web. Mon premier site web, en HTML5, CSS3 et JavaScript, a été réalisé dans le cadre de la SAE 105, nous devions concevoir de A à Z un site de food truck (menu, réservation, planning, contact et À propos).</p>
       </div>
 
       <div class="slider-section js-scroll">
         <div class="slider-wrap">
-          <button class="arrow arrow-left btn-prev">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <button class="arrow arrow-left" id="prevBtn" type="button">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
           </button>
+          
           <div class="slider-stage">
-            <div class="slides">
+            <div class="slides" id="slides">
+              <div class="slide"><img src="images/site_drap.jpg" alt="Site La Cité Drap'Hier" data-caption="Accueil - Site Vitrine"><div class="slide-caption">Accueil - Site Vitrine</div></div>
+              <div class="slide"><img src="images/imageCMS1.png" alt="CMS Interface" data-caption="Interface CMS"><div class="slide-caption">Interface CMS</div></div>
+              <div class="slide"><img src="images/image-elbeuf.png" alt="CMS image" data-caption="image CMS"><div class="slide-caption">Interface CMS</div></div>
+              <div class="slide"><img src="images/image-elbeuf-2.png" alt="CMS Interface" data-caption="Interface CMS"><div class="slide-caption">Interface CMS</div></div>
+<div class="slide">
+  <a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" title="Ouvrir le site — Site de biletterie" aria-label="Ouvrir le site — Site de billetterie" target="_blank" rel="noopener noreferrer">
+    <img src="images/sitesae203.jpg" alt="Dashboard SAE 203" data-caption="Dashboard SAE 203">
+  </a></div>              
+              <div class="slide"><img src="images/site-1-reservation-billet.png" alt="Réservation" data-caption="Module de Réservation"><div class="slide-caption">Module de Réservation</div></div>
+              <div class="slide"><img src="images/sitebilletterie1.png" alt="Admin Dashboard" data-caption="Back-office Admin"><div class="slide-caption">Back-office Admin</div></div>
+
               <div class="slide">
-                <img src="images/IMG_8746.jpg" alt="Interview Coulisses">
-                <div class="slide-caption">Mise en place et tournage de l'interview</div>
-              </div>
+  <a href="https://oscar2223.github.io/ods-foodtruck/index.html" title="Ouvrir le site — Le Gourmet Nomade" aria-label="Ouvrir le site — Le Gourmet Nomade" target="_blank" rel="noopener noreferrer">
+    <img src="images/ods-foodtruck.PNG" alt="ODS FOOD TRUCK" data-caption="ODS FOOD TRUCK">
+  </a></div>
               <div class="slide">
-                <img src="images/IMG_8747.jpg" alt="Interview Setup">
-                <div class="slide-caption">Gestion de l'éclairage trois points</div>
-              </div>
+  <a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" title="Ouvrir le site — Dashboard SAE 303" aria-label="Ouvrir le site — Dashboard SAE 303" target="_blank" rel="noopener noreferrer">
+    <img src="images/dashboard.PNG" alt="Dashboard SAE 303" data-caption="Dashboard SAE 303">
+  </a></div>
             </div>
           </div>
-          <button class="arrow arrow-right btn-next">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
-      </div>
 
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
-
-      <div class="text-block js-scroll">
-        <h3>Sound Design & Audio</h3>
-        <p>Travail approfondi sur la texture sonore et le mixage audio pour renforcer l'immersion narrative du projet.</p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left btn-prev">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <div class="slider-stage">
-            <div class="slides">
-              <div class="slide">
-                <img src="images/img-audio.png" alt="Interface Audio">
-                <div class="slide-caption">Nettoyage et mixage sur Adobe Audition</div>
-              </div>
-              <div class="slide">
-                <img src="images/img-son.png" alt="Spectre Sonore">
-                <div class="slide-caption">Analyse fréquentielle et égalisation</div>
-              </div>
-            </div>
-          </div>
-          <button class="arrow arrow-right btn-next">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
-      </div>
-
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
-
-      <div class="text-block js-scroll">
-        <h3>Séquençage & Rythme</h3>
-        <p>Exploration du rythme cinématographique à travers des techniques de montage "cut" et de transitions invisibles.</p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left btn-prev">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <div class="slider-stage">
-            <div class="slides">
-              <div class="slide">
-                <img src="images/img-coupe.png" alt="Timeline Montage">
-                <div class="slide-caption">Organisation de la timeline Premiere Pro</div>
-              </div>
-              <div class="slide">
-                <img src="images/img-montage.png" alt="Post Production">
-                <div class="slide-caption">Étalonnage et rendu final</div>
-              </div>
-            </div>
-          </div>
-          <button class="arrow arrow-right btn-next">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <button class="arrow arrow-right" id="nextBtn" type="button">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
           </button>
         </div>
       </div>
 
       <div class="text-block js-scroll">
-        <h3>Compétences</h3>
+        <h3>Développement & Technique</h3>
+        <p>
+          Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données et implémenté toute la logique PHP : inscription, sécurisation, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.
+        </p>
+        <p style="margin-top:20px;">
+          L'objectif était de concevoir un CMS complet pour la ville d'Elbeuf, Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.
+        </p>
+          <p style="margin-top:20px;">
+Durant la SAE 303, j’ai réalisé un dashboard portant sur l’évolution climatique dans le département des Bouches-du-Rhône (13), intégrant des KPI, des courbes de tendance, des diagrammes circulaires, une carte interactive avec Leaflet.js, des histogrammes et différents graphiques.      </div>
+
+      <div class="text-block js-scroll">
+        <h3>Compétences Acquises</h3>
         <div class="skills-grid">
-          <span class="skill-tag">Premiere Pro</span>
-          <span class="skill-tag">Audition</span>
-          <span class="skill-tag">After Effects</span>
-          <span class="skill-tag">Color Grading</span>
+          <span class="skill-tag">Développement PHP/MySQL</span>
+          <span class="skill-tag">Architecture MVC</span>
+          <span class="skill-tag">Sécurité Web</span>
+          <span class="skill-tag">Design Responsive</span>
+          <span class="skill-tag">Gestion de Base de Données</span>
         </div>
       </div>
 
       <div class="nav-buttons-row js-scroll">
-        <button class="btn-outline" id="prevProject">← Précédent</button>
-        <button class="btn-outline" id="nextProject">Suivant →</button>
+        <button class="btn-outline" id="prevProject">← Projet Précédent</button>
+        <button class="btn-outline" id="nextProject">Projet Suivant →</button>
+        <a href="projets.html" class="btn-outline">Retour au Portfolio</a>
       </div>
+
     </div>
   </main>
 
@@ -293,10 +320,10 @@
 
   <div id="lightbox" class="lightbox">
     <div class="lightbox-inner">
-      <button class="close-btn" id="lightboxClose">Fermer</button>
-      <button class="nav-btn nav-prev" id="lightboxPrev">‹</button>
+      <button class="close-btn" id="lightboxClose">Fermer [ESC]</button>
+      <button class="nav-btn nav-prev" id="lightboxPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
       <img id="lightboxImage" src="" alt="">
-      <button class="nav-btn nav-next" id="lightboxNext">›</button>
+      <button class="nav-btn nav-next" id="lightboxNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
   </div>
 
@@ -309,78 +336,71 @@
       }, { threshold: 0.1 });
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
 
-      const allSliders = document.querySelectorAll('.slider-wrap');
-      allSliders.forEach((slider) => {
-          const slidesContainer = slider.querySelector('.slides');
-          const slides = Array.from(slidesContainer.querySelectorAll('.slide'));
-          const prevBtn = slider.querySelector('.btn-prev');
-          const nextBtn = slider.querySelector('.btn-next');
-          let currentIndex = 0;
-          const totalSlides = slides.length;
+      const slidesEl = document.getElementById('slides');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const slides = Array.from(slidesEl.querySelectorAll('.slide'));
+      const total = slides.length;
+      let index = 0;
+      let timer = null;
 
-          function updateSlider() {
-            slidesContainer.style.transform = `translateX(${ -currentIndex * 100 }%)`;
-          }
-          if(nextBtn) nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); });
-          if(prevBtn) prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); });
-      });
+      function goTo(i){
+        index = (i + total) % total;
+        slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
+      }
+
+      if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
+      if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
+
+      function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
+      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+
+      const stage = document.querySelector('.slider-stage');
+      if(stage){
+        stage.addEventListener('mouseenter', stopAuto);
+        stage.addEventListener('mouseleave', startAuto);
+      }
+      startAuto();
 
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
       const lbPrev = document.getElementById('lightboxPrev');
       const lbNext = document.getElementById('lightboxNext');
-      const allImages = document.querySelectorAll('.right-col img:not([src*="svg"])');
-      const imagesList = Array.from(allImages);
-      let currentLightboxIndex = -1;
+      const imgs = Array.from(slidesEl.querySelectorAll('img'));
+      let lbIndex = 0;
 
-      function openLightboxAt(index){
-        currentLightboxIndex = index;
-        lbImg.src = imagesList[index].src;
+      function openLb(i){
+        lbIndex = (i + imgs.length) % imgs.length;
+        lbImg.src = imgs[lbIndex].src;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
+        stopAuto();
+      }
+      function closeLb(){
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        startAuto();
       }
 
-      imagesList.forEach((img, idx) => {
-        img.addEventListener('click', (e) => {
-           if(img.parentElement && img.parentElement.tagName === 'A') return;
-           e.preventDefault();
-           openLightboxAt(idx);
-        });
-      });
-
-      function closeLightbox(){
-         lightbox.classList.remove('active');
-         document.body.style.overflow = '';
-      }
-
-      function showNextLightbox(){
-        if(imagesList.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex + 1) % imagesList.length;
-        lbImg.src = imagesList[currentLightboxIndex].src;
-      }
-
-      function showPrevLightbox(){
-        if(imagesList.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex - 1 + imagesList.length) % imagesList.length;
-        lbImg.src = imagesList[currentLightboxIndex].src;
-      }
-
-      if(lbClose) lbClose.addEventListener('click', closeLightbox);
-      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevLightbox(); });
-      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); showNextLightbox(); });
-
-      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+      imgs.forEach((img, i) => img.addEventListener('click', () => openLb(i)));
+      if(lbClose) lbClose.addEventListener('click', closeLb);
+      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex - 1); });
+      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex + 1); });
+      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
 
       document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active') && e.key === 'Escape') closeLightbox();
-        if(lightbox.classList.contains('active') && e.key === 'ArrowRight') showNextLightbox();
-        if(lightbox.classList.contains('active') && e.key === 'ArrowLeft') showPrevLightbox();
+        if(lightbox.classList.contains('active')) {
+          if(e.key === 'Escape') closeLb();
+          if(e.key === 'ArrowLeft') openLb(lbIndex - 1);
+          if(e.key === 'ArrowRight') openLb(lbIndex + 1);
+        }
       });
 
       document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
     });
+  </script>
   </script>
 </body>
 </html>
