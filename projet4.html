@@ -206,10 +206,25 @@
     .lightbox.active { display: flex; }
     .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
     .lightbox img { max-height: 85vh; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+    
     .lightbox .close-btn {
       position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none;
       font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
     }
+
+    /* Styles des boutons de navigation Lightbox */
+    .lightbox .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; cursor: pointer;
+      color: #fff; font-size: 22px; z-index: 2010; backdrop-filter: blur(4px);
+      transition: all 0.3s;
+    }
+    .lightbox .nav-btn:hover { background: rgba(255,255,255,0.9); color: #000; }
+    .lightbox .nav-prev { left: -60px; }
+    .lightbox .nav-next { right: -60px; }
+    .lightbox svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+
 
     @media (max-width: 900px) {
       main.content { grid-template-columns: 1fr; gap: 40px; }
@@ -217,6 +232,8 @@
       .right-col { padding-top: 0; }
       .arrow-left { left: 10px; }
       .arrow-right { right: 10px; }
+      .lightbox .nav-prev { left: 10px; background: rgba(0,0,0,0.5); }
+      .lightbox .nav-next { right: 10px; background: rgba(0,0,0,0.5); }
     }
   </style>
 </head>
@@ -386,7 +403,13 @@
   <div id="lightbox" class="lightbox">
     <div class="lightbox-inner">
       <button class="close-btn" id="lightboxClose">Fermer [ESC]</button>
+      <button class="nav-btn nav-prev" id="lightboxPrev">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
       <img id="lightboxImage" src="" alt="">
+      <button class="nav-btn nav-next" id="lightboxNext">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
   </div>
 
@@ -403,7 +426,6 @@
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
       
-      // Verification si le slider existe avant de lancer le code
       if(slidesEl && prevBtn && nextBtn) {
           const slides = Array.from(slidesEl.querySelectorAll('.slide'));
           const total = slides.length;
@@ -429,44 +451,76 @@
           startAuto();
       }
 
-      // Lightbox Logic (S'applique à toutes les images dans .right-col sauf les icônes)
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
+      const lbPrev = document.getElementById('lightboxPrev');
+      const lbNext = document.getElementById('lightboxNext');
       
-      // On cible les images du slider ET les images des blocs projets
-      const allImages = document.querySelectorAll('.right-col img:not([src*="svg"])'); 
-      
-      allImages.forEach((img) => {
+      let currentGroupImages = []; 
+      let currentLbIndex = 0;
+
+      function openLightbox(clickedImg) {
+        const container = clickedImg.closest('.slider-section, .mini-grid, .project-card');
+        
+        if (container) {
+          currentGroupImages = Array.from(container.querySelectorAll('img'));
+          
+          currentLbIndex = currentGroupImages.indexOf(clickedImg);
+          
+          updateLightboxImage();
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function updateLightboxImage() {
+        if(currentGroupImages.length > 0) {
+          lbImg.src = currentGroupImages[currentLbIndex].src;
+        }
+      }
+
+      function nextLbImage() {
+        if(currentGroupImages.length === 0) return;
+        currentLbIndex = (currentLbIndex + 1) % currentGroupImages.length;
+        updateLightboxImage();
+      }
+
+      function prevLbImage() {
+        if(currentGroupImages.length === 0) return;
+        currentLbIndex = (currentLbIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
+        updateLightboxImage();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        currentGroupImages = [];
+      }
+
+      document.querySelectorAll('.right-col img:not([src*="svg"])').forEach(img => {
         img.addEventListener('click', (e) => {
-            // Empêche le clic si l'image est dans un lien
-            if(img.parentElement.tagName === 'A') return; 
-            
-            e.preventDefault();
-            lbImg.src = img.src;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+           if(img.parentElement.tagName === 'A') return;
+           
+           e.stopPropagation();
+           openLightbox(img);
         });
       });
 
-      if(lbClose) {
-          lbClose.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-          });
-      }
-
+      // Contrôles Lightbox
+      if(lbClose) lbClose.addEventListener('click', closeLightbox);
+      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); nextLbImage(); });
+      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); prevLbImage(); });
+      
       lightbox.addEventListener('click', (e) => { 
-          if(e.target === lightbox) {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-          }
+          if(e.target === lightbox) closeLightbox();
       });
 
       document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active') && e.key === 'Escape') {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
+        if(lightbox.classList.contains('active')) {
+            if(e.key === 'Escape') closeLightbox();
+            if(e.key === 'ArrowRight') nextLbImage();
+            if(e.key === 'ArrowLeft') prevLbImage();
         }
       });
 
@@ -476,6 +530,3 @@
   </script>
 </body>
 </html>
-
-
-
