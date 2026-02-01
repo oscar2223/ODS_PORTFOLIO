@@ -174,6 +174,7 @@
     .lightbox.active { display: flex; }
     .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
     .lightbox img { max-height: 85vh; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+    
     .lightbox .close-btn {
       position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none;
       font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
@@ -184,10 +185,13 @@
       width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
       background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; cursor: pointer;
       color: #fff; font-size: 22px; z-index: 2010; backdrop-filter: blur(4px);
+      transition: all 0.3s;
     }
-    .lightbox .nav-btn:hover { background: rgba(255,255,255,0.12); color: #000; }
+    .lightbox .nav-btn:hover { background: rgba(255,255,255,0.9); color: #000; }
     .lightbox .nav-prev { left: -60px; }
     .lightbox .nav-next { right: -60px; }
+    .lightbox svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+
 
     @media (max-width: 900px) {
       main.content { grid-template-columns: 1fr; gap: 40px; }
@@ -195,8 +199,8 @@
       .right-col { padding-top: 0; }
       .arrow-left { left: 10px; }
       .arrow-right { right: 10px; }
-      .lightbox .nav-prev { left: 10px; }
-      .lightbox .nav-next { right: 10px; }
+      .lightbox .nav-prev { left: 10px; background: rgba(0,0,0,0.5); }
+      .lightbox .nav-next { right: 10px; background: rgba(0,0,0,0.5); }
     }
   </style>
 </head>
@@ -371,9 +375,13 @@
   <div id="lightbox" class="lightbox">
     <div class="lightbox-inner">
       <button class="close-btn" id="lightboxClose">Fermer [ESC]</button>
-      <button class="nav-btn nav-prev" id="lightboxPrev">‹</button>
+      <button class="nav-btn nav-prev" id="lightboxPrev">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
       <img id="lightboxImage" src="" alt="">
-      <button class="nav-btn nav-next" id="lightboxNext">›</button>
+      <button class="nav-btn nav-next" id="lightboxNext">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
   </div>
 
@@ -388,7 +396,6 @@
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
 
       const allSliders = document.querySelectorAll('.slider-wrap');
-
       allSliders.forEach((slider) => {
           const slidesContainer = slider.querySelector('.slides');
           const slides = Array.from(slidesContainer.querySelectorAll('.slide'));
@@ -402,28 +409,20 @@
           function updateSlider() {
             slidesContainer.style.transform = `translateX(${ -currentIndex * 100 }%)`;
           }
-
           function goNext() {
             currentIndex = (currentIndex + 1) % totalSlides;
             updateSlider();
           }
-
           function goPrev() {
             currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
             updateSlider();
           }
 
           if(nextBtn) {
-            nextBtn.addEventListener('click', () => {
-              goNext();
-              stopAuto();
-            });
+            nextBtn.addEventListener('click', () => { goNext(); stopAuto(); });
           }
           if(prevBtn) {
-            prevBtn.addEventListener('click', () => {
-              goPrev();
-              stopAuto();
-            });
+            prevBtn.addEventListener('click', () => { goPrev(); stopAuto(); });
           }
 
           function startAuto() {
@@ -435,7 +434,6 @@
 
           slider.addEventListener('mouseenter', stopAuto);
           slider.addEventListener('mouseleave', startAuto);
-
           startAuto();
       });
 
@@ -444,67 +442,78 @@
       const lbClose = document.getElementById('lightboxClose');
       const lbPrev = document.getElementById('lightboxPrev');
       const lbNext = document.getElementById('lightboxNext');
-      const allImages = document.querySelectorAll('.right-col img:not([src*="svg"])'); 
-      const imagesList = Array.from(allImages);
-      let currentLightboxIndex = -1;
+      
+      let currentGroupImages = []; 
+      let currentLbIndex = 0;
 
-      function openLightboxAt(index){
-        currentLightboxIndex = index;
-        lbImg.src = imagesList[index].src;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
+      function openLightbox(clickedImg) {
+        const container = clickedImg.closest('.slider-section');
+        
+        if (container) {
+          currentGroupImages = Array.from(container.querySelectorAll('img'));
+          currentLbIndex = currentGroupImages.indexOf(clickedImg);
+          
+          updateLightboxImage();
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          
+      
+        }
       }
 
-      imagesList.forEach((img, idx) => {
+      function updateLightboxImage() {
+        if(currentGroupImages.length > 0) {
+          lbImg.src = currentGroupImages[currentLbIndex].src;
+        }
+      }
+
+      function nextLbImage() {
+        if(currentGroupImages.length === 0) return;
+        currentLbIndex = (currentLbIndex + 1) % currentGroupImages.length;
+        updateLightboxImage();
+      }
+
+      function prevLbImage() {
+        if(currentGroupImages.length === 0) return;
+        currentLbIndex = (currentLbIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
+        updateLightboxImage();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        currentGroupImages = []; 
+      }
+
+      document.querySelectorAll('.right-col img').forEach(img => {
         img.addEventListener('click', (e) => {
            if(img.parentElement.tagName === 'A') return;
-
-           e.preventDefault();
-           openLightboxAt(idx);
+           
+           e.stopPropagation();
+           openLightbox(e.target);
         });
       });
-
-      function closeLightbox(){
-         lightbox.classList.remove('active');
-         document.body.style.overflow = '';
-      }
-
-      function showNextLightbox(){
-        if(imagesList.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex + 1) % imagesList.length;
-        lbImg.src = imagesList[currentLightboxIndex].src;
-      }
-
-      function showPrevLightbox(){
-        if(imagesList.length === 0) return;
-        currentLightboxIndex = (currentLightboxIndex - 1 + imagesList.length) % imagesList.length;
-        lbImg.src = imagesList[currentLightboxIndex].src;
-      }
-
-      if(lbClose) {
-          lbClose.addEventListener('click', closeLightbox);
-      }
-
-      if(lbPrev) {
-        lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrevLightbox(); });
-      }
-      if(lbNext) {
-        lbNext.addEventListener('click', (e) => { e.stopPropagation(); showNextLightbox(); });
-      }
+      if(lbClose) lbClose.addEventListener('click', closeLightbox);
+      
+      if(lbNext) lbNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextLbImage();
+      });
+      
+      if(lbPrev) lbPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevLbImage();
+      });
       
       lightbox.addEventListener('click', (e) => { 
           if(e.target === lightbox) closeLightbox();
       });
 
       document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active') && e.key === 'Escape') {
-           closeLightbox();
-        }
-        if(lightbox.classList.contains('active') && e.key === 'ArrowRight'){
-           showNextLightbox();
-        }
-        if(lightbox.classList.contains('active') && e.key === 'ArrowLeft'){
-           showPrevLightbox();
+        if(lightbox.classList.contains('active')) {
+          if(e.key === 'Escape') closeLightbox();
+          if(e.key === 'ArrowRight') nextLbImage();
+          if(e.key === 'ArrowLeft') prevLbImage();
         }
       });
 
