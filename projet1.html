@@ -64,7 +64,7 @@
     .nav a:hover::after { width: 100%; }
 
     main.content {
-      display: grid; grid-template-columns: 1fr 1.2fr;
+      display: grid; grid-template-columns: 1fr 2fr; 
       min-height: 100vh; padding-top: 120px; padding-bottom: 100px;
       max-width: 1600px; margin: 0 auto; gap: 60px;
     }
@@ -82,7 +82,7 @@
     }
     .meta-item strong { display: block; color: #fff; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
 
-    .right-col { padding-right: 4vw; display: flex; flex-direction: column; gap: 80px; padding-top: 10px; }
+    .right-col { padding-right: 4vw; display: flex; flex-direction: column; gap: 100px; padding-top: 10px; }
 
     .big-title {
       font-family: var(--font-serif); font-size: clamp(40px, 4vw, 70px);
@@ -90,56 +90,60 @@
     }
     .big-title span { font-style: italic; color: var(--accent-color); display: block; font-size: 0.6em; margin-top: 10px; }
 
-    .text-block {
+    .project-category {
       opacity: 0; transform: translateY(30px);
       transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 60px;
     }
-    .text-block.visible { opacity: 1; transform: translateY(0); }
+    .project-category.visible { opacity: 1; transform: translateY(0); }
+    .project-category:last-child { border-bottom: none; }
 
-    .text-block h3 {
-      font-family: var(--font-ui); font-size: 12px; text-transform: uppercase;
-      letter-spacing: 2px; color: var(--accent-color); margin-bottom: 20px;
+    .cat-header h3 {
+      font-family: var(--font-ui); font-size: 14px; text-transform: uppercase;
+      letter-spacing: 2px; color: #fff; margin-bottom: 15px;
+      border-left: 2px solid #fff; padding-left: 15px;
     }
-    .text-block p {
-      font-size: clamp(18px, 1.5vw, 22px); line-height: 1.6; margin: 0; font-weight: 300; color: #dcdcdc;
+    .cat-description {
+      font-size: clamp(18px, 1.2vw, 20px); line-height: 1.6; margin-bottom: 30px; font-weight: 300; color: #dcdcdc; max-width: 90%;
     }
 
-    .slider-section { width: 100%; margin: 20px 0; }
-    .slider-wrap { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative; overflow: hidden; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.3s;
+    }
+    .gallery-item:hover { border-color: rgba(255,255,255,0.5); }
     
-    .slider-stage {
-      width: 100%; overflow: hidden; border-radius: 2px;
-      background: #111; 
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.1);
+    .gallery-item img {
+      width: 100%; height: 200px; object-fit: cover;
+      transition: transform 0.5s ease;
+      opacity: 0.8;
     }
-    
-    .slides { display: flex; transition: transform 0.6s cubic-bezier(.2,.9,.2,1); }
-    .slide { min-width: 100%; position: relative; display: flex; justify-content: center; }
-    .slide img {
-      width: 100%; height: 400px; object-fit: cover; cursor: zoom-in; opacity: 0.9; transition: opacity 0.3s;
-    }
-    .slide img:hover { opacity: 1; }
+    .gallery-item:hover img { transform: scale(1.05); opacity: 1; }
 
-    .slide-caption {
+    .gallery-caption {
       position: absolute; bottom: 0; left: 0; width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-      color: #fff; padding: 20px 20px 10px;
-      font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.5px;
+      padding: 8px 12px; background: rgba(0,0,0,0.8);
+      font-family: var(--font-ui); font-size: 12px; color: #fff;
+      transform: translateY(100%); transition: transform 0.3s;
     }
+    .gallery-item:hover .gallery-caption { transform: translateY(0); }
 
-    .arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 44px; height: 44px; border-radius: 50%;
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(4px);
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid rgba(255,255,255,0.2); cursor: pointer; z-index: 10;
-      transition: all 0.3s; color: #fff;
+    /* Links inside gallery */
+    .gallery-link-overlay {
+      position: absolute; top: 10px; right: 10px;
+      background: #fff; color: #000; padding: 5px 10px;
+      font-family: var(--font-ui); font-size: 10px; text-transform: uppercase;
+      border-radius: 20px; z-index: 5; opacity: 0; transition: opacity 0.3s;
     }
-    .arrow:hover { background: #fff; color: #000; }
-    .arrow-left { left: -22px; }
-    .arrow-right { right: -22px; }
-    .arrow svg { width: 20px; height: 20px; stroke-width: 2; fill: none; stroke: currentColor; }
+    .gallery-item:hover .gallery-link-overlay { opacity: 1; }
+
 
     .skills-grid {
       display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;
@@ -171,17 +175,17 @@
     }
     .lightbox.active { display: flex; }
     .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
-    .lightbox img { max-height: 85vh; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+    .lightbox img { max-height: 85vh; max-width: 100%; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
     
     .lightbox .nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
-      background: transparent; color: #fff; border: none; cursor: pointer;
-      padding: 10px; transition: transform 0.2s;
+      background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); 
+      cursor: pointer; padding: 15px; border-radius: 50%; transition: all 0.2s;
     }
-    .lightbox .nav-btn:hover { transform: translateY(-50%) scale(1.2); }
-    .lightbox .nav-prev { left: -50px; }
-    .lightbox .nav-next { right: -50px; }
-    .lightbox svg { width: 30px; height: 30px; stroke: #fff; stroke-width: 2; fill: none; }
+    .lightbox .nav-btn:hover { background: #fff; color: #000; }
+    .lightbox .nav-prev { left: -70px; }
+    .lightbox .nav-next { right: -70px; }
+    .lightbox svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
     
     .lightbox .close-btn {
       position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none;
@@ -191,12 +195,9 @@
     @media (max-width: 900px) {
       main.content { grid-template-columns: 1fr; gap: 40px; }
       .sticky-wrapper { position: relative; top: 0; margin-bottom: 20px; }
-      .right-col { padding-top: 0; }
-      .arrow-left { left: 10px; }
-      .arrow-right { right: 10px; }
-      .slide img { height: 250px; }
-      .lightbox .nav-prev { left: 10px; }
-      .lightbox .nav-next { right: 10px; }
+      .right-col { padding-top: 0; gap: 60px; }
+      .lightbox .nav-prev { left: 10px; background: rgba(0,0,0,0.5); }
+      .lightbox .nav-next { right: 10px; background: rgba(0,0,0,0.5); }
     }
   </style>
 </head>
@@ -241,59 +242,82 @@
 
     <div class="right-col">
       
-      <div class="text-block js-scroll">
-        <h3>Le Challenge</h3>
-        <p>Voici l’ensemble des projets que j’ai réalisés durant ma formation en BUT MMI, parcours développement web. Mon premier site web, en HTML5, CSS3 et JavaScript, a été réalisé dans le cadre de la SAE 105, nous devions concevoir de A à Z un site de food truck (menu, réservation, planning, contact et À propos).</p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left" id="prevBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-          
-          <div class="slider-stage">
-            <div class="slides" id="slides">
-              <div class="slide"><img src="images/site_drap.jpg" alt="Site La Cité Drap'Hier" data-caption="Accueil - Site Vitrine"><div class="slide-caption">Accueil - Site Vitrine</div></div>
-              <div class="slide"><img src="images/imageCMS1.png" alt="CMS Interface" data-caption="Interface CMS"><div class="slide-caption">Interface CMS</div></div>
-              <div class="slide"><img src="images/image-elbeuf.png" alt="CMS image" data-caption="image CMS"><div class="slide-caption">Interface CMS</div></div>
-              <div class="slide"><img src="images/image-elbeuf-2.png" alt="CMS Interface" data-caption="Interface CMS"><div class="slide-caption">Interface CMS</div></div>
-<div class="slide">
-  <a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" title="Ouvrir le site — Site de biletterie" aria-label="Ouvrir le site — Site de billetterie" target="_blank" rel="noopener noreferrer">
-    <img src="images/sitesae203.jpg" alt="Dashboard SAE 203" data-caption="Dashboard SAE 203">
-  </a></div>              
-              <div class="slide"><img src="images/site-1-reservation-billet.png" alt="Réservation" data-caption="Module de Réservation"><div class="slide-caption">Module de Réservation</div></div>
-              <div class="slide"><img src="images/sitebilletterie1.png" alt="Admin Dashboard" data-caption="Back-office Admin"><div class="slide-caption">Back-office Admin</div></div>
-
-              <div class="slide">
-  <a href="https://oscar2223.github.io/ods-foodtruck/index.html" title="Ouvrir le site — Le Gourmet Nomade" aria-label="Ouvrir le site — Le Gourmet Nomade" target="_blank" rel="noopener noreferrer">
-    <img src="images/ods-foodtruck.PNG" alt="ODS FOOD TRUCK" data-caption="ODS FOOD TRUCK">
-  </a></div>
-              <div class="slide">
-  <a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" title="Ouvrir le site — Dashboard SAE 303" aria-label="Ouvrir le site — Dashboard SAE 303" target="_blank" rel="noopener noreferrer">
-    <img src="images/dashboard.PNG" alt="Dashboard SAE 303" data-caption="Dashboard SAE 303">
-  </a></div>
-            </div>
+      <div class="project-category js-scroll">
+        <div class="cat-header">
+          <h3>Projet 1 : Cité Drap'Hier & CMS</h3>
+        </div>
+        <div class="cat-description">
+          <p>L'objectif était de concevoir un CMS complet pour la ville d'Elbeuf. Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.</p>
+        </div>
+        
+        <div class="gallery-grid" data-group="cms">
+          <div class="gallery-item">
+            <img src="images/site_drap.jpg" alt="Site La Cité Drap'Hier">
+            <div class="gallery-caption">Accueil - Site Vitrine</div>
           </div>
-
-          <button class="arrow arrow-right" id="nextBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
+          <div class="gallery-item">
+            <img src="images/imageCMS1.png" alt="Interface CMS">
+            <div class="gallery-caption">Interface Admin CMS</div>
+          </div>
+          <div class="gallery-item">
+            <img src="images/image-elbeuf.png" alt="Détail CMS">
+            <div class="gallery-caption">Gestion des articles</div>
+          </div>
+          <div class="gallery-item">
+            <img src="images/image-elbeuf-2.png" alt="Interface CMS 2">
+            <div class="gallery-caption">Édition de contenu</div>
+          </div>
         </div>
       </div>
 
-      <div class="text-block js-scroll">
-        <h3>Développement & Technique</h3>
-        <p>
-          Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données et implémenté toute la logique PHP : inscription, sécurisation, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.
-        </p>
-        <p style="margin-top:20px;">
-          L'objectif était de concevoir un CMS complet pour la ville d'Elbeuf, Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.
-        </p>
-          <p style="margin-top:20px;">
-Durant la SAE 303, j’ai réalisé un dashboard portant sur l’évolution climatique dans le département des Bouches-du-Rhône (13), intégrant des KPI, des courbes de tendance, des diagrammes circulaires, une carte interactive avec Leaflet.js, des histogrammes et différents graphiques.      </div>
+      <div class="project-category js-scroll">
+        <div class="cat-header">
+          <h3>Projet 2 : Billetterie (SAE 203)</h3>
+        </div>
+        <div class="cat-description">
+          <p>Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données et implémenté toute la logique PHP : inscription, sécurisation, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.</p>
+        </div>
 
-      <div class="text-block js-scroll">
+        <div class="gallery-grid" data-group="billetterie">
+          <div class="gallery-item">
+            <a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <img src="images/sitesae203.jpg" alt="Dashboard SAE 203">
+            <div class="gallery-caption">Page d'accueil Billetterie</div>
+          </div>
+          <div class="gallery-item">
+            <img src="images/site-1-reservation-billet.png" alt="Réservation">
+            <div class="gallery-caption">Module de Réservation</div>
+          </div>
+          <div class="gallery-item">
+            <img src="images/sitebilletterie1.png" alt="Back-office Admin">
+            <div class="gallery-caption">Back-office Administrateur</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-category js-scroll">
+        <div class="cat-header">
+          <h3>Projet 3 : Data Viz & Applications</h3>
+        </div>
+        <div class="cat-description">
+          <p>Durant la <strong>SAE 303</strong>, j’ai réalisé un dashboard climatique intégrant des KPI, courbes et cartes interactives. J'ai également conçu de A à Z un site de Food Truck (<strong>SAE 105</strong>) en HTML5/CSS3 natif.</p>
+        </div>
+
+        <div class="gallery-grid" data-group="apps">
+          <div class="gallery-item">
+            <a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" target="_blank" class="gallery-link-overlay">Voir Dashboard</a>
+            <img src="images/dashboard.PNG" alt="Dashboard SAE 303">
+            <div class="gallery-caption">Dashboard Climatique (Data Viz)</div>
+          </div>
+          <div class="gallery-item">
+            <a href="https://oscar2223.github.io/ods-foodtruck/index.html" target="_blank" class="gallery-link-overlay">Voir Foodtruck</a>
+            <img src="images/ods-foodtruck.PNG" alt="ODS FOOD TRUCK">
+            <div class="gallery-caption">Site Food Truck</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-block js-scroll" style="margin-top: 40px;">
         <h3>Compétences Acquises</h3>
         <div class="skills-grid">
           <span class="skill-tag">Développement PHP/MySQL</span>
@@ -321,9 +345,13 @@ Durant la SAE 303, j’ai réalisé un dashboard portant sur l’évolution clim
   <div id="lightbox" class="lightbox">
     <div class="lightbox-inner">
       <button class="close-btn" id="lightboxClose">Fermer [ESC]</button>
-      <button class="nav-btn nav-prev" id="lightboxPrev"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <button class="nav-btn nav-prev" id="lightboxPrev">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
       <img id="lightboxImage" src="" alt="">
-      <button class="nav-btn nav-next" id="lightboxNext"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      <button class="nav-btn nav-next" id="lightboxNext">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
   </div>
 
@@ -336,71 +364,74 @@ Durant la SAE 303, j’ai réalisé un dashboard portant sur l’évolution clim
       }, { threshold: 0.1 });
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
 
-      const slidesEl = document.getElementById('slides');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const slides = Array.from(slidesEl.querySelectorAll('.slide'));
-      const total = slides.length;
-      let index = 0;
-      let timer = null;
-
-      function goTo(i){
-        index = (i + total) % total;
-        slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
-      }
-
-      if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
-      if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
-
-      function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
-      function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
-
-      const stage = document.querySelector('.slider-stage');
-      if(stage){
-        stage.addEventListener('mouseenter', stopAuto);
-        stage.addEventListener('mouseleave', startAuto);
-      }
-      startAuto();
-
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
       const lbPrev = document.getElementById('lightboxPrev');
       const lbNext = document.getElementById('lightboxNext');
-      const imgs = Array.from(slidesEl.querySelectorAll('img'));
-      let lbIndex = 0;
+      
+      let currentGroupImages = []; 
+      let currentIndex = 0;        
 
-      function openLb(i){
-        lbIndex = (i + imgs.length) % imgs.length;
-        lbImg.src = imgs[lbIndex].src;
+      function openLightbox(imgElement) {
+        const groupContainer = imgElement.closest('.gallery-grid');
+        currentGroupImages = Array.from(groupContainer.querySelectorAll('img'));
+        
+        currentIndex = currentGroupImages.indexOf(imgElement);
+        
+        updateImage();
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
-        stopAuto();
-      }
-      function closeLb(){
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        startAuto();
       }
 
-      imgs.forEach((img, i) => img.addEventListener('click', () => openLb(i)));
-      if(lbClose) lbClose.addEventListener('click', closeLb);
-      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex - 1); });
-      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); openLb(lbIndex + 1); });
-      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLb(); });
+      function updateImage() {
+        if(currentGroupImages.length > 0) {
+          lbImg.src = currentGroupImages[currentIndex].src;
+        }
+      }
+
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % currentGroupImages.length;
+        updateImage();
+      }
+
+      function prevImage() {
+        currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
+        updateImage();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        currentGroupImages = [];
+      }
+
+      document.querySelectorAll('.gallery-item img').forEach(img => {
+        img.addEventListener('click', (e) => {
+          e.stopPropagation(); 
+          openLightbox(e.target);
+        });
+      });
+
+      if(lbClose) lbClose.addEventListener('click', closeLightbox);
+      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+      
+      lightbox.addEventListener('click', (e) => {
+        if(e.target === lightbox) closeLightbox();
+      });
 
       document.addEventListener('keydown', e => {
         if(lightbox.classList.contains('active')) {
-          if(e.key === 'Escape') closeLb();
-          if(e.key === 'ArrowLeft') openLb(lbIndex - 1);
-          if(e.key === 'ArrowRight') openLb(lbIndex + 1);
+          if(e.key === 'Escape') closeLightbox();
+          if(e.key === 'ArrowRight') nextImage();
+          if(e.key === 'ArrowLeft') prevImage();
         }
       });
 
       document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
     });
-  </script>
   </script>
 </body>
 </html>
