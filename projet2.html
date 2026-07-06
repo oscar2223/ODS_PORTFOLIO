@@ -142,6 +142,28 @@
     .arrow-right { right: -22px; }
     .arrow svg { width: 20px; height: 20px; stroke-width: 2; fill: none; stroke: currentColor; }
 
+    /* Cadre pour affichage d'une page unique (ex: maquette A4 InDesign) au format portrait */
+    .page-frame {
+      width: 100%; overflow: hidden; border-radius: 2px;
+      background: #111;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      padding: 30px; position: relative;
+    }
+    .page-frame img {
+      width: auto; max-width: 100%; max-height: 640px;
+      object-fit: contain; cursor: zoom-in; opacity: 0.95; transition: opacity 0.3s;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+    .page-frame img:hover { opacity: 1; }
+    .page-frame .slide-caption {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      color: #fff; padding: 20px 20px 10px;
+      font-family: var(--font-ui); font-size: 13px; letter-spacing: 0.5px;
+      text-align: center;
+    }
 
     .skills-grid {
       display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;
@@ -237,7 +259,7 @@
           </div>
           <div class="meta-item">
             <strong>Outils</strong>
-            Photoshop, Illustrator
+            Photoshop, Illustrator, InDesign
           </div>
         </div>
       </div>
@@ -316,35 +338,23 @@
       <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
 
       <div class="text-block js-scroll">
-        <h3>Refonte de la marque Lobodis</h3>
+        <h3>Reproduction Éditoriale sous InDesign</h3>
         <p>
-          Pour la marque <strong>Lobodis</strong>, j’ai conçu l'identité visuelle et le niveau axiologique, avec le slogan <em>"Lobodis veut se distinguer en étant vrai, clair et excellent."</em>
+          Exercice de reproduction fidèle d'une page de mode/beauté au format <strong>A4</strong> sous <strong>Adobe InDesign</strong>. L'objectif était de retranscrire à l'identique le gabarit d'origine : mise en place des <em>fonds perdus</em> et des repères de coupe, respect de la grille de mise en page, positionnement et proportions exactes de chaque élément (typographie, visuels, blocs de texte) afin de restituer fidèlement la hiérarchie visuelle et l'équilibre de la composition d'origine.
         </p>
       </div>
 
       <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left btn-prev" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-          
-          <div class="slider-stage">
-            <div class="slides">
-              <div class="slide">
-                <img src="images/Logo-Lobodis.jpg" alt="Logo Lobodis">
-                <div class="slide-caption">Redesign Logo Lobodis</div>
-              </div>
-              <div class="slide">
-                <img src="images/Affiche-Lobodis.jpg" alt="Affiche Lobodis">
-                <div class="slide-caption">Affiche Publicitaire</div>
-              </div>
-            </div>
-          </div>
-
-          <button class="arrow arrow-right btn-next" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
+        <div class="page-frame">
+          <img src="images/indesign.png" alt="Reproduction page mode/beauté InDesign" data-caption="Reproduction Page Mode/Beauté — Format A4">
+          <div class="slide-caption">Reproduction Page Mode/Beauté — Format A4</div>
         </div>
+      </div>
+
+      <div class="text-block js-scroll">
+        <p>
+          Ce travail de PAO (Publication Assistée par Ordinateur) est venu compléter mes compétences en direction artistique : au-delà de la création graphique, j'ai développé une lecture technique de la mise en page, de la gestion des marges et fonds perdus jusqu'à la préparation d'un fichier prêt pour l'impression, en cohérence avec mon travail de charte graphique et de scénographie mené sur les projets Adobe Photoshop et Illustrator.
+        </p>
       </div>
 
       <div class="text-block js-scroll">
@@ -352,9 +362,11 @@
         <div class="skills-grid">
           <span class="skill-tag">Adobe Photoshop</span>
           <span class="skill-tag">Adobe Illustrator</span>
+          <span class="skill-tag">Adobe InDesign</span>
           <span class="skill-tag">Direction Artistique</span>
           <span class="skill-tag">Scénographie</span>
           <span class="skill-tag">Identité Visuelle</span>
+          <span class="skill-tag">Mise en Page Éditoriale</span>
         </div>
       </div>
 
@@ -523,4 +535,3 @@
   </script>
 </body>
 </html>
-
