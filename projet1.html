@@ -466,6 +466,40 @@
         </div>
       </div>
 
+      <div class="project-category js-scroll">
+        <div class="cat-header">
+          <h3>Projet 9 : Shift Up — Application, Back-office & CMS</h3>
+        </div>
+        <div class="cat-description">
+          <p><strong>Shift Up</strong> est une entreprise fictive dont la mission est d'accompagner la transition écologique des entreprises via un collectif, en créant du lien entre les engagements pris par l'entreprise et les actions concrètes de chaque salarié au quotidien.</p>
+          <p style="margin-top:16px;">J'ai conçu l'écosystème complet du projet, avec une identité visuelle dédiée et une base de données centralisant les coordonnées des utilisateurs ainsi que leurs performances sur les tâches :</p>
+          <p style="margin-top:16px;"><strong>Application (côté clients)</strong> : les salariés y accomplissent des tâches écologiques quotidiennes dans leur environnement de travail.</p>
+          <p style="margin-top:16px;"><strong>Site web (côté admins)</strong> : consultation des entreprises et de leurs départements, chiffres détaillés, bannissement/suppression d'employés, gestion des profils, ajout/modification/suppression des tâches ; le super-admin peut en plus créer des entreprises et des badges pour l'application.</p>
+          <p style="margin-top:16px;"><strong>CMS</strong> dédié à la promotion de l'entreprise, de ses valeurs et de ses services.</p>
+        </div>
+
+        <div class="gallery-grid" data-group="shift-up">
+          <div class="gallery-item">
+            <a href="https://mwanzrya.tpweb.univ-rouen.fr/Shift-Up/views/users/index.php" target="_blank" rel="noopener noreferrer">
+              <img src="images/user.png" alt="Application Shift Up - espace utilisateur">
+            </a>
+            <div class="gallery-caption">Application — Espace Utilisateur</div>
+          </div>
+          <div class="gallery-item">
+            <a href="https://mwanzrya.tpweb.univ-rouen.fr/Shift-Up/views/admin/admin_dashboard.php" target="_blank" rel="noopener noreferrer">
+              <img src="images/admin.png" alt="Site web Shift Up - back-office admin">
+            </a>
+            <div class="gallery-caption">Site Web — Back-office Admin</div>
+          </div>
+          <div class="gallery-item">
+            <a href="https://skyal12.github.io/Shift-Up-showcase-site/" target="_blank" rel="noopener noreferrer">
+              <img src="images/CMS.png" alt="CMS vitrine Shift Up">
+            </a>
+            <div class="gallery-caption">CMS — Site Vitrine</div>
+          </div>
+        </div>
+      </div>
+
       <div class="text-block js-scroll" style="margin-top: 40px;">
         <h3>Compétences Acquises</h3>
         <div class="skills-grid">
@@ -478,6 +512,8 @@
           <span class="skill-tag">WordPress</span>
           <span class="skill-tag">UX / Maquettage</span>
           <span class="skill-tag">SEO</span>
+          <span class="skill-tag">Application Web Multi-Rôles</span>
+          <span class="skill-tag">Identité Visuelle</span>
         </div>
       </div>
 
@@ -561,6 +597,7 @@
 
       document.querySelectorAll('.gallery-item img').forEach(img => {
         img.addEventListener('click', (e) => {
+          if(img.parentElement.tagName === 'A') return;
           e.stopPropagation(); 
           openLightbox(e.target);
         });
