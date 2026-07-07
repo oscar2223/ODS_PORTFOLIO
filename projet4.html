@@ -165,15 +165,24 @@
         display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 15px; margin-top: 30px; margin-bottom: 30px;
     }
-    .mini-grid a { display: block; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    .mini-grid a, .mini-grid .grid-item { display: block; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
     .mini-grid img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.5s; }
-    .mini-grid a:hover img { transform: scale(1.05); }
+    .mini-grid a:hover img, .mini-grid .grid-item:hover img { transform: scale(1.05); }
     .mini-grid .grid-caption {
         position: absolute; bottom: 0; left: 0; width: 100%;
         background: rgba(0,0,0,0.7); color: #fff; font-size: 11px;
         padding: 5px 10px; font-family: var(--font-ui);
     }
 
+    .priority-tags { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 10px; }
+    .priority-tag {
+        font-family: var(--font-ui); font-size: 11px; text-transform: uppercase;
+        letter-spacing: 1px; padding: 6px 14px; border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.2); color: #fff;
+    }
+    .priority-tag.major { border-color: #b23b3b; color: #ff8a8a; }
+    .priority-tag.medium { border-color: #b2893b; color: #ffcf8a; }
+    .priority-tag.light { border-color: #3b8ab2; color: #8adcff; }
 
     .skills-grid {
       display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;
@@ -266,11 +275,11 @@
           </div>
           <div class="meta-item">
             <strong>Contexte</strong>
-            BUT MMI - Projet Formation
+            BUT MMI - Projet Formation / Stage Digiactif
           </div>
           <div class="meta-item">
             <strong>Outils</strong>
-            Figma, Canva, Notion, Trello & Prestashop
+            Figma, Canva, Notion, Trello, Prestashop, Yoast SEO, SEObserver, Divi Builder
           </div>
         </div>
       </div>
@@ -375,6 +384,99 @@
          
         </div>
       </div>
+
+      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
+
+      <div class="text-block js-scroll">
+        <h3>4. Audit Technique SEO & Performance</h3>
+        <p>
+            Dans le cadre de mon stage chez <strong>Digiactif</strong>, j'ai réalisé plusieurs audits techniques et SEO, sous forme de rapports écrits et de vidéos d'analyse.
+        </p>
+        <p style="margin-top:20px;">
+            Le premier audit porte sur le site <strong>digiactif.fr</strong> lui-même : 41 problèmes ont été identifiés (visuels comme techniques : structure SEO, référencement, balisage) et classés selon trois niveaux de priorité.
+        </p>
+
+        <div class="priority-tags">
+          <span class="priority-tag major">Majeur</span>
+          <span class="priority-tag medium">Moyen</span>
+          <span class="priority-tag light">Léger</span>
+        </div>
+
+        <div class="mini-grid">
+            <div class="grid-item">
+                <img src="images/audit-digiactif1.png" alt="Audit technique digiactif.fr - vue 1">
+                <div class="grid-caption">Audit digiactif.fr — Priorité Majeure</div>
+            </div>
+            <div class="grid-item">
+                <img src="images/audit-digiactif2.png" alt="Audit technique digiactif.fr - vue 2">
+                <div class="grid-caption">Audit digiactif.fr — Priorité Moyenne</div>
+            </div>
+            <div class="grid-item">
+                <img src="images/audit-digiactif3.png" alt="Audit technique digiactif.fr - vue 3">
+                <div class="grid-caption">Audit digiactif.fr — Priorité Légère</div>
+            </div>
+        </div>
+
+        <p style="margin-top:10px;">
+            Pour cinq sites e-commerce clients, j'ai ensuite réalisé des audits techniques directement en vidéo sur <strong>Loom</strong>, en analysant le balisage Hn (accueil, catégorie, produit), l'hébergement, et l'unicité des chemins de maillage interne. Cliquez sur une vignette pour visionner l'audit vidéo correspondant.
+        </p>
+
+        <div class="mini-grid">
+            <a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener noreferrer">
+                <img src="images/httpsjfg3d.comfr.png" alt="Audit vidéo jfg3d.com">
+                <div class="grid-caption">jfg3d.com — Audit vidéo</div>
+            </a>
+            <a href="https://www.loom.com/share/0628b72deba64d8fa9a01e62dafcaa09" target="_blank" rel="noopener noreferrer">
+                <img src="images/gamingroomconcept.com.png" alt="Audit vidéo gamingroomconcept.com">
+                <div class="grid-caption">gamingroomconcept.com — Audit vidéo</div>
+            </a>
+            <a href="https://www.loom.com/share/6f1b18c5d99f4cf6aa4077c6e9eae057" target="_blank" rel="noopener noreferrer">
+                <img src="images/choup-art.fr.png" alt="Audit vidéo choup-art.fr">
+                <div class="grid-caption">choup-art.fr — Audit vidéo</div>
+            </a>
+            <a href="https://www.loom.com/share/d787c1e8b3e044e194929dc58f16a66e" target="_blank" rel="noopener noreferrer">
+                <img src="images/eshopcommerce.png" alt="Audit vidéo eshop.ecomesure.com">
+                <div class="grid-caption">eshop.ecomesure.com — Audit vidéo</div>
+            </a>
+            <a href="https://www.loom.com/share/f3c68347b78143ed886ceb927a7f3acc" target="_blank" rel="noopener noreferrer">
+                <img src="images/kindofcrin.fr.png" alt="Audit vidéo kindofcrin.fr">
+                <div class="grid-caption">kindofcrin.fr — Audit vidéo</div>
+            </a>
+        </div>
+      </div>
+
+      <div class="text-block js-scroll">
+        <h3>5. Référencement SEO sur WordPress</h3>
+        <p>
+            Toujours chez Digiactif, j'ai travaillé sur le référencement naturel de sites <strong>WordPress</strong> clients : recherche de mots-clés et suivi via <strong>Google Sheets</strong>, optimisation des méta-données, des slugs et des titres SEO avec <strong>Yoast SEO</strong>, analyse de positionnement avec <strong>SEObserver</strong>, et vérification de la hiérarchie des titres (Hn) grâce à l'extension <strong>HeadingsMap</strong>.
+        </p>
+        <p style="margin-top:20px;">
+            J'ai également créé des pages de blog complètes sous <strong>Divi Builder</strong>, avec 10 articles rédigés par site, chacun d'environ 800 mots et optimisé pour le SEO en fonction du domaine du client.
+        </p>
+
+        <div class="mini-grid">
+            <div class="grid-item">
+                <img src="images/mots.png" alt="Recherche de mots-clés Google Sheets">
+                <div class="grid-caption">Recherche de mots-clés (Google Sheets)</div>
+            </div>
+            <div class="grid-item">
+                <img src="images/seobserver.png" alt="Analyse SEObserver">
+                <div class="grid-caption">Analyse de positionnement (SEObserver)</div>
+            </div>
+            <div class="grid-item">
+                <img src="images/titrages.png" alt="Structure des titres HeadingsMap">
+                <div class="grid-caption">Structure des titres (HeadingsMap)</div>
+            </div>
+            <div class="grid-item">
+                <img src="images/seo.png" alt="Optimisation Yoast SEO">
+                <div class="grid-caption">Optimisation Yoast SEO</div>
+            </div>
+            <div class="grid-item">
+                <img src="images/articles.png" alt="Rédaction d'articles de blog Divi">
+                <div class="grid-caption">Articles de blog (Divi Builder)</div>
+            </div>
+        </div>
+      </div>
       
       <div class="text-block js-scroll">
         <h3>Compétences Techniques</h3>
@@ -383,6 +485,10 @@
           <span class="skill-tag">Prestashop</span>
           <span class="skill-tag">Marketing Digital</span>
           <span class="skill-tag">Gestion de Projet</span>
+          <span class="skill-tag">Audit SEO Technique</span>
+          <span class="skill-tag">Yoast SEO</span>
+          <span class="skill-tag">SEObserver</span>
+          <span class="skill-tag">Divi Builder</span>
         </div>
       </div>
 
