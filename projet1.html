@@ -19,7 +19,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    
+
     body {
       margin: 0;
       padding: 0;
@@ -64,7 +64,7 @@
     .nav a:hover::after { width: 100%; }
 
     main.content {
-      display: grid; grid-template-columns: 1fr 2fr; 
+      display: grid; grid-template-columns: 1fr 2fr;
       min-height: 100vh; padding-top: 120px; padding-bottom: 100px;
       max-width: 1600px; margin: 0 auto; gap: 60px;
     }
@@ -97,7 +97,6 @@
       padding-bottom: 60px;
     }
     .project-category.visible { opacity: 1; transform: translateY(0); }
-    .project-category:last-child { border-bottom: none; }
 
     .cat-header h3 {
       font-family: var(--font-ui); font-size: 14px; text-transform: uppercase;
@@ -119,7 +118,7 @@
       border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.3s;
     }
     .gallery-item:hover { border-color: rgba(255,255,255,0.5); }
-    
+
     .gallery-item img {
       width: 100%; height: 200px; object-fit: cover;
       transition: transform 0.5s ease;
@@ -144,6 +143,11 @@
     }
     .gallery-item:hover .gallery-link-overlay { opacity: 1; }
 
+    /* Écrans tactiles : pas de survol, on affiche toujours le lien */
+    @media (hover: none) {
+      .gallery-link-overlay { opacity: 1; }
+      .gallery-caption { transform: translateY(0); }
+    }
 
     .skills-grid {
       display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px;
@@ -176,17 +180,17 @@
     .lightbox.active { display: flex; }
     .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
     .lightbox img { max-height: 85vh; max-width: 100%; border: 1px solid #333; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
-    
+
     .lightbox .nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); 
+      background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);
       cursor: pointer; padding: 15px; border-radius: 50%; transition: all 0.2s;
     }
     .lightbox .nav-btn:hover { background: #fff; color: #000; }
     .lightbox .nav-prev { left: -70px; }
     .lightbox .nav-next { right: -70px; }
     .lightbox svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
-    
+
     .lightbox .close-btn {
       position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none;
       font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 1px; font-size: 12px;
@@ -216,17 +220,17 @@
   </header>
 
   <main class="content">
-    
+
     <div class="left-col">
       <div class="sticky-wrapper">
         <h1 class="big-title">
           Développement web
         </h1>
-        
+
         <div class="project-meta js-scroll">
           <div class="meta-item">
             <strong>Rôle</strong>
-            Développement Fullstack & Design 
+            Développement Fullstack & Design
           </div>
           <div class="meta-item">
             <strong>Contexte</strong>
@@ -241,7 +245,8 @@
     </div>
 
     <div class="right-col">
-      
+
+      <!-- Projet 1 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 1 : Cité Drap'Hier & CMS</h3>
@@ -249,7 +254,7 @@
         <div class="cat-description">
           <p>L'objectif était de concevoir un CMS complet pour la ville d'Elbeuf. Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.</p>
         </div>
-        
+
         <div class="gallery-grid" data-group="cms">
           <div class="gallery-item">
             <img src="images/site_drap.jpg" alt="Site La Cité Drap'Hier">
@@ -270,6 +275,7 @@
         </div>
       </div>
 
+      <!-- Projet 2 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 2 : Billetterie (SAE 203)</h3>
@@ -280,7 +286,7 @@
 
         <div class="gallery-grid" data-group="billetterie">
           <div class="gallery-item">
-            <a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
             <img src="images/sitesae203.jpg" alt="Dashboard SAE 203">
             <div class="gallery-caption">Page d'accueil Billetterie</div>
           </div>
@@ -295,39 +301,43 @@
         </div>
       </div>
 
-
-
+      <!-- Projet 3 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
-          <h3>Projet 3 : Site de Food Truck </h3>
+          <h3>Projet 3 : Site de Food Truck</h3>
         </div>
         <div class="cat-description">
-          <p>Durant la <strong>SAE 105</strong>, j'ai conçu de A à Z un site de Food Truck en HTML5/CSS3/JS en intégrant des googles maps, tableau de menu et un planning ainsi qu'un formulaire de contact. </p>
+          <p>Durant la <strong>SAE 105</strong>, j'ai conçu de A à Z un site de Food Truck en HTML5/CSS3/JS, avec une intégration Google Maps, un tableau de menu, un planning et un formulaire de contact.</p>
         </div>
-<div class="gallery-item">
-            <a href="https://oscar2223.github.io/ods-foodtruck/index.html" target="_blank" class="gallery-link-overlay">Voir Foodtruck</a>
-            <img src="images/ods-foodtruck.PNG" alt="ODS FOOD TRUCK">
+
+        <div class="gallery-grid" data-group="foodtruck">
+          <div class="gallery-item">
+            <a href="https://oscar2223.github.io/ods-foodtruck/index.html" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir Foodtruck</a>
+            <img src="images/ods-foodtruck.PNG" alt="ODS Food Truck">
             <div class="gallery-caption">Site Food Truck</div>
           </div>
         </div>
+      </div>
 
-<div class="project-category js-scroll">
+      <!-- Projet 4 -->
+      <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 4 : Data Analyst</h3>
         </div>
         <div class="cat-description">
-          <p>Durant la <strong>SAE 303</strong>, j’ai réalisé un dashboard climatique sur l'évolution climatique du departement du 13 (Bouche-du-Rhône) intégrant des KPI, courbes de tendance, diagrammes, filtres interactives et une carte de stations. </p>
+          <p>Durant la <strong>SAE 303</strong>, j'ai réalisé un dashboard climatique sur l'évolution climatique du département des Bouches-du-Rhône (13), intégrant des KPI, des courbes de tendance, des diagrammes, des filtres interactifs et une carte de stations.</p>
         </div>
 
         <div class="gallery-grid" data-group="apps">
           <div class="gallery-item">
-            <a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" target="_blank" class="gallery-link-overlay">Voir Dashboard</a>
+            <a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir Dashboard</a>
             <img src="images/dashboard.PNG" alt="Dashboard SAE 303">
-            <div class="gallery-caption">Dashboard Climatique </div>
-          </div>
+            <div class="gallery-caption">Dashboard Climatique</div>
           </div>
         </div>
+      </div>
 
+      <!-- Projet 5 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 5 : Intégration Web PrestaShop — Analyse Concurrentielle</h3>
@@ -372,6 +382,7 @@
         </div>
       </div>
 
+      <!-- Projet 6 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 6 : Maquettes UX — Sites Clients PrestaShop</h3>
@@ -380,20 +391,21 @@
           <p>Conception de maquettes UX pour des sites clients gérés sous <strong>PrestaShop</strong> chez Digiactif : <strong>DPSG</strong> et <strong>Mes Petites Étiquettes</strong>. Travail sur l'arborescence, la hiérarchie visuelle et l'ergonomie des parcours utilisateurs avant intégration front-end.</p>
         </div>
 
-      <div class="gallery-grid" data-group="ux-clients">
-  <div class="gallery-item">
-    <a href="https://dpsg.fr/moulinet-spinning-exo/47840-60632-moulinet-penn-wrath-ii.html" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-    <img src="images/dpsg.png" alt="Maquette UX - DPSG">
-    <div class="gallery-caption">DPSG — Maquette UX</div>
-  </div>
-  <div class="gallery-item">
-    <a href="https://www.mespetitesetiquettes.com/fr/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-    <img src="images/petitesetiquettes-digiactif.fr.png" alt="Maquette UX - Mes Petites Étiquettes">
-    <div class="gallery-caption">Mes Petites Étiquettes — Maquette UX</div>
-  </div>
-</div>
+        <div class="gallery-grid" data-group="ux-clients">
+          <div class="gallery-item">
+            <a href="https://dpsg.fr/moulinet-spinning-exo/47840-60632-moulinet-penn-wrath-ii.html" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
+            <img src="images/dpsg.png" alt="Maquette UX - DPSG">
+            <div class="gallery-caption">DPSG — Maquette UX</div>
+          </div>
+          <div class="gallery-item">
+            <a href="https://www.mespetitesetiquettes.com/fr/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
+            <img src="images/petitesetiquettes-digiactif.fr.png" alt="Maquette UX - Mes Petites Étiquettes">
+            <div class="gallery-caption">Mes Petites Étiquettes — Maquette UX</div>
+          </div>
+        </div>
       </div>
 
+      <!-- Projet 7 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 7 : Smati Paris — Développement Full Stack PrestaShop</h3>
@@ -403,33 +415,34 @@
         </div>
 
         <div class="gallery-grid" data-group="smati-paris">
-  <div class="gallery-item">
-    <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Pages Sur-Mesures</a>
-    <img src="images/service-1.png" alt="Page Services Sur-Mesure - version 1">
-    <div class="gallery-caption">Services Sur-Mesure — V1</div>
-  </div>
-  <div class="gallery-item">
-    <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Pages Sur-Mesures</a>
-    <img src="images/service2.png" alt="Page Services Sur-Mesure - version 2">
-    <div class="gallery-caption">Services Sur-Mesure — V2</div>
-  </div>
-  <div class="gallery-item">
-    <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Devenir revendeur</a>
-    <img src="images/devenirrev-1.png" alt="Page Devenir Revendeur - version 1">
-    <div class="gallery-caption">Devenir Revendeur — V1</div>
-  </div>
-  <div class="gallery-item">
-    <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Devenir revendeur</a>
-    <img src="images/devenirrev1.png" alt="Page Devenir Revendeur - version 2">
-    <div class="gallery-caption">Devenir Revendeur — V2</div>
-  </div>
-  <div class="gallery-item">
-    <img src="images/couleur.png" alt="Charte graphique Smati Paris">
-    <div class="gallery-caption">Charte graphique & couleurs</div>
-  </div>
-</div>
+          <div class="gallery-item">
+            <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Pages Sur-Mesures</a>
+            <img src="images/service-1.png" alt="Page Services Sur-Mesure - version 1">
+            <div class="gallery-caption">Services Sur-Mesure — V1</div>
+          </div>
+          <div class="gallery-item">
+            <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Pages Sur-Mesures</a>
+            <img src="images/service2.png" alt="Page Services Sur-Mesure - version 2">
+            <div class="gallery-caption">Services Sur-Mesure — V2</div>
+          </div>
+          <div class="gallery-item">
+            <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Devenir revendeur</a>
+            <img src="images/devenirrev-1.png" alt="Page Devenir Revendeur - version 1">
+            <div class="gallery-caption">Devenir Revendeur — V1</div>
+          </div>
+          <div class="gallery-item">
+            <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Devenir revendeur</a>
+            <img src="images/devenirrev1.png" alt="Page Devenir Revendeur - version 2">
+            <div class="gallery-caption">Devenir Revendeur — V2</div>
+          </div>
+          <div class="gallery-item">
+            <img src="images/couleur.png" alt="Charte graphique Smati Paris">
+            <div class="gallery-caption">Charte graphique & couleurs</div>
+          </div>
+        </div>
       </div>
 
+      <!-- Projet 8 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 8 : Refontes WordPress — 25+ Sites FR & BR</h3>
@@ -440,38 +453,39 @@
 
         <div class="gallery-grid" data-group="wordpress-multi">
           <div class="gallery-item">
-            <a href="http://jardinsdapraia.com.br" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <a href="http://jardinsdapraia.com.br" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
             <img src="images/br1.png" alt="Refonte site Brésil">
             <div class="gallery-caption">Refonte WordPress — Site BR</div>
           </div>
           <div class="gallery-item">
-            <a href="https://infocletico.com.br/" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <a href="https://infocletico.com.br/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
             <img src="images/infoclitico.png" alt="Infoclínico - site santé BR">
             <div class="gallery-caption">Infoclínico — Site Santé (BR)</div>
           </div>
           <div class="gallery-item">
-            <a href="https://vacinaparnaiba.com.br/" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <a href="https://vacinaparnaiba.com.br/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
             <img src="images/vacina.png" alt="Vacina Parnaíba - site vaccination">
             <div class="gallery-caption">Vacina Parnaíba — Site Vaccination (BR)</div>
           </div>
           <div class="gallery-item">
-            <a href="https://www.outillage-de-jardin.com/" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <a href="https://www.outillage-de-jardin.com/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
             <img src="images/1-jardin.png" alt="Site jardin FR">
             <div class="gallery-caption">Le Jardin — Site FR</div>
           </div>
           <div class="gallery-item">
-            <a href="https://www.association-soins-sante.fr/" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <a href="https://www.association-soins-sante.fr/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
             <img src="images/soins.png" alt="Site soins et bien-être FR">
             <div class="gallery-caption">Soins & Bien-être — Site FR</div>
           </div>
           <div class="gallery-item">
-            <a href="https://www.reduire-votre-impot.com/" target="_blank" class="gallery-link-overlay">Voir le site</a>
+            <a href="https://www.reduire-votre-impot.com/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
             <img src="images/impot1.png" alt="Site impôts FR">
             <div class="gallery-caption">Impôts — Site FR</div>
           </div>
         </div>
       </div>
 
+      <!-- Projet 9 -->
       <div class="project-category js-scroll">
         <div class="cat-header">
           <h3>Projet 9 : Shift Up — Application, Back-office & CMS</h3>
@@ -533,25 +547,26 @@
   </main>
 
   <footer>
-    <div>© 2025 Oscar Da Silva</div>
+    <div>© 2026 Oscar Da Silva</div>
     <div><a href="contact.html">Contact</a></div>
   </footer>
 
   <div id="lightbox" class="lightbox">
     <div class="lightbox-inner">
       <button class="close-btn" id="lightboxClose">Fermer [ESC]</button>
-      <button class="nav-btn nav-prev" id="lightboxPrev">
+      <button class="nav-btn nav-prev" id="lightboxPrev" aria-label="Image précédente">
         <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
       <img id="lightboxImage" src="" alt="">
-      <button class="nav-btn nav-next" id="lightboxNext">
+      <button class="nav-btn nav-next" id="lightboxNext" aria-label="Image suivante">
         <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
     </div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
+      // Apparition au scroll
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -559,29 +574,31 @@
       }, { threshold: 0.1 });
       document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
 
+      // Lightbox
       const lightbox = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImage');
       const lbClose = document.getElementById('lightboxClose');
       const lbPrev = document.getElementById('lightboxPrev');
       const lbNext = document.getElementById('lightboxNext');
-      
-      let currentGroupImages = []; 
-      let currentIndex = 0;        
+
+      let currentGroupImages = [];
+      let currentIndex = 0;
 
       function openLightbox(imgElement) {
         const groupContainer = imgElement.closest('.gallery-grid');
+        if (!groupContainer) return;
         currentGroupImages = Array.from(groupContainer.querySelectorAll('img'));
-        
         currentIndex = currentGroupImages.indexOf(imgElement);
-        
+
         updateImage();
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
       }
 
       function updateImage() {
-        if(currentGroupImages.length > 0) {
+        if (currentGroupImages.length > 0) {
           lbImg.src = currentGroupImages[currentIndex].src;
+          lbImg.alt = currentGroupImages[currentIndex].alt;
         }
       }
 
@@ -603,34 +620,32 @@
 
       document.querySelectorAll('.gallery-item img').forEach(img => {
         img.addEventListener('click', (e) => {
-          if(img.parentElement.tagName === 'A') return;
-          e.stopPropagation(); 
+          if (img.parentElement.tagName === 'A') return;
+          e.stopPropagation();
           openLightbox(e.target);
         });
       });
 
-      if(lbClose) lbClose.addEventListener('click', closeLightbox);
-      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
-      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
-      
+      if (lbClose) lbClose.addEventListener('click', closeLightbox);
+      if (lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+      if (lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+
       lightbox.addEventListener('click', (e) => {
-        if(e.target === lightbox) closeLightbox();
+        if (e.target === lightbox) closeLightbox();
       });
 
       document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active')) {
-          if(e.key === 'Escape') closeLightbox();
-          if(e.key === 'ArrowRight') nextImage();
-          if(e.key === 'ArrowLeft') prevImage();
+        if (lightbox.classList.contains('active')) {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') nextImage();
+          if (e.key === 'ArrowLeft') prevImage();
         }
       });
 
+      // Navigation entre projets
       document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
       document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
     });
-    @media (hover: none) {
-  .gallery-link-overlay { opacity: 1; }
-}
   </script>
 </body>
 </html>
