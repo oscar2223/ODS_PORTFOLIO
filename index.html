@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio d'Oscar Da Silva, étudiant BUT 3 MMI parcours Développement : front-end, WordPress, PrestaShop, full-stack."><meta property="og:title" content="Oscar Da Silva — Développeur web"><meta property="og:type" content="website"><meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Accueil — ODS</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
 
     header.site-header {
       display: flex; 
-      justify-content: center; /
+      justify-content: center;
       align-items: center;
       gap: 60px;
       padding: 30px 4vw;
@@ -190,6 +190,59 @@
       .footer-links { align-items: center; }
     }
   </style>
+<style>
+/* ===== ODS — couche commune ===== */
+/* ODS — couche commune (accent, nav, thème clair, filtres, sections accueil) */
+:root{--ac:#6d5efc;--ac2:#9a93ff;--card:#111114;--line:rgba(255,255,255,.12)}
+::selection{background:var(--ac);color:#fff}
+:focus-visible{outline:2px solid var(--ac2);outline-offset:3px}
+html[data-theme=light]{filter:invert(1) hue-rotate(180deg)}
+html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] iframe,html[data-theme=light] canvas{filter:invert(1) hue-rotate(180deg)}
+.frame{padding-top:72px}
+.ods-header{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:16px 4vw;background:rgba(8,8,8,.72);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.ods-logo{font:700 18px 'Manrope',sans-serif;letter-spacing:1px;color:#fff;text-decoration:none}
+.ods-nav{display:flex;gap:26px;align-items:center}
+.ods-nav a,.ods-nav button{font:400 13px 'Manrope',sans-serif;text-transform:uppercase;letter-spacing:1px;color:#fff;opacity:.65;text-decoration:none;background:none;border:0;cursor:pointer;padding:4px 0;border-bottom:1px solid transparent;transition:.25s}
+.ods-nav a:hover,.ods-nav button:hover,.ods-nav a.on{opacity:1;border-bottom-color:var(--ac2)}
+.ods-burger{display:none!important;font-size:22px!important}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--ac);z-index:600}
+#glow{position:fixed;width:340px;height:340px;margin:-170px 0 0 -170px;border-radius:50%;background:radial-gradient(circle,rgba(109,94,252,.16),transparent 65%);pointer-events:none;z-index:2;transition:opacity .3s}
+#totop{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(8,8,8,.8);color:#fff;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:500}
+#totop.show{opacity:1;pointer-events:auto}
+.cta:hover,.btn-outline:hover,.btn-contact:hover{background:var(--ac)!important;border-color:var(--ac)!important;color:#fff!important}
+.skill-tag{border-color:rgba(154,147,255,.45)!important}
+/* filtres projets */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.filters button{font:400 12px 'Manrope',sans-serif;color:#ddd;background:transparent;border:1px solid var(--line);border-radius:20px;padding:8px 14px;cursor:pointer;transition:.25s}
+.filters button:hover,.filters button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.project-card.hide{display:none}
+/* accueil */
+.hero{position:relative}#hero-canvas{position:absolute;inset:-40px -20px;width:calc(100% + 40px);height:calc(100% + 80px);z-index:-1;opacity:.55;pointer-events:none}
+.dispo{display:inline-flex;align-items:center;gap:10px;font:400 13px 'Manrope',sans-serif;border:1px solid var(--line);border-radius:30px;padding:8px 16px;margin:0 0 28px;color:#ddd}
+.dispo i{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 rgba(61,220,132,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}}
+.sec{max-width:1200px;margin:0 auto;padding:90px 4vw;border-top:1px solid var(--line)}
+.sec h2{font:400 clamp(34px,4.5vw,60px)/1.05 'Playfair Display',serif;margin:0 0 14px}
+.sec>p.sub{font:300 20px/1.5 'Cormorant Garamond',serif;color:#bbb;max-width:640px;margin:0 0 40px}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font:400 12px 'Manrope',sans-serif;color:#aaa;margin-bottom:30px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.s{background:var(--ac)}.u{background:#3ddc84}.l{background:#e6b422}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:26px;transition:.3s}
+.card:hover{border-color:var(--ac);transform:translateY(-4px)}
+.card h3{font:500 22px 'Playfair Display',serif;margin:0 0 6px}
+.card small{display:block;font:300 13px 'Manrope',sans-serif;color:#999;margin-bottom:18px}
+.badges{display:flex;flex-wrap:wrap;gap:8px}
+.badges span{font:400 12px 'Manrope',sans-serif;border:1px solid var(--line);border-radius:4px;padding:6px 10px}
+.timeline{border-left:1px solid var(--ac);padding-left:30px;max-width:820px}
+.timeline h3{font:500 26px 'Playfair Display',serif;margin:0}
+.timeline .when{font:400 13px 'Manrope',sans-serif;color:var(--ac2);margin:6px 0 16px}
+.timeline ul{margin:0;padding-left:18px;font:300 19px/1.6 'Cormorant Garamond',serif;color:#ccc;columns:2;column-gap:40px}
+.contact-row{display:flex;flex-wrap:wrap;gap:14px}
+@media(max-width:880px){.ods-nav{position:fixed;inset:60px 0 auto 0;flex-direction:column;background:rgba(8,8,8,.97);padding:24px;gap:20px;display:none}.ods-nav.open{display:flex}.ods-burger{display:block!important}.timeline ul{columns:1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#glow,#hero-canvas{display:none}}
+.cert{text-decoration:none;color:inherit;display:block}.cert img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border-radius:4px;margin-bottom:16px}.cert h3{font-size:18px!important;margin:0!important}
+</style>
 </head>
 <body>
 
@@ -197,32 +250,12 @@
 
   <div class="frame">
 
-    <header class="site-header" role="navigation" aria-label="Navigation principale">
-      <nav class="nav nav-left" aria-label="Gauche">
-        <a href="index.html">Home</a>
-        <a href="projets.html">Projets</a>
-      </nav>
-
-      <div class="logo" aria-label="Logo ODS">
-        <a href="index.html">
-          <img src="images/lg-ods.png" alt="logo ODS">
-        </a>
-      </div>
-
-      <div class="right-wrap">
-        <nav class="nav nav-right" aria-label="Droite">
-          <a href="apropos.html">À Propos</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-
-        <button class="hamburger" aria-label="Ouvrir le menu" id="hamburger">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </header>
+    <header class="ods-header"><a class="ods-logo" href="index.html">ODS.</a>
+<nav class="ods-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button id="theme" type="button" aria-label="Changer de thème">◐ Thème</button></nav>
+<button class="ods-burger ods-nav-btn" type="button" aria-label="Menu" style="background:none;border:0;color:#fff;cursor:pointer">☰</button></header>
 
     <main>
-      <section class="hero">
+      <section class="hero"><canvas id="hero-canvas" aria-hidden="true"></canvas><p class="dispo"><i></i>Disponible pour un stage dès le 22 février 2027</p>
         <h1>Oscar <span class="break">Da Silva</span></h1>
         <h2 class="typewriter">Je crée des expériences <span id="typing-text"></span></h2>
         <p class="lead">Je suis actuellement étudiant à l'université de Rouen Normandie, sur le campus d'Elbeuf, dans la formation BUT MMI en troisième année à la recherche d'un stage ou une alternance.</p>
@@ -230,12 +263,14 @@
         <div style="margin-top: 40px;">
           <a class="cta" href="projets.html">Voir les projets</a>
           <a class="cta" href="galerie.html">Voir ma galerie</a>
+<a class="cta" href="contact.html">Me contacter</a>
+<a class="cta" href="oscar_dasv_cv.pdf">Télécharger mon CV</a>
         </div>
       </section>
 
       <aside class="side" aria-label="Contact et portrait">
         <div class="portrait" aria-hidden="true">
-          <img src="images/Rectangle 3.png" alt="Portrait">
+          <img loading="lazy" src="images/Rectangle 3.png" alt="Portrait">
         </div>
 
         <div class="contact">
@@ -244,6 +279,16 @@
         </div>
       </aside>
     </main>
+<section class="sec" id="competences"><h2>Compétences techniques</h2><p class="sub">Chaque technologie indique où je l'ai réellement pratiquée.</p>
+<div class="legend"><span><i class="dot s"></i>Pratiqué en stage (Digiactif)</span><span><i class="dot u"></i>Utilisé en projet universitaire</span><span><i class="dot l"></i>En apprentissage</span></div><div class="cards"><article class="card"><h3>Front-End</h3><small>Interfaces et intégration</small><div class="badges"><span><i class="dot s"></i>HTML5</span><span><i class="dot s"></i>CSS3</span><span><i class="dot s"></i>JavaScript</span><span><i class="dot s"></i>Responsive Design</span><span><i class="dot s"></i>Animations CSS</span><span><i class="dot s"></i>Intégration de maquettes</span><span><i class="dot u"></i>Figma</span><span><i class="dot l"></i>React</span></div></article><article class="card"><h3>Back-End et intégration</h3><small>Logique applicative et données</small><div class="badges"><span><i class="dot u"></i>PHP</span><span><i class="dot u"></i>SQL</span><span><i class="dot s"></i>Formulaires HubSpot en JavaScript</span><span><i class="dot s"></i>Fichiers et templates du thème</span><span><i class="dot l"></i>API externes</span></div></article><article class="card"><h3>CMS et e-commerce</h3><small>Personnalisation de sites existants</small><div class="badges"><span><i class="dot s"></i>WordPress</span><span><i class="dot s"></i>PrestaShop</span><span><i class="dot s"></i>Smarty</span><span><i class="dot s"></i>HubSpot</span><span><i class="dot s"></i>Thèmes et pages personnalisées</span></div></article><article class="card"><h3>Outils et environnements</h3><small>Au quotidien</small><div class="badges"><span><i class="dot u"></i>VS Code</span><span><i class="dot u"></i>Git et GitHub</span><span><i class="dot u"></i>Figma</span><span><i class="dot u"></i>Adobe Creative Cloud</span><span><i class="dot u"></i>Canva</span><span><i class="dot u"></i>Notion</span><span><i class="dot u"></i>Trello</span><span><i class="dot u"></i>Excel</span></div></article><article class="card"><h3>SEO et optimisation</h3><small>Référencement naturel</small><div class="badges"><span><i class="dot s"></i>Audit technique</span><span><i class="dot s"></i>Balises Hn</span><span><i class="dot s"></i>Structure HTML</span><span><i class="dot s"></i>Maillage interne</span><span><i class="dot s"></i>Alt des images</span><span><i class="dot s"></i>Indexation</span></div></article></div></section>
+<section class="sec" id="experience"><h2>Expérience professionnelle</h2><p class="sub">Un stage de deux mois dans une agence digitale normande.</p>
+<div class="timeline"><h3>Digiactif — Stage en développement web</h3><p class="when">Avril à juin 2026 · deux mois</p><ul><li>Refonte de sites WordPress</li><li>Développement de pages PrestaShop</li><li>Intégration HTML/CSS</li><li>JavaScript</li><li>Smarty</li><li>HubSpot</li><li>Audits techniques et SEO</li><li>Travail sur maquettes et cahiers des charges</li></ul></div>
+<p style="margin-top:30px"><a class="cta" href="projets.html">Voir les projets associés</a></p></section>
+<section class="sec" id="formation"><h2>Formation</h2><div class="cards"><article class="card"><h3>BUT 3 MMI — Parcours Développement</h3><small>IUT de Rouen Normandie, campus d'Elbeuf</small><div class="badges"><span><i class="dot u"></i>Développement web</span><span><i class="dot u"></i>Intégration</span><span><i class="dot u"></i>Audiovisuel</span><span><i class="dot u"></i>UX/UI</span></div></article><article class="card"><h3>Bac STI2D</h3><small>ITEC et SIN</small><div class="badges"><span><i class="dot u"></i>Technique</span><span><i class="dot u"></i>Innovation</span></div></article></div></section>
+<section class="sec" id="certifications"><h2>Certifications</h2><p class="sub">Cliquez sur un certificat pour l'ouvrir en grand.</p><div class="cards"><a class="card cert" href="images/Refonte de sites WordPress - Digiactif.png" target="_blank" rel="noopener"><img loading="lazy" src="images/Refonte de sites WordPress - Digiactif.png" alt="Refonte de sites WordPress - Digiactif"><h3>Refonte de sites WordPress - Digiactif</h3></a><a class="card cert" href="images/Formation Prestashop - Digiactif.png" target="_blank" rel="noopener"><img loading="lazy" src="images/Formation Prestashop - Digiactif.png" alt="Formation Prestashop - Digiactif"><h3>Formation Prestashop - Digiactif</h3></a><a class="card cert" href="images/Certificat MATLAB - Matlab Project Helper.pdf" target="_blank" rel="noopener"><img loading="lazy" src="images/Certificat MATLAB - Matlab Project Helper.png" alt="Certificat MATLAB - Matlab Project Helper"><h3>Certificat MATLAB - Matlab Project Helper</h3></a></div></section>
+<section class="sec" id="veille"><h2>Veille et centres d'intérêt</h2><div class="badges"><span>Développement web</span><span>Nouvelles technologies</span><span>Intelligence artificielle</span><span>UX/UI Design</span><span>E-commerce</span><span>Culture numérique</span><span>Sport automobile et Formule 1</span></div></section>
+<section class="sec" id="contact-rapide"><h2>Travaillons ensemble</h2><p class="sub">Je recherche un stage en développement web / Full-Stack à partir du 22 février 2027, ainsi qu'une alternance.</p>
+<div class="contact-row"><a class="cta" href="contact.html">Me contacter</a><button class="cta" id="copyMail" data-mail="oscar.dsv4@gmail.com">Copier l'e-mail</button><a class="cta" target="_blank" rel="noopener" href="https://www.linkedin.com/in/oscar-da-silva-3b440b284/">LinkedIn</a><a class="cta" target="_blank" rel="noopener" href="https://github.com/oscar2223">GitHub</a><a class="cta" href="oscar_dasv_cv.pdf">Télécharger mon CV</a></div></section>
 
     <footer>
       <div>©2026 Oscar Da Silva</div>
@@ -318,9 +363,38 @@
     }
     if(textElement) type();
   </script>
+<script>
+(function(){
+const d=document,r=d.documentElement,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+try{const t=localStorage.getItem('ods-theme');if(t)r.dataset.theme=t}catch(e){}
+d.addEventListener('DOMContentLoaded',()=>{
+ const bar=d.createElement('div');bar.id='progress';d.body.append(bar);
+ const up=d.createElement('button');up.id='totop';up.setAttribute('aria-label','Retour en haut');up.textContent='↑';up.onclick=()=>scrollTo({top:0,behavior:rm?'auto':'smooth'});d.body.append(up);
+ addEventListener('scroll',()=>{const h=r.scrollHeight-innerHeight;bar.style.width=(h>0?scrollY/h*100:0)+'%';up.classList.toggle('show',scrollY>600)},{passive:true});
+ const nav=d.querySelector('.ods-nav'),bg=d.querySelector('.ods-burger');
+ bg&&bg.addEventListener('click',()=>{const o=nav.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
+ const here=location.pathname.split('/').pop()||'index.html';
+ d.querySelectorAll('.ods-nav a').forEach(a=>{if(a.getAttribute('href')===here)a.classList.add('on')});
+ const th=d.getElementById('theme');
+ th&&th.addEventListener('click',()=>{const n=r.dataset.theme==='light'?'dark':'light';r.dataset.theme=n;try{localStorage.setItem('ods-theme',n)}catch(e){}});
+ if(matchMedia('(pointer:fine)').matches&&!rm){const g=d.createElement('div');g.id='glow';d.body.append(g);addEventListener('mousemove',e=>{g.style.transform=`translate(${e.clientX}px,${e.clientY}px)`})}
+ // filtres projets
+ d.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  d.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  d.querySelectorAll('.project-card').forEach(c=>c.classList.toggle('hide',b.dataset.f!=='all'&&!c.dataset.cat.split(' ').includes(b.dataset.f)))}));
+ // copie e-mail
+ const cp=d.getElementById('copyMail');
+ cp&&cp.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(cp.dataset.mail);cp.textContent='Adresse copiée ✓'}catch(e){cp.textContent=cp.dataset.mail}setTimeout(()=>cp.textContent="Copier l'e-mail",2200)});
+ // apparition des sections accueil
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none';io.unobserve(e.target)}}),{threshold:.1});
+ d.querySelectorAll('.sec .card,.sec .timeline').forEach(el=>{if(rm)return;el.style.cssText='opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s';io.observe(el)});
+ // canvas hero léger (desktop seulement)
+ const cv=d.getElementById('hero-canvas');
+ if(cv&&!rm&&innerWidth>880){const c=cv.getContext('2d');let m={x:-999,y:-999},W,H;
+  const rs=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight};rs();addEventListener('resize',rs);
+  cv.parentElement.addEventListener('mousemove',e=>{const b=cv.getBoundingClientRect();m={x:e.clientX-b.left,y:e.clientY-b.top}});
+  (function f(){c.clearRect(0,0,W,H);for(let x=20;x<W;x+=36)for(let y=20;y<H;y+=36){const k=Math.max(0,1-Math.hypot(x-m.x,y-m.y)/160);c.fillStyle=`rgba(154,147,255,${.12+k*.8})`;c.beginPath();c.arc(x,y,1+k*2.4,0,7);c.fill()}requestAnimationFrame(f)})()}
+});})();
+</script>
 </body>
 </html>
-
-
-
-
