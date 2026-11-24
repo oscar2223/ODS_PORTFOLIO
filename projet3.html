@@ -228,165 +228,62 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#glow,#hero-canvas{display:none}}
 .cert{text-decoration:none;color:inherit;display:block}.cert img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border-radius:4px;margin-bottom:16px}.cert h3{font-size:18px!important;margin:0!important}
 </style>
+<style>
+.pg{max-width:1400px;margin:0 auto;padding:130px 4vw 90px}
+.pg .big-title{font-size:clamp(48px,7vw,96px);margin:0 0 20px;letter-spacing:-2px}
+.pg .project-meta{flex-direction:row;flex-wrap:wrap;gap:12px 48px;border-left:0;padding:0;margin:0 0 56px}
+.pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:40px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:32px;padding:26px;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35);cursor:pointer;transition:.35s;animation:pcIn .8s both;animation-delay:calc(var(--i)*.08s)}
+.pc:hover{transform:translateY(-6px);border-color:var(--ac)}
+.pc-frame{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:22px;padding:20px;height:317px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.pc-label{font:500 16px 'Manrope',sans-serif;color:#9a9aa5}
+.pc-frame img{width:100%;flex:1;min-height:0;object-fit:cover;object-position:top;border-radius:10px;background:#fff}
+.pc-frame .badges{align-content:flex-start}
+.pc-title{font:700 26px/1.2 'Manrope',sans-serif;letter-spacing:-.5px;margin:28px 0 14px}
+.pc-desc{font:400 18px/1.6 'Manrope',sans-serif;color:#b9b9c2;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:24px}
+.pc-desc p,.pc-desc li{display:inline;margin:0;font:inherit;color:inherit}
+.pc-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:center;gap:14px;font:500 15px 'Manrope',sans-serif}
+.pc-tech{color:#9a9aa5}.pc-more{background:none;border:0;color:#fff;font:inherit;cursor:pointer}
+@keyframes pcIn{from{opacity:0;transform:translateY(30px)}}
+#dlg{width:min(1000px,92vw);max-height:88vh;background:#0e0e11;color:#eaeaea;border:1px solid var(--line);border-radius:24px;padding:36px}
+#dlg::backdrop{background:rgba(0,0,0,.8)}
+#dlg .x{position:sticky;top:0;float:right;background:var(--ac);color:#fff;border:0;border-radius:20px;padding:8px 16px;cursor:pointer;font:500 13px 'Manrope',sans-serif}
+#dlg h2{font:700 32px 'Manrope',sans-serif;margin:0 0 18px}
+#dlg .dd p,#dlg .dd li{font:300 21px/1.6 'Cormorant Garamond',serif;color:#ddd}
+.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:26px}
+.dg img{width:100%;border-radius:8px;border:1px solid var(--line)}.dg figcaption{font:400 13px 'Manrope',sans-serif;color:#aaa;margin-top:6px}.dg a{color:var(--ac2)}
+@media(max-width:880px){.pg-grid{grid-template-columns:1fr}.pc-frame{height:260px}}
+</style>
 </head>
 <body>
 
   <div class="noise-overlay"></div>
 
   <header class="ods-header"><a class="ods-logo" href="index.html">ODS.</a>
-<nav class="ods-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button id="theme" type="button" aria-label="Changer de thème">◐ Thème</button></nav>
-<button class="ods-burger ods-nav-btn" type="button" aria-label="Menu" style="background:none;border:0;color:#fff;cursor:pointer">☰</button></header>
+<nav aria-label="Navigation principale" class="ods-nav"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button aria-label="Changer de thème" id="theme" type="button">◐ Thème</button></nav>
+<button aria-label="Menu" class="ods-burger ods-nav-btn" style="background:none;border:0;color:#fff;cursor:pointer" type="button">☰</button></header>
 
-  <main class="content">
-    
-    <div class="left-col">
-      <div class="sticky-wrapper">
-        <h1 class="big-title">
-          Production Audiovisuelle
-        </h1>
-        
-        <div class="project-meta js-scroll">
-          <div class="meta-item">
-            <strong>Rôle</strong>
-            Réalisation, Montage & Bande son
+  <main class="pg"><h1 class="big-title">Production Audiovisuelle</h1><div class="project-meta">
+<div class="meta-item">
+<strong>Rôle</strong>
+            Réalisation, Montage &amp; Bande son
           </div>
-          <div class="meta-item">
-            <strong>Contexte</strong>
+<div class="meta-item">
+<strong>Contexte</strong>
             BUT MMI - 2024
           </div>
-          <div class="meta-item">
-            <strong>Outils</strong>
-            Premiere Pro, Audition & After Effects 
+<div class="meta-item">
+<strong>Outils</strong>
+            Premiere Pro, Audition &amp; After Effects 
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="right-col">
-      
-      <div class="text-block js-scroll">
-        <h3>Storytelling & Montage</h3>
-        <p>Dans le cadre de la <strong>SAE 104</strong>, j’ai développé mes compétences en structuration de message audiovisuel. Pour le concours <em>Green Awards</em>, j'ai pris en charge l'intégralité de la chaîne de production, avec l'écriture du rythme, montage dynamique, et traitement sonore et visuel sous Premiere Pro (étalonnage, transitions, titrage).</p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left" id="prevBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-          
-          <div class="slider-stage">
-            <div class="slides" id="slides">
-              <div class="slide">
-                <a href="https://youtu.be/FTqoGqJZ0Lo?si=IBb5pH857giQg3Im" target="_blank">
-                    <img loading="lazy" src="images/FILMNOIR.jpg" alt="Affiche Film Noir">
-                    <div class="slide-caption">Cliquez pour voir : Court-métrage Film Noir</div>
-                </a>
-              </div>
-              <div class="slide">
-                <a href="https://youtu.be/HKato-Owr9U" target="_blank">
-                    <img loading="lazy" src="images/interview.png" alt="Interview Vidéo">
-                    <div class="slide-caption">Cliquez pour voir : Interview Maison Sport Santé</div>
-                </a>
-              </div>
-              <div class="slide">
-                <a href="https://youtu.be/kFdugk7YmxY" target="_blank">
-                    <img loading="lazy" src="images/film-crescendo.PNG" alt="Interview Vidéo">
-                    <div class="slide-caption">Cliquez pour voir : Film Crescendo </div>
-                </a>
-              </div>
-              <div class="slide">
-                <a href="https://youtube.com/shorts/2DjwlXRqOIc" target="_blank">
-                    <img loading="lazy" src="images/reel.png" alt="Reel Vidéo">
-                    <div class="slide-caption">Cliquez pour voir : Reel</div>
-                </a>
-              </div>
-              <div class="slide">
-                <a href="https://youtube.com/shorts/a_qAHawnlUk" target="_blank">
-                    <img loading="lazy" src="images/motion.png" alt="Motion Design Vidéo">
-                    <div class="slide-caption">Cliquez pour voir : Motion Design</div>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <button class="arrow arrow-right" id="nextBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="text-block js-scroll">
-        <h3>Montage & Son</h3>
-        <p>En <strong>audiovisuel</strong>, nous avons acquis de nombreuses compétences en réalisant des courts-métrages, notamment des films noirs et des films à crescendo. Grâce à des logiciels tels qu’Adobe Premiere Pro et Adobe Audition, j’ai réalisé le montage, le mixage audio et l’étalonnage de mes productions.</p>
-      </div>
-
-      <div class="text-block js-scroll">
-        <h3>Compétences Techniques</h3>
-        <div class="skills-grid">
-          <span class="skill-tag">Adobe Premiere Pro</span>
-          <span class="skill-tag">Montage Vidéo</span>
-          <span class="skill-tag">Mixage Son</span>
-          <span class="skill-tag">Motion Design</span>
-        </div>
-      </div>
-
-      <div class="nav-buttons-row js-scroll">
-        <button class="btn-outline" id="prevProject">← Projet Précédent</button>
-        <button class="btn-outline" id="nextProject">Projet Suivant →</button>
-        <a href="projets.html" class="btn-outline">Retour au Portfolio</a>
-      </div>
-
-    </div>
-  </main>
+</div><div class="pg-grid"><article class="pc" style="--i:0" tabindex="0"><div class="pc-frame"><span class="pc-label">SAE 104</span><img loading="lazy" src="images/FILMNOIR.jpg" alt="Storytelling & Montage"></div><h2 class="pc-title">Storytelling & Montage</h2><div class="pc-desc"><p>Dans le cadre de la <strong>SAE 104</strong>, j’ai développé mes compétences en structuration de message audiovisuel. Pour le concours <em>Green Awards</em>, j'ai pris en charge l'intégralité de la chaîne de production, avec l'écriture du rythme, montage dynamique, et traitement sonore et visuel sous Premiere Pro (étalonnage, transitions, titrage).</p></div><div class="pc-foot"><span class="pc-tech">Premiere Pro</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Storytelling & Montage</h2><div class="dd"><p>Dans le cadre de la <strong>SAE 104</strong>, j’ai développé mes compétences en structuration de message audiovisuel. Pour le concours <em>Green Awards</em>, j'ai pris en charge l'intégralité de la chaîne de production, avec l'écriture du rythme, montage dynamique, et traitement sonore et visuel sous Premiere Pro (étalonnage, transitions, titrage).</p><div class="badges"></div></div><div class="dg"><figure><a href="https://youtu.be/FTqoGqJZ0Lo?si=IBb5pH857giQg3Im" target="_blank" rel="noopener"><img loading="lazy" src="images/FILMNOIR.jpg" alt="Cliquez pour voir : Court-métrage Film Noir"></a><figcaption>Cliquez pour voir : Court-métrage Film Noir — <a href="https://youtu.be/FTqoGqJZ0Lo?si=IBb5pH857giQg3Im" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://youtu.be/HKato-Owr9U" target="_blank" rel="noopener"><img loading="lazy" src="images/interview.png" alt="Cliquez pour voir : Interview Maison Sport Santé"></a><figcaption>Cliquez pour voir : Interview Maison Sport Santé — <a href="https://youtu.be/HKato-Owr9U" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://youtu.be/kFdugk7YmxY" target="_blank" rel="noopener"><img loading="lazy" src="images/film-crescendo.PNG" alt="Cliquez pour voir : Film Crescendo"></a><figcaption>Cliquez pour voir : Film Crescendo — <a href="https://youtu.be/kFdugk7YmxY" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://youtube.com/shorts/2DjwlXRqOIc" target="_blank" rel="noopener"><img loading="lazy" src="images/reel.png" alt="Cliquez pour voir : Reel"></a><figcaption>Cliquez pour voir : Reel — <a href="https://youtube.com/shorts/2DjwlXRqOIc" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://youtube.com/shorts/a_qAHawnlUk" target="_blank" rel="noopener"><img loading="lazy" src="images/motion.png" alt="Cliquez pour voir : Motion Design"></a><figcaption>Cliquez pour voir : Motion Design — <a href="https://youtube.com/shorts/a_qAHawnlUk" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:1" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - 2024</span><div class="badges"></div></div><h2 class="pc-title">Montage & Son</h2><div class="pc-desc"><p>En <strong>audiovisuel</strong>, nous avons acquis de nombreuses compétences en réalisant des courts-métrages, notamment des films noirs et des films à crescendo. Grâce à des logiciels tels qu’Adobe Premiere Pro et Adobe Audition, j’ai réalisé le montage, le mixage audio et l’étalonnage de mes productions.</p></div><div class="pc-foot"><span class="pc-tech">Premiere Pro • Audition</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Montage & Son</h2><div class="dd"><p>En <strong>audiovisuel</strong>, nous avons acquis de nombreuses compétences en réalisant des courts-métrages, notamment des films noirs et des films à crescendo. Grâce à des logiciels tels qu’Adobe Premiere Pro et Adobe Audition, j’ai réalisé le montage, le mixage audio et l’étalonnage de mes productions.</p><div class="badges"></div></div><div class="dg"></div></div></article><article class="pc" style="--i:2" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - 2024</span><div class="badges"><span class="skill-tag">Adobe Premiere Pro</span><span class="skill-tag">Montage Vidéo</span><span class="skill-tag">Mixage Son</span><span class="skill-tag">Motion Design</span></div></div><h2 class="pc-title">Compétences Techniques</h2><div class="pc-desc"></div><div class="pc-foot"><span class="pc-tech">Adobe Premiere Pro • Montage Vidéo • Mixage Son • Motion Design</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Compétences Techniques</h2><div class="dd"><div class="badges"><span class="skill-tag">Adobe Premiere Pro</span><span class="skill-tag">Montage Vidéo</span><span class="skill-tag">Mixage Son</span><span class="skill-tag">Motion Design</span></div></div><div class="dg"></div></div></article></div><div class="nav-buttons-row"><a class="btn-outline" href="projet2.html">← Projet Précédent</a><a class="btn-outline" href="projet4.html">Projet Suivant →</a><a class="btn-outline" href="projets.html">Retour au Portfolio</a></div></main><dialog id="dlg"><button class="x" type="button">Fermer ✕</button><div id="dbody"></div></dialog>
 
   <footer>
     <div>© 2026 Oscar Da Silva</div>
     <div><a href="contact.html">Contact</a></div>
   </footer>
 
-  <script>
-    
-  document.addEventListener("DOMContentLoaded", function() {
-    // 1. Animation au Scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
-
-    // 2. Slider Logic
-    const slidesEl = document.getElementById('slides');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const slides = Array.from(slidesEl.querySelectorAll('.slide'));
-    const total = slides.length;
-    let index = 0;
-    let timer = null;
-
-    function goTo(i){
-      index = (i + total) % total;
-      slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
-    }
-
-    if(prevBtn) prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
-    if(nextBtn) nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
-
-    function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
-    function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
-
-    const stage = document.querySelector('.slider-stage');
-    if(stage){
-      stage.addEventListener('mouseenter', stopAuto);
-      stage.addEventListener('mouseleave', startAuto);
-    }
-    startAuto();
-
- document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
-      document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
-    });
-</script>
+  
 <script>
 (function(){
 const d=document,r=d.documentElement,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -419,6 +316,11 @@ d.addEventListener('DOMContentLoaded',()=>{
   cv.parentElement.addEventListener('mousemove',e=>{const b=cv.getBoundingClientRect();m={x:e.clientX-b.left,y:e.clientY-b.top}});
   (function f(){c.clearRect(0,0,W,H);for(let x=20;x<W;x+=36)for(let y=20;y<H;y+=36){const k=Math.max(0,1-Math.hypot(x-m.x,y-m.y)/160);c.fillStyle=`rgba(154,147,255,${.12+k*.8})`;c.beginPath();c.arc(x,y,1+k*2.4,0,7);c.fill()}requestAnimationFrame(f)})()}
 });})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{const d=document.getElementById('dlg'),b=document.getElementById('dbody');
+document.querySelectorAll('.pc').forEach(c=>{const o=()=>{b.innerHTML=c.querySelector('.pc-detail').innerHTML;d.showModal()};c.addEventListener('click',o);c.addEventListener('keydown',e=>{if(e.key==='Enter')o()})});
+d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('x'))d.close()})});
 </script>
 </body>
 </html>
