@@ -298,255 +298,97 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#glow,#hero-canvas{display:none}}
 .cert{text-decoration:none;color:inherit;display:block}.cert img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border-radius:4px;margin-bottom:16px}.cert h3{font-size:18px!important;margin:0!important}
 </style>
+<style>
+.pg{max-width:1400px;margin:0 auto;padding:130px 4vw 90px}
+.pg .big-title{font-size:clamp(48px,7vw,96px);margin:0 0 20px;letter-spacing:-2px}
+.pg .project-meta{flex-direction:row;flex-wrap:wrap;gap:12px 48px;border-left:0;padding:0;margin:0 0 56px}
+.pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:40px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:32px;padding:26px;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35);cursor:pointer;transition:.35s;animation:pcIn .8s both;animation-delay:calc(var(--i)*.08s)}
+.pc:hover{transform:translateY(-6px);border-color:var(--ac)}
+.pc-frame{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:22px;padding:20px;height:317px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.pc-label{font:500 16px 'Manrope',sans-serif;color:#9a9aa5}
+.pc-frame img{width:100%;flex:1;min-height:0;object-fit:cover;object-position:top;border-radius:10px;background:#fff}
+.pc-frame .badges{align-content:flex-start}
+.pc-title{font:700 26px/1.2 'Manrope',sans-serif;letter-spacing:-.5px;margin:28px 0 14px}
+.pc-desc{font:400 18px/1.6 'Manrope',sans-serif;color:#b9b9c2;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:24px}
+.pc-desc p,.pc-desc li{display:inline;margin:0;font:inherit;color:inherit}
+.pc-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:center;gap:14px;font:500 15px 'Manrope',sans-serif}
+.pc-tech{color:#9a9aa5}.pc-more{background:none;border:0;color:#fff;font:inherit;cursor:pointer}
+@keyframes pcIn{from{opacity:0;transform:translateY(30px)}}
+#dlg{width:min(1000px,92vw);max-height:88vh;background:#0e0e11;color:#eaeaea;border:1px solid var(--line);border-radius:24px;padding:36px}
+#dlg::backdrop{background:rgba(0,0,0,.8)}
+#dlg .x{position:sticky;top:0;float:right;background:var(--ac);color:#fff;border:0;border-radius:20px;padding:8px 16px;cursor:pointer;font:500 13px 'Manrope',sans-serif}
+#dlg h2{font:700 32px 'Manrope',sans-serif;margin:0 0 18px}
+#dlg .dd p,#dlg .dd li{font:300 21px/1.6 'Cormorant Garamond',serif;color:#ddd}
+.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:26px}
+.dg img{width:100%;border-radius:8px;border:1px solid var(--line)}.dg figcaption{font:400 13px 'Manrope',sans-serif;color:#aaa;margin-top:6px}.dg a{color:var(--ac2)}
+@media(max-width:880px){.pg-grid{grid-template-columns:1fr}.pc-frame{height:260px}}
+</style>
 </head>
 <body>
 
   <div class="noise-overlay"></div>
 
   <header class="ods-header"><a class="ods-logo" href="index.html">ODS.</a>
-<nav class="ods-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button id="theme" type="button" aria-label="Changer de thème">◐ Thème</button></nav>
-<button class="ods-burger ods-nav-btn" type="button" aria-label="Menu" style="background:none;border:0;color:#fff;cursor:pointer">☰</button></header>
+<nav aria-label="Navigation principale" class="ods-nav"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button aria-label="Changer de thème" id="theme" type="button">◐ Thème</button></nav>
+<button aria-label="Menu" class="ods-burger ods-nav-btn" style="background:none;border:0;color:#fff;cursor:pointer" type="button">☰</button></header>
 
-  <main class="content">
-    
-    <div class="left-col">
-      <div class="sticky-wrapper">
-        <h1 class="big-title">
-          Marketing & Identité
-        </h1>
-        
-        <div class="project-meta js-scroll">
-          <div class="meta-item">
-            <strong>Rôle</strong>
-            Marketing Digital & Stratégie Marketing
+  <main class="pg"><h1 class="big-title">Marketing & Identité</h1><div class="project-meta">
+<div class="meta-item">
+<strong>Rôle</strong>
+            Marketing Digital &amp; Stratégie Marketing
           </div>
-          <div class="meta-item">
-            <strong>Contexte</strong>
+<div class="meta-item">
+<strong>Contexte</strong>
             BUT MMI - Projet Formation / Stage Digiactif
           </div>
-          <div class="meta-item">
-            <strong>Outils</strong>
+<div class="meta-item">
+<strong>Outils</strong>
             Figma, Canva, Notion, Trello, Prestashop, Yoast SEO, SEObserver, Divi Builder
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="right-col">
-      
-      <div class="text-block js-scroll">
-        <h3>L'Expérience</h3>
-        <p>Au cours d'un projet de formation, nous avons réalisé la refonte de l'identité visuelle d'une startup spécialisée dans la vente d'espaces publicitaires, nommée <strong>SOL AGENCIES</strong>. </p>
-        <p style="margin-top:20px;">
-          Nous avons conçu la charte graphique complète, incluant le logo et ses déclinaisons (noir & blanc, monochrome), ainsi qu'une bannière YouTube et un interstitiel mobile, le tout en respectant un cahier des charges strict.
-        </p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left" id="prevBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-          
-          <div class="slider-stage">
-            <div class="slides" id="slides">
-              <div class="slide">
-                <img loading="lazy" src="images/logo-marketing.png" alt="Logo SOL AGENCIES" data-caption="Logo principal SOL AGENCIES">
-                <div class="slide-caption">Logo principal SOL AGENCIES</div>
-              </div>
-              <div class="slide">
-                <img loading="lazy" src="images/logoversionnoir-mark.png" alt="Déclinaisons Logo" data-caption="Versions N&B et Monochrome">
-                <div class="slide-caption">Versions N&B et Monochrome</div>
-              </div>
-              <div class="slide">
-                <img loading="lazy" src="images/BANNIEREYOUT.png" alt="Bannière YouTube" data-caption="Design de bannière publicitaire">
-                <div class="slide-caption">Design de bannière YouTube</div>
-              </div>
-              <div class="slide">
-                <img loading="lazy" src="images/INTERMOBILE.png" alt="Interstitiel mobile" data-caption="Format publicitaire mobile">
-                <div class="slide-caption">Interstitiel mobile</div>
-              </div>
-            </div>
-          </div>
-
-          <button class="arrow arrow-right" id="nextBtn" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="text-block js-scroll">
-        <h3>Gestion & Outils</h3>
-        <p>
+</div><div class="pg-grid"><article class="pc" style="--i:0" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - Projet Formation / Stage Digiactif</span><img loading="lazy" src="images/logo-marketing.png" alt="L'Expérience"></div><h2 class="pc-title">L'Expérience</h2><div class="pc-desc"><p>Au cours d'un projet de formation, nous avons réalisé la refonte de l'identité visuelle d'une startup spécialisée dans la vente d'espaces publicitaires, nommée <strong>SOL AGENCIES</strong>. </p><p style="margin-top:20px;">
+          Nous avons conçu la charte graphique complète, incluant le logo et ses déclinaisons (noir &amp; blanc, monochrome), ainsi qu'une bannière YouTube et un interstitiel mobile, le tout en respectant un cahier des charges strict.
+        </p></div><div class="pc-foot"><span class="pc-tech">BUT MMI - Projet Formation / Stage Digiactif</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>L'Expérience</h2><div class="dd"><p>Au cours d'un projet de formation, nous avons réalisé la refonte de l'identité visuelle d'une startup spécialisée dans la vente d'espaces publicitaires, nommée <strong>SOL AGENCIES</strong>. </p><p style="margin-top:20px;">
+          Nous avons conçu la charte graphique complète, incluant le logo et ses déclinaisons (noir &amp; blanc, monochrome), ainsi qu'une bannière YouTube et un interstitiel mobile, le tout en respectant un cahier des charges strict.
+        </p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/logo-marketing.png" alt="Logo principal SOL AGENCIES"><figcaption>Logo principal SOL AGENCIES</figcaption></figure><figure><img loading="lazy" src="images/logoversionnoir-mark.png" alt="Versions N&B et Monochrome"><figcaption>Versions N&B et Monochrome</figcaption></figure><figure><img loading="lazy" src="images/BANNIEREYOUT.png" alt="Design de bannière YouTube"><figcaption>Design de bannière YouTube</figcaption></figure><figure><img loading="lazy" src="images/INTERMOBILE.png" alt="Interstitiel mobile"><figcaption>Interstitiel mobile</figcaption></figure></div></div></article><article class="pc" style="--i:1" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - Projet Formation / Stage Digiactif</span><div class="badges"></div></div><h2 class="pc-title">Gestion & Outils</h2><div class="pc-desc"><p>
           Pour mener à bien ce projet, j'ai utilisé divers outils de gestion pour l'organisation et le suivi des échéances (diagramme de Gantt), ainsi que <strong>Notion</strong> et <strong>Trello</strong> pour la collaboration en équipe et la répartition des tâches. 
-        </p>
-      </div>
-
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
-
-      <div class="text-block js-scroll">
-        <h3>1. Marketing Digital & E-commerce</h3>
-        <p>
+        </p></div><div class="pc-foot"><span class="pc-tech">Notion • Trello</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Gestion & Outils</h2><div class="dd"><p>
+          Pour mener à bien ce projet, j'ai utilisé divers outils de gestion pour l'organisation et le suivi des échéances (diagramme de Gantt), ainsi que <strong>Notion</strong> et <strong>Trello</strong> pour la collaboration en équipe et la répartition des tâches. 
+        </p><div class="badges"></div></div><div class="dg"></div></div></article><article class="pc" style="--i:2" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - Projet Formation / Stage Digiactif</span><img loading="lazy" src="images/marketing-digital.PNG" alt="1. Marketing Digital & E-commerce"></div><h2 class="pc-title">1. Marketing Digital & E-commerce</h2><div class="pc-desc"><p>
             Durant mon cursus, j’ai acquis des compétences en marketing digital en concevant un site e-commerce sous PrestaShop. Le projet illustre une mise en œuvre complète : options de paramétrage, parcours client et intégration technique.
-        </p>
-        
-        <div class="project-card">
-            <a href="https://delauhu1.tpweb.univ-rouen.fr/Prestashop/2-accueil" target="_blank" rel="noopener noreferrer">
-                <img loading="lazy" src="images/marketing-digital.PNG" alt="Site e-commerce Prestashop">
-            </a>
-            <a href="https://delauhu1.tpweb.univ-rouen.fr/Prestashop/2-accueil" target="_blank" class="caption-link">Voir le site en ligne →</a>
-        </div>
-      </div>
-
-      <div class="text-block js-scroll">
-        <h3>2. Identité Visuelle - Seine Marathon</h3>
-        <p>
+        </p></div><div class="pc-foot"><span class="pc-tech">PrestaShop</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>1. Marketing Digital & E-commerce</h2><div class="dd"><p>
+            Durant mon cursus, j’ai acquis des compétences en marketing digital en concevant un site e-commerce sous PrestaShop. Le projet illustre une mise en œuvre complète : options de paramétrage, parcours client et intégration technique.
+        </p><div class="badges"></div></div><div class="dg"><figure><a href="https://delauhu1.tpweb.univ-rouen.fr/Prestashop/2-accueil" target="_blank" rel="noopener"><img loading="lazy" src="images/marketing-digital.PNG" alt="Site e-commerce Prestashop"></a><figcaption>Site e-commerce Prestashop — <a href="https://delauhu1.tpweb.univ-rouen.fr/Prestashop/2-accueil" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:3" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - Projet Formation / Stage Digiactif</span><img loading="lazy" src="images/image-marathon.jpeg" alt="2. Identité Visuelle - Seine Marathon"></div><h2 class="pc-title">2. Identité Visuelle - Seine Marathon</h2><div class="pc-desc"><p>
            Création d'une identité visuelle impactante pour le Seine-Marathon 76. 
           L'objectif était de dynamiser l'image de l'événement à travers des supports de communication print et web.
-        </p>
-        <div class="project-card">
-            <img loading="lazy" src="images/image-marathon.jpeg" alt="Image Marathon" style="max-height: 500px; object-fit: contain;">
-        </div>
-      </div>
-
-      <div class="text-block js-scroll">
-        <h3>3. Prototypage UI/UX (Figma)</h3>
-        <p>
+        </p></div><div class="pc-foot"><span class="pc-tech">BUT MMI - Projet Formation / Stage Digiactif</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>2. Identité Visuelle - Seine Marathon</h2><div class="dd"><p>
+           Création d'une identité visuelle impactante pour le Seine-Marathon 76. 
+          L'objectif était de dynamiser l'image de l'événement à travers des supports de communication print et web.
+        </p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/image-marathon.jpeg" alt="Image Marathon"><figcaption>Image Marathon</figcaption></figure></div></div></article><article class="pc" style="--i:4" tabindex="0"><div class="pc-frame"><span class="pc-label">SAE 301</span><img loading="lazy" src="images/wireframe-maritime.PNG" alt="3. Prototypage UI/UX (Figma)"></div><h2 class="pc-title">3. Prototypage UI/UX (Figma)</h2><div class="pc-desc"><p>
             Dans le cadre de la SAE 301, notre équipe (agence simulée) a répondu à un appel d'offre pour le prototypage complet de la plateforme Seine Maritime 76. Nous avons conçu des interfaces mobile (bénévoles) et desktop (organisateurs) en respectant l'identité graphique existante.
-        </p>
-        
-        <div class="mini-grid">
-            <a href="https://www.figma.com/design/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=0-1&p=f&t=IZVnZttlLC0Gsgls-0" target="_blank">
-                <img loading="lazy" src="images/wireframe-maritime.PNG" alt="Affiche Wireframes App">
-                <div class="grid-caption">Wireframes</div>
-            </a>
-            <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=57-26&p=f&t=wt4HFq37VXBnHyWy-1&scaling=min-zoom&content-scaling=fixed&page-id=11%3A2&starting-point-node-id=57%3A26" target="_blank">
-                <img loading="lazy" src="images/Seine-Marathon 76-1.jpg" alt="Maquette Mobile">
-                <div class="grid-caption">Maquette Mobile</div>
-            </a>
-            <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=123-63&t=97YAb5VIGgJ80A48-0&scaling=scale-down&content-scaling=fixed&page-id=11%3A3&starting-point-node-id=123%3A63" target="_blank">
-                <img loading="lazy" src="images/Seine-Marathon 76-2.jpg" alt="Maquette Desktop">
-                <div class="grid-caption">Maquette Desktop</div>
-            </a>
-         
-        </div>
-      </div>
-
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
-
-      <div class="text-block js-scroll">
-        <h3>4. Audit Technique SEO & Performance</h3>
-        <p>
+        </p></div><div class="pc-foot"><span class="pc-tech">Figma</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>3. Prototypage UI/UX (Figma)</h2><div class="dd"><p>
+            Dans le cadre de la SAE 301, notre équipe (agence simulée) a répondu à un appel d'offre pour le prototypage complet de la plateforme Seine Maritime 76. Nous avons conçu des interfaces mobile (bénévoles) et desktop (organisateurs) en respectant l'identité graphique existante.
+        </p><div class="badges"></div></div><div class="dg"><figure><a href="https://www.figma.com/design/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=0-1&p=f&t=IZVnZttlLC0Gsgls-0" target="_blank" rel="noopener"><img loading="lazy" src="images/wireframe-maritime.PNG" alt="Wireframes"></a><figcaption>Wireframes — <a href="https://www.figma.com/design/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=0-1&p=f&t=IZVnZttlLC0Gsgls-0" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=57-26&p=f&t=wt4HFq37VXBnHyWy-1&scaling=min-zoom&content-scaling=fixed&page-id=11%3A2&starting-point-node-id=57%3A26" target="_blank" rel="noopener"><img loading="lazy" src="images/Seine-Marathon 76-1.jpg" alt="Maquette Mobile"></a><figcaption>Maquette Mobile — <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=57-26&p=f&t=wt4HFq37VXBnHyWy-1&scaling=min-zoom&content-scaling=fixed&page-id=11%3A2&starting-point-node-id=57%3A26" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=123-63&t=97YAb5VIGgJ80A48-0&scaling=scale-down&content-scaling=fixed&page-id=11%3A3&starting-point-node-id=123%3A63" target="_blank" rel="noopener"><img loading="lazy" src="images/Seine-Marathon 76-2.jpg" alt="Maquette Desktop"></a><figcaption>Maquette Desktop — <a href="https://www.figma.com/proto/XcBGWi9Sx2IdF28ALdhwfy/Maquette-R301?node-id=123-63&t=97YAb5VIGgJ80A48-0&scaling=scale-down&content-scaling=fixed&page-id=11%3A3&starting-point-node-id=123%3A63" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:5" tabindex="0"><div class="pc-frame"><span class="pc-label">Stage Digiactif</span><img loading="lazy" src="images/audit-digiactif1.png" alt="4. Audit Technique SEO & Performance"></div><h2 class="pc-title">4. Audit Technique SEO & Performance</h2><div class="pc-desc"><p>
             Dans le cadre de mon stage chez <strong>Digiactif</strong>, j'ai réalisé plusieurs audits techniques et SEO, sous forme de rapports écrits et de vidéos d'analyse.
-        </p>
-        <p style="margin-top:20px;">
+        </p><p style="margin-top:20px;">
             Le premier audit porte sur le site <strong>digiactif.fr</strong> lui-même : 41 problèmes ont été identifiés (visuels comme techniques : structure SEO, référencement, balisage) et classés selon trois niveaux de priorité.
-        </p>
-
-        <div class="priority-tags">
-          <span class="priority-tag major">Majeur</span>
-          <span class="priority-tag medium">Moyen</span>
-          <span class="priority-tag light">Léger</span>
-        </div>
-
-        <div class="mini-grid">
-            <div class="grid-item">
-                <img loading="lazy" src="images/audit-digiactif1.png" alt="Audit technique digiactif.fr - vue 1">
-                <div class="grid-caption">Audit digiactif.fr — Priorité Majeure</div>
-            </div>
-            <div class="grid-item">
-                <img loading="lazy" src="images/audit-digiactif2.png" alt="Audit technique digiactif.fr - vue 2">
-                <div class="grid-caption">Audit digiactif.fr — Priorité Moyenne</div>
-            </div>
-            <div class="grid-item">
-                <img loading="lazy" src="images/audit-digiactif3.png" alt="Audit technique digiactif.fr - vue 3">
-                <div class="grid-caption">Audit digiactif.fr — Priorité Légère</div>
-            </div>
-        </div>
-
-        <p style="margin-top:10px;">
+        </p><p style="margin-top:10px;">
             Pour cinq sites e-commerce clients, j'ai ensuite réalisé des audits techniques directement en vidéo sur <strong>Loom</strong>, en analysant le balisage Hn (accueil, catégorie, produit), l'hébergement, et l'unicité des chemins de maillage interne. Cliquez sur une vignette pour visionner l'audit vidéo correspondant.
-        </p>
-
-        <div class="mini-grid">
-            <a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener noreferrer">
-                <img loading="lazy" src="images/httpsjfg3d.comfr.png" alt="Audit vidéo jfg3d.com">
-                <div class="grid-caption">jfg3d.com — Audit vidéo</div>
-            </a>
-            <a href="https://www.loom.com/share/0628b72deba64d8fa9a01e62dafcaa09" target="_blank" rel="noopener noreferrer">
-                <img loading="lazy" src="images/gamingroomconcept.com.png" alt="Audit vidéo gamingroomconcept.com">
-                <div class="grid-caption">gamingroomconcept.com — Audit vidéo</div>
-            </a>
-            <a href="https://www.loom.com/share/6f1b18c5d99f4cf6aa4077c6e9eae057" target="_blank" rel="noopener noreferrer">
-                <img loading="lazy" src="images/choup-art.fr.png" alt="Audit vidéo choup-art.fr">
-                <div class="grid-caption">choup-art.fr — Audit vidéo</div>
-            </a>
-            <a href="https://www.loom.com/share/d787c1e8b3e044e194929dc58f16a66e" target="_blank" rel="noopener noreferrer">
-                <img loading="lazy" src="images/eshopcommerce.png" alt="Audit vidéo eshop.ecomesure.com">
-                <div class="grid-caption">eshop.ecomesure.com — Audit vidéo</div>
-            </a>
-            <a href="https://www.loom.com/share/f3c68347b78143ed886ceb927a7f3acc" target="_blank" rel="noopener noreferrer">
-                <img loading="lazy" src="images/kindofcrin.fr.png" alt="Audit vidéo kindofcrin.fr">
-                <div class="grid-caption">kindofcrin.fr — Audit vidéo</div>
-            </a>
-        </div>
-      </div>
-
-      <div class="text-block js-scroll">
-        <h3>5. Référencement SEO sur WordPress</h3>
-        <p>
+        </p></div><div class="pc-foot"><span class="pc-tech">Stage Digiactif</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>4. Audit Technique SEO & Performance</h2><div class="dd"><p>
+            Dans le cadre de mon stage chez <strong>Digiactif</strong>, j'ai réalisé plusieurs audits techniques et SEO, sous forme de rapports écrits et de vidéos d'analyse.
+        </p><p style="margin-top:20px;">
+            Le premier audit porte sur le site <strong>digiactif.fr</strong> lui-même : 41 problèmes ont été identifiés (visuels comme techniques : structure SEO, référencement, balisage) et classés selon trois niveaux de priorité.
+        </p><p style="margin-top:10px;">
+            Pour cinq sites e-commerce clients, j'ai ensuite réalisé des audits techniques directement en vidéo sur <strong>Loom</strong>, en analysant le balisage Hn (accueil, catégorie, produit), l'hébergement, et l'unicité des chemins de maillage interne. Cliquez sur une vignette pour visionner l'audit vidéo correspondant.
+        </p><div class="badges"></div></div><div class="dg"><figure><a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener"><img loading="lazy" src="images/audit-digiactif1.png" alt="Audit digiactif.fr — Priorité Majeure"></a><figcaption>Audit digiactif.fr — Priorité Majeure — <a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener"><img loading="lazy" src="images/audit-digiactif2.png" alt="Audit digiactif.fr — Priorité Moyenne"></a><figcaption>Audit digiactif.fr — Priorité Moyenne — <a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener"><img loading="lazy" src="images/audit-digiactif3.png" alt="Audit digiactif.fr — Priorité Légère"></a><figcaption>Audit digiactif.fr — Priorité Légère — <a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener"><img loading="lazy" src="images/httpsjfg3d.comfr.png" alt="jfg3d.com — Audit vidéo"></a><figcaption>jfg3d.com — Audit vidéo — <a href="https://www.loom.com/share/b2b3d9a2236947f8b96dbf50d39e1db3" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.loom.com/share/0628b72deba64d8fa9a01e62dafcaa09" target="_blank" rel="noopener"><img loading="lazy" src="images/gamingroomconcept.com.png" alt="gamingroomconcept.com — Audit vidéo"></a><figcaption>gamingroomconcept.com — Audit vidéo — <a href="https://www.loom.com/share/0628b72deba64d8fa9a01e62dafcaa09" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.loom.com/share/6f1b18c5d99f4cf6aa4077c6e9eae057" target="_blank" rel="noopener"><img loading="lazy" src="images/choup-art.fr.png" alt="choup-art.fr — Audit vidéo"></a><figcaption>choup-art.fr — Audit vidéo — <a href="https://www.loom.com/share/6f1b18c5d99f4cf6aa4077c6e9eae057" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.loom.com/share/d787c1e8b3e044e194929dc58f16a66e" target="_blank" rel="noopener"><img loading="lazy" src="images/eshopcommerce.png" alt="eshop.ecomesure.com — Audit vidéo"></a><figcaption>eshop.ecomesure.com — Audit vidéo — <a href="https://www.loom.com/share/d787c1e8b3e044e194929dc58f16a66e" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.loom.com/share/f3c68347b78143ed886ceb927a7f3acc" target="_blank" rel="noopener"><img loading="lazy" src="images/kindofcrin.fr.png" alt="kindofcrin.fr — Audit vidéo"></a><figcaption>kindofcrin.fr — Audit vidéo — <a href="https://www.loom.com/share/f3c68347b78143ed886ceb927a7f3acc" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:6" tabindex="0"><div class="pc-frame"><span class="pc-label">Stage Digiactif</span><img loading="lazy" src="images/mots.png" alt="5. Référencement SEO sur WordPress"></div><h2 class="pc-title">5. Référencement SEO sur WordPress</h2><div class="pc-desc"><p>
             Toujours chez Digiactif, j'ai travaillé sur le référencement naturel de sites <strong>WordPress</strong> clients : recherche de mots-clés et suivi via <strong>Google Sheets</strong>, optimisation des méta-données, des slugs et des titres SEO avec <strong>Yoast SEO</strong>, analyse de positionnement avec <strong>SEObserver</strong>, et vérification de la hiérarchie des titres (Hn) grâce à l'extension <strong>HeadingsMap</strong>.
-        </p>
-        <p style="margin-top:20px;">
+        </p><p style="margin-top:20px;">
             J'ai également créé des pages de blog complètes sous <strong>Divi Builder</strong>, avec 10 articles rédigés par site, chacun d'environ 800 mots et optimisé pour le SEO en fonction du domaine du client.
-        </p>
-
-        <div class="mini-grid">
-            <div class="grid-item">
-                <img loading="lazy" src="images/mots.png" alt="Recherche de mots-clés Google Sheets">
-                <div class="grid-caption">Recherche de mots-clés (Google Sheets)</div>
-            </div>
-            <div class="grid-item">
-                <img loading="lazy" src="images/seobserver.png" alt="Analyse SEObserver">
-                <div class="grid-caption">Analyse de positionnement (SEObserver)</div>
-            </div>
-            <div class="grid-item">
-                <img loading="lazy" src="images/titrages.png" alt="Structure des titres HeadingsMap">
-                <div class="grid-caption">Structure des titres (HeadingsMap)</div>
-            </div>
-            <div class="grid-item">
-                <img loading="lazy" src="images/seo.png" alt="Optimisation Yoast SEO">
-                <div class="grid-caption">Optimisation Yoast SEO</div>
-            </div>
-            <div class="grid-item">
-                <img loading="lazy" src="images/articles.png" alt="Rédaction d'articles de blog Divi">
-                <div class="grid-caption">Articles de blog (Divi Builder)</div>
-            </div>
-        </div>
-      </div>
-      
-      <div class="text-block js-scroll">
-        <h3>Compétences Techniques</h3>
-        <div class="skills-grid">
-          <span class="skill-tag">Figma</span>
-          <span class="skill-tag">Prestashop</span>
-          <span class="skill-tag">Marketing Digital</span>
-          <span class="skill-tag">Gestion de Projet</span>
-          <span class="skill-tag">Audit SEO Technique</span>
-          <span class="skill-tag">Yoast SEO</span>
-          <span class="skill-tag">SEObserver</span>
-          <span class="skill-tag">Divi Builder</span>
-        </div>
-      </div>
-
-      <div class="nav-buttons-row js-scroll">
-        <button class="btn-outline" id="prevProject">← Projet Précédent</button>
-        <button class="btn-outline" id="nextProject">Projet Suivant →</button>
-        <a href="projets.html" class="btn-outline">Retour au Portfolio</a>
-      </div>
-
-    </div>
-  </main>
+        </p></div><div class="pc-foot"><span class="pc-tech">WordPress • Yoast SEO • Divi Builder</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>5. Référencement SEO sur WordPress</h2><div class="dd"><p>
+            Toujours chez Digiactif, j'ai travaillé sur le référencement naturel de sites <strong>WordPress</strong> clients : recherche de mots-clés et suivi via <strong>Google Sheets</strong>, optimisation des méta-données, des slugs et des titres SEO avec <strong>Yoast SEO</strong>, analyse de positionnement avec <strong>SEObserver</strong>, et vérification de la hiérarchie des titres (Hn) grâce à l'extension <strong>HeadingsMap</strong>.
+        </p><p style="margin-top:20px;">
+            J'ai également créé des pages de blog complètes sous <strong>Divi Builder</strong>, avec 10 articles rédigés par site, chacun d'environ 800 mots et optimisé pour le SEO en fonction du domaine du client.
+        </p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/mots.png" alt="Recherche de mots-clés (Google Sheets)"><figcaption>Recherche de mots-clés (Google Sheets)</figcaption></figure><figure><img loading="lazy" src="images/seobserver.png" alt="Analyse de positionnement (SEObserver)"><figcaption>Analyse de positionnement (SEObserver)</figcaption></figure><figure><img loading="lazy" src="images/titrages.png" alt="Structure des titres (HeadingsMap)"><figcaption>Structure des titres (HeadingsMap)</figcaption></figure><figure><img loading="lazy" src="images/seo.png" alt="Optimisation Yoast SEO"><figcaption>Optimisation Yoast SEO</figcaption></figure><figure><img loading="lazy" src="images/articles.png" alt="Articles de blog (Divi Builder)"><figcaption>Articles de blog (Divi Builder)</figcaption></figure></div></div></article><article class="pc" style="--i:7" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - Projet Formation / Stage Digiactif</span><div class="badges"><span class="skill-tag">Figma</span><span class="skill-tag">Prestashop</span><span class="skill-tag">Marketing Digital</span><span class="skill-tag">Gestion de Projet</span><span class="skill-tag">Audit SEO Technique</span><span class="skill-tag">Yoast SEO</span><span class="skill-tag">SEObserver</span><span class="skill-tag">Divi Builder</span></div></div><h2 class="pc-title">Compétences Techniques</h2><div class="pc-desc"></div><div class="pc-foot"><span class="pc-tech">Figma • Prestashop • Marketing Digital • Gestion de Projet</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Compétences Techniques</h2><div class="dd"><div class="badges"><span class="skill-tag">Figma</span><span class="skill-tag">Prestashop</span><span class="skill-tag">Marketing Digital</span><span class="skill-tag">Gestion de Projet</span><span class="skill-tag">Audit SEO Technique</span><span class="skill-tag">Yoast SEO</span><span class="skill-tag">SEObserver</span><span class="skill-tag">Divi Builder</span></div></div><div class="dg"></div></div></article></div><div class="nav-buttons-row"><a class="btn-outline" href="projet3.html">← Projet Précédent</a><a class="btn-outline" href="projets.html">Projet Suivant →</a><a class="btn-outline" href="projets.html">Retour au Portfolio</a></div></main><dialog id="dlg"><button class="x" type="button">Fermer ✕</button><div id="dbody"></div></dialog>
 
   <footer>
     <div>© 2026 Oscar Da Silva</div>
@@ -566,121 +408,7 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
     </div>
   </div>
 
-  <script>
-     document.addEventListener("DOMContentLoaded", function() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
-
-      const slidesEl = document.getElementById('slides');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      
-      if(slidesEl && prevBtn && nextBtn) {
-          const slides = Array.from(slidesEl.querySelectorAll('.slide'));
-          const total = slides.length;
-          let index = 0;
-          let timer = null;
-
-          function goTo(i){
-            index = (i + total) % total;
-            slidesEl.style.transform = `translateX(${ -index * 100 }%)`;
-          }
-
-          prevBtn.addEventListener('click', ()=> { goTo(index - 1); stopAuto(); });
-          nextBtn.addEventListener('click', ()=> { goTo(index + 1); stopAuto(); });
-
-          function startAuto(){ if(!timer) timer = setInterval(()=> goTo(index+1), 5000); }
-          function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
-
-          const stage = document.querySelector('.slider-stage');
-          if(stage){
-            stage.addEventListener('mouseenter', stopAuto);
-            stage.addEventListener('mouseleave', startAuto);
-          }
-          startAuto();
-      }
-
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightboxImage');
-      const lbClose = document.getElementById('lightboxClose');
-      const lbPrev = document.getElementById('lightboxPrev');
-      const lbNext = document.getElementById('lightboxNext');
-      
-      let currentGroupImages = []; 
-      let currentLbIndex = 0;
-
-      function openLightbox(clickedImg) {
-        const container = clickedImg.closest('.slider-section, .mini-grid, .project-card');
-        
-        if (container) {
-          currentGroupImages = Array.from(container.querySelectorAll('img'));
-          
-          currentLbIndex = currentGroupImages.indexOf(clickedImg);
-          
-          updateLightboxImage();
-          lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        }
-      }
-
-      function updateLightboxImage() {
-        if(currentGroupImages.length > 0) {
-          lbImg.src = currentGroupImages[currentLbIndex].src;
-        }
-      }
-
-      function nextLbImage() {
-        if(currentGroupImages.length === 0) return;
-        currentLbIndex = (currentLbIndex + 1) % currentGroupImages.length;
-        updateLightboxImage();
-      }
-
-      function prevLbImage() {
-        if(currentGroupImages.length === 0) return;
-        currentLbIndex = (currentLbIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
-        updateLightboxImage();
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        currentGroupImages = [];
-      }
-
-      document.querySelectorAll('.right-col img:not([src*="svg"])').forEach(img => {
-        img.addEventListener('click', (e) => {
-           if(img.parentElement.tagName === 'A') return;
-           
-           e.stopPropagation();
-           openLightbox(img);
-        });
-      });
-
-      // Contrôles Lightbox
-      if(lbClose) lbClose.addEventListener('click', closeLightbox);
-      if(lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); nextLbImage(); });
-      if(lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); prevLbImage(); });
-      
-      lightbox.addEventListener('click', (e) => { 
-          if(e.target === lightbox) closeLightbox();
-      });
-
-      document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active')) {
-            if(e.key === 'Escape') closeLightbox();
-            if(e.key === 'ArrowRight') nextLbImage();
-            if(e.key === 'ArrowLeft') prevLbImage();
-        }
-      });
-
-      document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet3.html'; });
-      document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet1.html'; });
-    });
-  </script>
+  
 <script>
 (function(){
 const d=document,r=d.documentElement,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -713,6 +441,11 @@ d.addEventListener('DOMContentLoaded',()=>{
   cv.parentElement.addEventListener('mousemove',e=>{const b=cv.getBoundingClientRect();m={x:e.clientX-b.left,y:e.clientY-b.top}});
   (function f(){c.clearRect(0,0,W,H);for(let x=20;x<W;x+=36)for(let y=20;y<H;y+=36){const k=Math.max(0,1-Math.hypot(x-m.x,y-m.y)/160);c.fillStyle=`rgba(154,147,255,${.12+k*.8})`;c.beginPath();c.arc(x,y,1+k*2.4,0,7);c.fill()}requestAnimationFrame(f)})()}
 });})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{const d=document.getElementById('dlg'),b=document.getElementById('dbody');
+document.querySelectorAll('.pc').forEach(c=>{const o=()=>{b.innerHTML=c.querySelector('.pc-detail').innerHTML;d.showModal()};c.addEventListener('click',o);c.addEventListener('keydown',e=>{if(e.key==='Enter')o()})});
+d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('x'))d.close()})});
 </script>
 </body>
 </html>
