@@ -242,6 +242,13 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
 @media(max-width:880px){.ods-nav{position:fixed;inset:60px 0 auto 0;flex-direction:column;background:rgba(8,8,8,.97);padding:24px;gap:20px;display:none}.ods-nav.open{display:flex}.ods-burger{display:block!important}.timeline ul{columns:1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#glow,#hero-canvas{display:none}}
 .cert{text-decoration:none;color:inherit;display:block}.cert img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border-radius:4px;margin-bottom:16px}.cert h3{font-size:18px!important;margin:0!important}
+.cert{cursor:zoom-in}
+/* lightbox certifications */
+.lightbox{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.lightbox.active{opacity:1;pointer-events:auto}
+.lightbox img{max-width:min(94vw,1200px);max-height:78vh;width:auto;height:auto;object-fit:contain;background:#fff;border-radius:4px;box-shadow:0 10px 50px rgba(0,0,0,.6)}
+.lightbox-caption{font:400 14px 'Manrope',sans-serif;color:#ddd;text-align:center;margin:0}
+.lightbox .cta{margin:0;cursor:pointer}
 </style>
 </head>
 <body>
@@ -285,7 +292,7 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
 <div class="timeline"><h3>Digiactif — Stage en développement web</h3><p class="when">Avril à juin 2026 · deux mois</p><ul><li>Refonte de sites WordPress</li><li>Développement de pages PrestaShop</li><li>Intégration HTML/CSS</li><li>JavaScript</li><li>Smarty</li><li>HubSpot</li><li>Audits techniques et SEO</li><li>Travail sur maquettes et cahiers des charges</li></ul></div>
 <p style="margin-top:30px"><a class="cta" href="projets.html">Voir les projets associés</a></p></section>
 <section class="sec" id="formation"><h2>Formation</h2><div class="cards"><article class="card"><h3>BUT 3 MMI — Parcours Développement</h3><small>IUT de Rouen Normandie, campus d'Elbeuf</small><div class="badges"><span><i class="dot u"></i>Développement web</span><span><i class="dot u"></i>Intégration</span><span><i class="dot u"></i>Audiovisuel</span><span><i class="dot u"></i>UX/UI</span></div></article><article class="card"><h3>Bac STI2D</h3><small>ITEC et SIN</small><div class="badges"><span><i class="dot u"></i>Technique</span><span><i class="dot u"></i>Innovation</span></div></article></div></section>
-<section class="sec" id="certifications"><h2>Certifications</h2><p class="sub">Cliquez sur un certificat pour l'ouvrir en grand.</p><div class="cards"><a class="card cert" href="images/certificat1.png" target="_blank" rel="noopener"><img loading="lazy" src="images/certificat1.png" alt="Refonte de sites WordPress - Digiactif"><h3>Refonte de sites WordPress - Digiactif</h3></a><a class="card cert" href="images/certificat2.png" target="_blank" rel="noopener"><img loading="lazy" src="images/certificat2.png" alt="Formation Prestashop - Digiactif"><h3>Formation Prestashop - Digiactif</h3></a><a class="card cert" href="images/matlab.png" target="_blank" rel="noopener"><img loading="lazy" src="images/matlab.png" alt="Certificat MATLAB - Matlab Project Helper"><h3>Certificat MATLAB - Matlab Project Helper</h3></a></div></section>
+<section class="sec" id="certifications"><h2>Certifications</h2><p class="sub">Cliquez sur un certificat pour l'ouvrir en grand.</p><div class="cards"><a class="card cert" href="images/certificat1.png" data-title="Refonte de sites WordPress - Digiactif"><img loading="lazy" src="images/certificat1.png" alt="Refonte de sites WordPress - Digiactif"><h3>Refonte de sites WordPress - Digiactif</h3></a><a class="card cert" href="images/certificat2.png" data-title="Formation Prestashop - Digiactif"><img loading="lazy" src="images/certificat2.png" alt="Formation Prestashop - Digiactif"><h3>Formation Prestashop - Digiactif</h3></a><a class="card cert" href="images/matlab.png" data-title="Certificat MATLAB - Matlab Project Helper"><img loading="lazy" src="images/matlab.png" alt="Certificat MATLAB - Matlab Project Helper"><h3>Certificat MATLAB - Matlab Project Helper</h3></a></div></section>
 <section class="sec" id="veille"><h2>Veille et centres d'intérêt</h2><div class="badges"><span>Développement web</span><span>Nouvelles technologies</span><span>Intelligence artificielle</span><span>UX/UI Design</span><span>E-commerce</span><span>Culture numérique</span><span>Sport automobile et Formule 1</span></div></section>
 <section class="sec" id="contact-rapide"><h2>Travaillons ensemble</h2><p class="sub">Je recherche un stage en développement web / Full-Stack à partir du 22 février 2027, ainsi qu'une alternance.</p>
 <div class="contact-row"><a class="cta" href="contact.html">Me contacter</a><a class="cta" target="_blank" rel="noopener" href="https://www.linkedin.com/in/oscar-da-silva-3b440b284/">LinkedIn</a><a class="cta" target="_blank" rel="noopener" href="https://github.com/oscar2223">GitHub</a><a class="cta" href="oscar_dasv_cv.pdf">Télécharger mon CV</a></div></section>
@@ -316,6 +323,12 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
     <a href="apropos.html">À Propos</a>
     <a href="contact.html">Contact</a>
     <button id="closeOverlay" class="cta" style="margin-top:30px; border-color:#fff;">Fermer</button>
+  </div>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Aperçu du certificat" aria-hidden="true">
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+    <button id="lightbox-close" class="cta" type="button">Fermer</button>
   </div>
 
   <script>
@@ -388,6 +401,28 @@ d.addEventListener('DOMContentLoaded',()=>{
  // apparition des sections accueil
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none';io.unobserve(e.target)}}),{threshold:.1});
  d.querySelectorAll('.sec .card,.sec .timeline').forEach(el=>{if(rm)return;el.style.cssText='opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s';io.observe(el)});
+ // lightbox certifications (bouton Fermer, Échap, clic sur le fond)
+ const lb=d.getElementById('lightbox'),lbImg=d.getElementById('lightbox-img'),lbCap=d.getElementById('lightbox-caption'),lbClose=d.getElementById('lightbox-close');
+ let lastFocus=null;
+ const openLb=a=>{
+  lastFocus=a;
+  const im=a.querySelector('img');
+  lbImg.src=a.getAttribute('href');
+  lbImg.alt=im?im.alt:'';
+  lbCap.textContent=a.dataset.title||'';
+  lb.classList.add('active');lb.setAttribute('aria-hidden','false');
+  d.body.style.overflow='hidden';
+  lbClose.focus();
+ };
+ const closeLb=()=>{
+  lb.classList.remove('active');lb.setAttribute('aria-hidden','true');
+  d.body.style.overflow='';
+  lastFocus&&lastFocus.focus();
+ };
+ d.querySelectorAll('.cert').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openLb(a)}));
+ lbClose.addEventListener('click',closeLb);
+ lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+ d.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('active'))closeLb()});
  // canvas hero léger (desktop seulement)
  const cv=d.getElementById('hero-canvas');
  if(cv&&!rm&&innerWidth>880){const c=cv.getContext('2d');let m={x:-999,y:-999},W,H;
