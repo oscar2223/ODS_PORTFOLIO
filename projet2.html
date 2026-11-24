@@ -304,184 +304,75 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#glow,#hero-canvas{display:none}}
 .cert{text-decoration:none;color:inherit;display:block}.cert img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border-radius:4px;margin-bottom:16px}.cert h3{font-size:18px!important;margin:0!important}
 </style>
+<style>
+.pg{max-width:1400px;margin:0 auto;padding:130px 4vw 90px}
+.pg .big-title{font-size:clamp(48px,7vw,96px);margin:0 0 20px;letter-spacing:-2px}
+.pg .project-meta{flex-direction:row;flex-wrap:wrap;gap:12px 48px;border-left:0;padding:0;margin:0 0 56px}
+.pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:40px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:32px;padding:26px;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35);cursor:pointer;transition:.35s;animation:pcIn .8s both;animation-delay:calc(var(--i)*.08s)}
+.pc:hover{transform:translateY(-6px);border-color:var(--ac)}
+.pc-frame{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:22px;padding:20px;height:317px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.pc-label{font:500 16px 'Manrope',sans-serif;color:#9a9aa5}
+.pc-frame img{width:100%;flex:1;min-height:0;object-fit:cover;object-position:top;border-radius:10px;background:#fff}
+.pc-frame .badges{align-content:flex-start}
+.pc-title{font:700 26px/1.2 'Manrope',sans-serif;letter-spacing:-.5px;margin:28px 0 14px}
+.pc-desc{font:400 18px/1.6 'Manrope',sans-serif;color:#b9b9c2;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:24px}
+.pc-desc p,.pc-desc li{display:inline;margin:0;font:inherit;color:inherit}
+.pc-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:center;gap:14px;font:500 15px 'Manrope',sans-serif}
+.pc-tech{color:#9a9aa5}.pc-more{background:none;border:0;color:#fff;font:inherit;cursor:pointer}
+@keyframes pcIn{from{opacity:0;transform:translateY(30px)}}
+#dlg{width:min(1000px,92vw);max-height:88vh;background:#0e0e11;color:#eaeaea;border:1px solid var(--line);border-radius:24px;padding:36px}
+#dlg::backdrop{background:rgba(0,0,0,.8)}
+#dlg .x{position:sticky;top:0;float:right;background:var(--ac);color:#fff;border:0;border-radius:20px;padding:8px 16px;cursor:pointer;font:500 13px 'Manrope',sans-serif}
+#dlg h2{font:700 32px 'Manrope',sans-serif;margin:0 0 18px}
+#dlg .dd p,#dlg .dd li{font:300 21px/1.6 'Cormorant Garamond',serif;color:#ddd}
+.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:26px}
+.dg img{width:100%;border-radius:8px;border:1px solid var(--line)}.dg figcaption{font:400 13px 'Manrope',sans-serif;color:#aaa;margin-top:6px}.dg a{color:var(--ac2)}
+@media(max-width:880px){.pg-grid{grid-template-columns:1fr}.pc-frame{height:260px}}
+</style>
 </head>
 <body>
 
   <div class="noise-overlay"></div>
 
   <header class="ods-header"><a class="ods-logo" href="index.html">ODS.</a>
-<nav class="ods-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button id="theme" type="button" aria-label="Changer de thème">◐ Thème</button></nav>
-<button class="ods-burger ods-nav-btn" type="button" aria-label="Menu" style="background:none;border:0;color:#fff;cursor:pointer">☰</button></header>
+<nav aria-label="Navigation principale" class="ods-nav"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button aria-label="Changer de thème" id="theme" type="button">◐ Thème</button></nav>
+<button aria-label="Menu" class="ods-burger ods-nav-btn" style="background:none;border:0;color:#fff;cursor:pointer" type="button">☰</button></header>
 
-  <main class="content">
-    
-    <div class="left-col">
-      <div class="sticky-wrapper">
-        <h1 class="big-title">
-          Scénographie & Graphisme
-        </h1>
-        
-        <div class="project-meta js-scroll">
-          <div class="meta-item">
-            <strong>Rôle</strong>
-            Direction Artistique & Graphisme
+  <main class="pg"><h1 class="big-title">Scénographie & Graphisme</h1><div class="project-meta">
+<div class="meta-item">
+<strong>Rôle</strong>
+            Direction Artistique &amp; Graphisme
           </div>
-          <div class="meta-item">
-            <strong>Contexte</strong>
+<div class="meta-item">
+<strong>Contexte</strong>
             BUT MMI - 2024 / Stage Digiactif
           </div>
-          <div class="meta-item">
-            <strong>Outils</strong>
+<div class="meta-item">
+<strong>Outils</strong>
             Photoshop, Illustrator, InDesign, Canva
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="right-col">
-      
-      <div class="text-block js-scroll">
-        <h3>Maîtrise des Outils Graphiques</h3>
-        <p>Dans le cadre de la ressource <strong>R109</strong>, j’ai perfectionné ma maîtrise de la suite Adobe. J'ai appris à concevoir des visuels impactants en travaillant la composition, la gestion de la lumière et la colorimétrie.</p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left btn-prev" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-          
-          <div class="slider-stage">
-            <div class="slides">
-              <div class="slide">
-                <img loading="lazy" src="images/photo-moi.PNG" alt="Photographies" data-caption="Travail Photographique & Retouche">
-                <div class="slide-caption">Travail Photographique & Retouche</div>
-              </div>
-              <div class="slide">
-                <img loading="lazy" src="images/créa-1.PNG" alt="Photographies" data-caption="Création Visuelle 1">
-                <div class="slide-caption">Création Visuelle & Retouche</div>
-              </div>
-              <div class="slide">
-                <img loading="lazy" src="images/photo-créa.PNG" alt="Photographies" data-caption="Création Visuelle 2">
-                <div class="slide-caption">Composition Graphique</div>
-              </div>
-            </div>
-          </div>
-
-          <button class="arrow arrow-right btn-next" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-        </div>
-      </div>
-
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
-
-      <div class="text-block js-scroll">
-        <h3>Scénographie Immersive</h3>
-        <p>
+</div><div class="pg-grid"><article class="pc" style="--i:0" tabindex="0"><div class="pc-frame"><span class="pc-label">R109</span><img loading="lazy" src="images/photo-moi.PNG" alt="Maîtrise des Outils Graphiques"></div><h2 class="pc-title">Maîtrise des Outils Graphiques</h2><div class="pc-desc"><p>Dans le cadre de la ressource <strong>R109</strong>, j’ai perfectionné ma maîtrise de la suite Adobe. J'ai appris à concevoir des visuels impactants en travaillant la composition, la gestion de la lumière et la colorimétrie.</p></div><div class="pc-foot"><span class="pc-tech">R109</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Maîtrise des Outils Graphiques</h2><div class="dd"><p>Dans le cadre de la ressource <strong>R109</strong>, j’ai perfectionné ma maîtrise de la suite Adobe. J'ai appris à concevoir des visuels impactants en travaillant la composition, la gestion de la lumière et la colorimétrie.</p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/photo-moi.PNG" alt="Travail Photographique & Retouche"><figcaption>Travail Photographique & Retouche</figcaption></figure><figure><img loading="lazy" src="images/créa-1.PNG" alt="Création Visuelle & Retouche"><figcaption>Création Visuelle & Retouche</figcaption></figure><figure><img loading="lazy" src="images/photo-créa.PNG" alt="Composition Graphique"><figcaption>Composition Graphique</figcaption></figure></div></div></article><article class="pc" style="--i:1" tabindex="0"><div class="pc-frame"><span class="pc-label">SAE 202</span><img loading="lazy" src="images/artchatrgraphpartie1.png" alt="Scénographie Immersive"></div><h2 class="pc-title">Scénographie Immersive</h2><div class="pc-desc"><p>
           Pour la <strong>SAE 202</strong>, j’ai conçu l'identité visuelle et la scénographie de <em>La Cité Drap’hier</em>. Il s'agit d'une expérience immersive située au Palais des Drapiers d’Elbeuf.
-        </p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="slider-wrap">
-          <button class="arrow arrow-left btn-prev" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-          
-          <div class="slider-stage">
-            <div class="slides">
-              <div class="slide">
-                <img loading="lazy" src="images/artchatrgraphpartie1.png" alt="Charte Graphique">
-                <div class="slide-caption">Éléments de la Charte Graphique</div>
-              </div>
-              <div class="slide">
-                <img loading="lazy" src="images/artchatregrap.png" alt="Univers Scénographique">
-                <div class="slide-caption">Univers Visuel & Scénographie</div>
-              </div>
-            </div>
-          </div>
-
-          <button class="arrow arrow-right btn-next" type="button">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
-          </button>
-        </div>
-      </div>
-
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
-
-      <div class="text-block js-scroll">
-        <h3>Reproduction Éditoriale sous InDesign</h3>
-        <p>
+        </p></div><div class="pc-foot"><span class="pc-tech">SAE 202</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Scénographie Immersive</h2><div class="dd"><p>
+          Pour la <strong>SAE 202</strong>, j’ai conçu l'identité visuelle et la scénographie de <em>La Cité Drap’hier</em>. Il s'agit d'une expérience immersive située au Palais des Drapiers d’Elbeuf.
+        </p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/artchatrgraphpartie1.png" alt="Éléments de la Charte Graphique"><figcaption>Éléments de la Charte Graphique</figcaption></figure><figure><img loading="lazy" src="images/artchatregrap.png" alt="Univers Visuel & Scénographie"><figcaption>Univers Visuel & Scénographie</figcaption></figure></div></div></article><article class="pc" style="--i:2" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - 2024 / Stage Digiactif</span><img loading="lazy" src="images/beauté.png" alt="Reproduction Éditoriale sous InDesign"></div><h2 class="pc-title">Reproduction Éditoriale sous InDesign</h2><div class="pc-desc"><p>
           Exercice de reproduction fidèle d'une page de mode/beauté au format <strong>A4</strong> sous <strong>Adobe InDesign</strong>. L'objectif était de retranscrire à l'identique le gabarit d'origine : mise en place des <em>fonds perdus</em> et des repères de coupe, respect de la grille de mise en page, positionnement et proportions exactes de chaque élément (typographie, visuels, blocs de texte) afin de restituer fidèlement la hiérarchie visuelle et l'équilibre de la composition d'origine.
-        </p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="page-frame">
-          <img loading="lazy" src="images/beauté.png" alt="Reproduction page mode/beauté InDesign" data-caption="Reproduction Page Mode/Beauté — Format A4">
-          <div class="slide-caption">Reproduction Page Mode/Beauté — Format A4</div>
-        </div>
-      </div>
-
-      <div class="text-block js-scroll">
-        <p>
+        </p><p>
           Ce travail est venu compléter mes compétences en direction artistique, au-delà de la création graphique, j'ai développé une lecture technique de la mise en page, de la gestion des marges et fonds perdus jusqu'à la préparation d'un fichier prêt pour l'impression, en cohérence avec mon travail de charte graphique et de scénographie mené sur les projets Adobe Photoshop et Illustrator.
-        </p>
-      </div>
-
-      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
-
-      <div class="text-block js-scroll">
-        <h3>Community Management — Resto Classic Car</h3>
-        <p>
+        </p></div><div class="pc-foot"><span class="pc-tech">Photoshop • Illustrator • InDesign</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Reproduction Éditoriale sous InDesign</h2><div class="dd"><p>
+          Exercice de reproduction fidèle d'une page de mode/beauté au format <strong>A4</strong> sous <strong>Adobe InDesign</strong>. L'objectif était de retranscrire à l'identique le gabarit d'origine : mise en place des <em>fonds perdus</em> et des repères de coupe, respect de la grille de mise en page, positionnement et proportions exactes de chaque élément (typographie, visuels, blocs de texte) afin de restituer fidèlement la hiérarchie visuelle et l'équilibre de la composition d'origine.
+        </p><p>
+          Ce travail est venu compléter mes compétences en direction artistique, au-delà de la création graphique, j'ai développé une lecture technique de la mise en page, de la gestion des marges et fonds perdus jusqu'à la préparation d'un fichier prêt pour l'impression, en cohérence avec mon travail de charte graphique et de scénographie mené sur les projets Adobe Photoshop et Illustrator.
+        </p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/beauté.png" alt="Reproduction Page Mode/Beauté — Format A4"><figcaption>Reproduction Page Mode/Beauté — Format A4</figcaption></figure></div></div></article><article class="pc" style="--i:3" tabindex="0"><div class="pc-frame"><span class="pc-label">Stage Digiactif</span><img loading="lazy" src="images/post1.png" alt="Community Management — Resto Classic Car"></div><h2 class="pc-title">Community Management — Resto Classic Car</h2><div class="pc-desc"><p>
           Durant mon stage chez <strong>Digiactif</strong>, j'ai créé du contenu de <strong>community management</strong> pour <em>Resto Classic Car</em>, une entreprise spécialisée dans la restauration automobile <strong>Citroën</strong>. Sur des sujets libres, j'ai conçu plus de <strong>20 affiches</strong> au format carré <strong>1:1</strong>, pensées pour une diffusion sur <strong>Facebook</strong>.
-        </p>
-        <p style="margin-top:20px;">
+        </p><p style="margin-top:20px;">
           Chaque visuel a été travaillé pour rester cohérent avec l'univers de la marque (teintes, typographie, mise en avant des véhicules restaurés) tout en s'adaptant aux codes visuels des réseaux sociaux.
-        </p>
-      </div>
-
-      <div class="slider-section js-scroll">
-        <div class="social-grid">
-          <div class="social-item">
-            <img loading="lazy" src="images/post1.png" alt="Post Facebook Resto Classic Car - 1">
-            <div class="social-caption">Post Facebook — Resto Classic Car</div>
-          </div>
-          <div class="social-item">
-            <img loading="lazy" src="images/post2.png" alt="Post Facebook Resto Classic Car - 2">
-            <div class="social-caption">Post Facebook — Resto Classic Car</div>
-          </div>
-          <div class="social-item">
-            <img loading="lazy" src="images/post3.png" alt="Post Facebook Resto Classic Car - 3">
-            <div class="social-caption">Post Facebook — Resto Classic Car</div>
-          </div>
-        </div>
-        <div class="more-note">+ de 20 affiches créées au total</div>
-      </div>
-
-      <div class="text-block js-scroll">
-        <h3>Compétences Techniques</h3>
-        <div class="skills-grid">
-          <span class="skill-tag">Adobe Photoshop</span>
-          <span class="skill-tag">Adobe Illustrator</span>
-          <span class="skill-tag">Adobe InDesign</span>
-          <span class="skill-tag">Direction Artistique</span>
-          <span class="skill-tag">Scénographie</span>
-          <span class="skill-tag">Identité Visuelle</span>
-          <span class="skill-tag">Mise en Page Éditoriale</span>
-          <span class="skill-tag">Community Management</span>
-        </div>
-      </div>
-
-      <div class="nav-buttons-row js-scroll">
-        <button class="btn-outline" id="prevProject">← Projet Précédent</button>
-        <button class="btn-outline" id="nextProject">Projet Suivant →</button>
-        <a href="projets.html" class="btn-outline">Retour au Portfolio</a>
-      </div>
-
-    </div>
-  </main>
+        </p></div><div class="pc-foot"><span class="pc-tech">Stage Digiactif</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Community Management — Resto Classic Car</h2><div class="dd"><p>
+          Durant mon stage chez <strong>Digiactif</strong>, j'ai créé du contenu de <strong>community management</strong> pour <em>Resto Classic Car</em>, une entreprise spécialisée dans la restauration automobile <strong>Citroën</strong>. Sur des sujets libres, j'ai conçu plus de <strong>20 affiches</strong> au format carré <strong>1:1</strong>, pensées pour une diffusion sur <strong>Facebook</strong>.
+        </p><p style="margin-top:20px;">
+          Chaque visuel a été travaillé pour rester cohérent avec l'univers de la marque (teintes, typographie, mise en avant des véhicules restaurés) tout en s'adaptant aux codes visuels des réseaux sociaux.
+        </p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/post1.png" alt="Post Facebook — Resto Classic Car"><figcaption>Post Facebook — Resto Classic Car</figcaption></figure><figure><img loading="lazy" src="images/post2.png" alt="Post Facebook — Resto Classic Car"><figcaption>Post Facebook — Resto Classic Car</figcaption></figure><figure><img loading="lazy" src="images/post3.png" alt="Post Facebook — Resto Classic Car"><figcaption>Post Facebook — Resto Classic Car</figcaption></figure></div></div></article><article class="pc" style="--i:4" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - 2024 / Stage Digiactif</span><div class="badges"><span class="skill-tag">Adobe Photoshop</span><span class="skill-tag">Adobe Illustrator</span><span class="skill-tag">Adobe InDesign</span><span class="skill-tag">Direction Artistique</span><span class="skill-tag">Scénographie</span><span class="skill-tag">Identité Visuelle</span><span class="skill-tag">Mise en Page Éditoriale</span><span class="skill-tag">Community Management</span></div></div><h2 class="pc-title">Compétences Techniques</h2><div class="pc-desc"></div><div class="pc-foot"><span class="pc-tech">Adobe Photoshop • Adobe Illustrator • Adobe InDesign • Direction Artistique</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Compétences Techniques</h2><div class="dd"><div class="badges"><span class="skill-tag">Adobe Photoshop</span><span class="skill-tag">Adobe Illustrator</span><span class="skill-tag">Adobe InDesign</span><span class="skill-tag">Direction Artistique</span><span class="skill-tag">Scénographie</span><span class="skill-tag">Identité Visuelle</span><span class="skill-tag">Mise en Page Éditoriale</span><span class="skill-tag">Community Management</span></div></div><div class="dg"></div></div></article></div><div class="nav-buttons-row"><a class="btn-outline" href="projet1.html">← Projet Précédent</a><a class="btn-outline" href="projet3.html">Projet Suivant →</a><a class="btn-outline" href="projets.html">Retour au Portfolio</a></div></main><dialog id="dlg"><button class="x" type="button">Fermer ✕</button><div id="dbody"></div></dialog>
 
   <footer>
     <div>© 2026 Oscar Da Silva</div>
@@ -501,142 +392,7 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
-
-      const allSliders = document.querySelectorAll('.slider-wrap');
-      allSliders.forEach((slider) => {
-          const slidesContainer = slider.querySelector('.slides');
-          const slides = Array.from(slidesContainer.querySelectorAll('.slide'));
-          const prevBtn = slider.querySelector('.btn-prev');
-          const nextBtn = slider.querySelector('.btn-next');
-          
-          let currentIndex = 0;
-          const totalSlides = slides.length;
-          let autoTimer = null;
-
-          function updateSlider() {
-            slidesContainer.style.transform = `translateX(${ -currentIndex * 100 }%)`;
-          }
-          function goNext() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
-          }
-          function goPrev() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            updateSlider();
-          }
-
-          if(nextBtn) {
-            nextBtn.addEventListener('click', () => { goNext(); stopAuto(); });
-          }
-          if(prevBtn) {
-            prevBtn.addEventListener('click', () => { goPrev(); stopAuto(); });
-          }
-
-          function startAuto() {
-            if(!autoTimer) autoTimer = setInterval(goNext, 5000);
-          }
-          function stopAuto() {
-            if(autoTimer) { clearInterval(autoTimer); autoTimer = null; }
-          }
-
-          slider.addEventListener('mouseenter', stopAuto);
-          slider.addEventListener('mouseleave', startAuto);
-          startAuto();
-      });
-
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightboxImage');
-      const lbClose = document.getElementById('lightboxClose');
-      const lbPrev = document.getElementById('lightboxPrev');
-      const lbNext = document.getElementById('lightboxNext');
-      
-      let currentGroupImages = []; 
-      let currentLbIndex = 0;
-
-      function openLightbox(clickedImg) {
-        const container = clickedImg.closest('.slider-section');
-        
-        if (container) {
-          currentGroupImages = Array.from(container.querySelectorAll('img'));
-          currentLbIndex = currentGroupImages.indexOf(clickedImg);
-          
-          updateLightboxImage();
-          lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden';
-          
-      
-        }
-      }
-
-      function updateLightboxImage() {
-        if(currentGroupImages.length > 0) {
-          lbImg.src = currentGroupImages[currentLbIndex].src;
-        }
-      }
-
-      function nextLbImage() {
-        if(currentGroupImages.length === 0) return;
-        currentLbIndex = (currentLbIndex + 1) % currentGroupImages.length;
-        updateLightboxImage();
-      }
-
-      function prevLbImage() {
-        if(currentGroupImages.length === 0) return;
-        currentLbIndex = (currentLbIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
-        updateLightboxImage();
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        currentGroupImages = []; 
-      }
-
-      document.querySelectorAll('.right-col img').forEach(img => {
-        img.addEventListener('click', (e) => {
-           if(img.parentElement.tagName === 'A') return;
-           
-           e.stopPropagation();
-           openLightbox(e.target);
-        });
-      });
-      if(lbClose) lbClose.addEventListener('click', closeLightbox);
-      
-      if(lbNext) lbNext.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextLbImage();
-      });
-      
-      if(lbPrev) lbPrev.addEventListener('click', (e) => {
-        e.stopPropagation();
-        prevLbImage();
-      });
-      
-      lightbox.addEventListener('click', (e) => { 
-          if(e.target === lightbox) closeLightbox();
-      });
-
-      document.addEventListener('keydown', e => {
-        if(lightbox.classList.contains('active')) {
-          if(e.key === 'Escape') closeLightbox();
-          if(e.key === 'ArrowRight') nextLbImage();
-          if(e.key === 'ArrowLeft') prevLbImage();
-        }
-      });
-
-      document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet1.html'; });
-      document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet3.html'; });
-    });
-  </script>
+  
 <script>
 (function(){
 const d=document,r=d.documentElement,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -669,6 +425,11 @@ d.addEventListener('DOMContentLoaded',()=>{
   cv.parentElement.addEventListener('mousemove',e=>{const b=cv.getBoundingClientRect();m={x:e.clientX-b.left,y:e.clientY-b.top}});
   (function f(){c.clearRect(0,0,W,H);for(let x=20;x<W;x+=36)for(let y=20;y<H;y+=36){const k=Math.max(0,1-Math.hypot(x-m.x,y-m.y)/160);c.fillStyle=`rgba(154,147,255,${.12+k*.8})`;c.beginPath();c.arc(x,y,1+k*2.4,0,7);c.fill()}requestAnimationFrame(f)})()}
 });})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{const d=document.getElementById('dlg'),b=document.getElementById('dbody');
+document.querySelectorAll('.pc').forEach(c=>{const o=()=>{b.innerHTML=c.querySelector('.pc-detail').innerHTML;d.showModal()};c.addEventListener('click',o);c.addEventListener('keydown',e=>{if(e.key==='Enter')o()})});
+d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('x'))d.close()})});
 </script>
 </body>
 </html>
