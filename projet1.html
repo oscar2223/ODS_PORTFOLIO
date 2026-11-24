@@ -257,341 +257,55 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}#glow,#hero-canvas{display:none}}
 .cert{text-decoration:none;color:inherit;display:block}.cert img{width:100%;aspect-ratio:4/3;object-fit:contain;background:#fff;border-radius:4px;margin-bottom:16px}.cert h3{font-size:18px!important;margin:0!important}
 </style>
+<style>
+.pg{max-width:1400px;margin:0 auto;padding:130px 4vw 90px}
+.pg .big-title{font-size:clamp(48px,7vw,96px);margin:0 0 20px;letter-spacing:-2px}
+.pg .project-meta{flex-direction:row;flex-wrap:wrap;gap:12px 48px;border-left:0;padding:0;margin:0 0 56px}
+.pg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:40px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:32px;padding:26px;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35);cursor:pointer;transition:.35s;animation:pcIn .8s both;animation-delay:calc(var(--i)*.08s)}
+.pc:hover{transform:translateY(-6px);border-color:var(--ac)}
+.pc-frame{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:22px;padding:20px;height:317px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.pc-label{font:500 16px 'Manrope',sans-serif;color:#9a9aa5}
+.pc-frame img{width:100%;flex:1;min-height:0;object-fit:cover;object-position:top;border-radius:10px;background:#fff}
+.pc-frame .badges{align-content:flex-start}
+.pc-title{font:700 26px/1.2 'Manrope',sans-serif;letter-spacing:-.5px;margin:28px 0 14px}
+.pc-desc{font:400 18px/1.6 'Manrope',sans-serif;color:#b9b9c2;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:24px}
+.pc-desc p,.pc-desc li{display:inline;margin:0;font:inherit;color:inherit}
+.pc-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;align-items:center;gap:14px;font:500 15px 'Manrope',sans-serif}
+.pc-tech{color:#9a9aa5}.pc-more{background:none;border:0;color:#fff;font:inherit;cursor:pointer}
+@keyframes pcIn{from{opacity:0;transform:translateY(30px)}}
+#dlg{width:min(1000px,92vw);max-height:88vh;background:#0e0e11;color:#eaeaea;border:1px solid var(--line);border-radius:24px;padding:36px}
+#dlg::backdrop{background:rgba(0,0,0,.8)}
+#dlg .x{position:sticky;top:0;float:right;background:var(--ac);color:#fff;border:0;border-radius:20px;padding:8px 16px;cursor:pointer;font:500 13px 'Manrope',sans-serif}
+#dlg h2{font:700 32px 'Manrope',sans-serif;margin:0 0 18px}
+#dlg .dd p,#dlg .dd li{font:300 21px/1.6 'Cormorant Garamond',serif;color:#ddd}
+.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:26px}
+.dg img{width:100%;border-radius:8px;border:1px solid var(--line)}.dg figcaption{font:400 13px 'Manrope',sans-serif;color:#aaa;margin-top:6px}.dg a{color:var(--ac2)}
+@media(max-width:880px){.pg-grid{grid-template-columns:1fr}.pc-frame{height:260px}}
+</style>
 </head>
 <body>
 
   <div class="noise-overlay"></div>
 
   <header class="ods-header"><a class="ods-logo" href="index.html">ODS.</a>
-<nav class="ods-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button id="theme" type="button" aria-label="Changer de thème">◐ Thème</button></nav>
-<button class="ods-burger ods-nav-btn" type="button" aria-label="Menu" style="background:none;border:0;color:#fff;cursor:pointer">☰</button></header>
+<nav aria-label="Navigation principale" class="ods-nav"><a href="index.html">Accueil</a><a href="apropos.html">À propos</a><a href="index.html#competences">Compétences</a><a href="projets.html">Projets</a><a href="index.html#experience">Expériences</a><a href="galerie.html">Galerie</a><a href="contact.html">Contact</a><button aria-label="Changer de thème" id="theme" type="button">◐ Thème</button></nav>
+<button aria-label="Menu" class="ods-burger ods-nav-btn" style="background:none;border:0;color:#fff;cursor:pointer" type="button">☰</button></header>
 
-  <main class="content">
-
-    <div class="left-col">
-      <div class="sticky-wrapper">
-        <h1 class="big-title">
-          Développement web
-        </h1>
-
-        <div class="project-meta js-scroll">
-          <div class="meta-item">
-            <strong>Rôle</strong>
-            Développement Fullstack & Design
+  <main class="pg"><h1 class="big-title">Développement web</h1><div class="project-meta">
+<div class="meta-item">
+<strong>Rôle</strong>
+            Développement Fullstack &amp; Design
           </div>
-          <div class="meta-item">
-            <strong>Contexte</strong>
+<div class="meta-item">
+<strong>Contexte</strong>
             BUT MMI - 2024 / Stage Digiactif
           </div>
-          <div class="meta-item">
-            <strong>Stack</strong>
+<div class="meta-item">
+<strong>Stack</strong>
             HTML, CSS, JS, PHP, MySQL, Jquery, PrestaShop, WordPress
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="right-col">
-
-      <!-- Projet 1 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 1 : Cité Drap'Hier & CMS</h3>
-        </div>
-        <div class="cat-description">
-          <p>L'objectif était de concevoir un CMS complet pour la ville d'Elbeuf. Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="cms">
-          <div class="gallery-item">
-            <img loading="lazy" src="images/site_drap.jpg" alt="Site La Cité Drap'Hier">
-            <div class="gallery-caption">Accueil - Site Vitrine</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/imageCMS1.png" alt="Interface CMS">
-            <div class="gallery-caption">Interface Admin CMS</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/image-elbeuf.png" alt="Détail CMS">
-            <div class="gallery-caption">Gestion des articles</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/image-elbeuf-2.png" alt="Interface CMS 2">
-            <div class="gallery-caption">Édition de contenu</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 2 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 2 : Billetterie (SAE 203)</h3>
-        </div>
-        <div class="cat-description">
-          <p>Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données et implémenté toute la logique PHP : inscription, sécurisation, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="billetterie">
-          <div class="gallery-item">
-            <a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/sitesae203.jpg" alt="Dashboard SAE 203">
-            <div class="gallery-caption">Page d'accueil Billetterie</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/site-1-reservation-billet.png" alt="Réservation">
-            <div class="gallery-caption">Module de Réservation</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/sitebilletterie1.png" alt="Back-office Admin">
-            <div class="gallery-caption">Back-office Administrateur</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 3 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 3 : Site de Food Truck</h3>
-        </div>
-        <div class="cat-description">
-          <p>Durant la <strong>SAE 105</strong>, j'ai conçu de A à Z un site de Food Truck en HTML5/CSS3/JS, avec une intégration Google Maps, un tableau de menu, un planning et un formulaire de contact.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="foodtruck">
-          <div class="gallery-item">
-            <a href="https://oscar2223.github.io/ods-foodtruck/index.html" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir Foodtruck</a>
-            <img loading="lazy" src="images/ods-foodtruck.PNG" alt="ODS Food Truck">
-            <div class="gallery-caption">Site Food Truck</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 4 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 4 : Data Analyst</h3>
-        </div>
-        <div class="cat-description">
-          <p>Durant la <strong>SAE 303</strong>, j'ai réalisé un dashboard climatique sur l'évolution climatique du département des Bouches-du-Rhône (13), intégrant des KPI, des courbes de tendance, des diagrammes, des filtres interactifs et une carte de stations.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="apps">
-          <div class="gallery-item">
-            <a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir Dashboard</a>
-            <img loading="lazy" src="images/dashboard.PNG" alt="Dashboard SAE 303">
-            <div class="gallery-caption">Dashboard Climatique</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 5 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 5 : Intégration Web PrestaShop — Analyse Concurrentielle</h3>
-        </div>
-        <div class="cat-description">
-          <p>Dans le cadre de mon stage chez <strong>Digiactif</strong>, j'ai réalisé une veille et une intégration de pages « À Propos » sur PrestaShop en m'appuyant sur l'analyse de sites concurrents (<strong>1083</strong> et <strong>Numon Ring</strong>). Chaque page présente les projets, les compétences et les expériences acquises, avec une intégration HTML/CSS/Smarty fidèle aux maquettes et respectant les contraintes du back-office PrestaShop.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="prestashop-concurrence">
-          <div class="gallery-item">
-            <img loading="lazy" src="images/1083-1.png" alt="Page À Propos - 1083">
-            <div class="gallery-caption">1083 — Page À Propos</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/1083-2.png" alt="Intégration PrestaShop - 1083">
-            <div class="gallery-caption">1083 — Intégration PrestaShop</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/1083-3.png" alt="Structure de contenu - 1083">
-            <div class="gallery-caption">1083 — Structure de contenu</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/1083-4.png" alt="Détail page - 1083">
-            <div class="gallery-caption">1083 — Détail de la page</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/numonring1.png" alt="Page À Propos - Numon Ring">
-            <div class="gallery-caption">Numon Ring — Page À Propos</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/numonring2.png" alt="Intégration PrestaShop - Numon Ring">
-            <div class="gallery-caption">Numon Ring — Intégration PrestaShop</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/numonring3.png" alt="Structure de contenu - Numon Ring">
-            <div class="gallery-caption">Numon Ring — Structure de contenu</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/numonring4.png" alt="Détail page - Numon Ring">
-            <div class="gallery-caption">Numon Ring — Détail de la page</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 6 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 6 : Maquettes UX — Sites Clients PrestaShop</h3>
-        </div>
-        <div class="cat-description">
-          <p>Conception de maquettes UX pour des sites clients gérés sous <strong>PrestaShop</strong> chez Digiactif : <strong>DPSG</strong> et <strong>Mes Petites Étiquettes</strong>. Travail sur l'arborescence, la hiérarchie visuelle et l'ergonomie des parcours utilisateurs avant intégration front-end.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="ux-clients">
-          <div class="gallery-item">
-            <a href="https://dpsg.fr/moulinet-spinning-exo/47840-60632-moulinet-penn-wrath-ii.html" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/dpsg.png" alt="Maquette UX - DPSG">
-            <div class="gallery-caption">DPSG — Maquette UX</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://www.mespetitesetiquettes.com/fr/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/petitesetiquettes-digiactif.fr.png" alt="Maquette UX - Mes Petites Étiquettes">
-            <div class="gallery-caption">Mes Petites Étiquettes — Maquette UX</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 7 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 7 : Smati Paris — Développement Full Stack PrestaShop</h3>
-        </div>
-        <div class="cat-description">
-          <p>Développement front-end et back-office complet pour le site <strong>Smati Paris</strong> sur PrestaShop, dans le strict respect du cahier des charges client : titres, espacements, tailles et emplacements des éléments définis en amont, ainsi que la charte graphique. Intégration de pages sur-mesure (« Services Sur-Mesure », « Devenir Revendeur ») avec des templates Smarty et un rendu responsive garanti sur mobile et desktop.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="smati-paris">
-          <div class="gallery-item">
-            <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Pages Sur-Mesures</a>
-            <img loading="lazy" src="images/service-1.png" alt="Page Services Sur-Mesure - version 1">
-            <div class="gallery-caption">Services Sur-Mesure — V1</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Pages Sur-Mesures</a>
-            <img loading="lazy" src="images/service2.png" alt="Page Services Sur-Mesure - version 2">
-            <div class="gallery-caption">Services Sur-Mesure — V2</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Devenir revendeur</a>
-            <img loading="lazy" src="images/devenirrev-1.png" alt="Page Devenir Revendeur - version 1">
-            <div class="gallery-caption">Devenir Revendeur — V1</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Devenir revendeur</a>
-            <img loading="lazy" src="images/devenirrev1.png" alt="Page Devenir Revendeur - version 2">
-            <div class="gallery-caption">Devenir Revendeur — V2</div>
-          </div>
-          <div class="gallery-item">
-            <img loading="lazy" src="images/couleur.png" alt="Charte graphique Smati Paris">
-            <div class="gallery-caption">Charte graphique & couleurs</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 8 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 8 : Refontes WordPress — 25+ Sites FR & BR</h3>
-        </div>
-        <div class="cat-description">
-          <p>Refonte complète de plus de 25 sites <strong>WordPress</strong> pour des clients Digiactif en France et au Brésil : audit SEO, restructuration des contenus, développement de templates sur-mesure et optimisation des balises Hn et des méta-descriptions.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="wordpress-multi">
-          <div class="gallery-item">
-            <a href="http://jardinsdapraia.com.br" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/br1.png" alt="Refonte site Brésil">
-            <div class="gallery-caption">Refonte WordPress — Site BR</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://infocletico.com.br/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/infoclitico.png" alt="Infoclínico - site santé BR">
-            <div class="gallery-caption">Infoclínico — Site Santé (BR)</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://vacinaparnaiba.com.br/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/vacina.png" alt="Vacina Parnaíba - site vaccination">
-            <div class="gallery-caption">Vacina Parnaíba — Site Vaccination (BR)</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://www.outillage-de-jardin.com/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/1-jardin.png" alt="Site jardin FR">
-            <div class="gallery-caption">Le Jardin — Site FR</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://www.association-soins-sante.fr/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/soins.png" alt="Site soins et bien-être FR">
-            <div class="gallery-caption">Soins & Bien-être — Site FR</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://www.reduire-votre-impot.com/" target="_blank" rel="noopener noreferrer" class="gallery-link-overlay">Voir le site</a>
-            <img loading="lazy" src="images/impot1.png" alt="Site impôts FR">
-            <div class="gallery-caption">Impôts — Site FR</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Projet 9 -->
-      <div class="project-category js-scroll">
-        <div class="cat-header">
-          <h3>Projet 9 : Shift Up — Application, Back-office & CMS</h3>
-        </div>
-        <div class="cat-description">
-          <p><strong>Shift Up</strong> est une entreprise fictive dont la mission est d'accompagner la transition écologique des entreprises via un collectif, en créant du lien entre les engagements pris par l'entreprise et les actions concrètes de chaque salarié au quotidien.</p>
-          <p style="margin-top:16px;">J'ai conçu l'écosystème complet du projet, avec une identité visuelle dédiée et une base de données centralisant les coordonnées des utilisateurs ainsi que leurs performances sur les tâches :</p>
-          <p style="margin-top:16px;"><strong>Application (côté clients)</strong> : les salariés y accomplissent des tâches écologiques quotidiennes dans leur environnement de travail.</p>
-          <p style="margin-top:16px;"><strong>Site web (côté admins)</strong> : consultation des entreprises et de leurs départements, chiffres détaillés, bannissement/suppression d'employés, gestion des profils, ajout/modification/suppression des tâches ; le super-admin peut en plus créer des entreprises et des badges pour l'application.</p>
-          <p style="margin-top:16px;"><strong>CMS</strong> dédié à la promotion de l'entreprise, de ses valeurs et de ses services.</p>
-        </div>
-
-        <div class="gallery-grid" data-group="shift-up">
-          <div class="gallery-item">
-            <a href="https://dasilosc.tpweb.univ-rouen.fr/Shift-Up/views/users/index.php" target="_blank" rel="noopener noreferrer">
-              <img loading="lazy" src="images/user.png" alt="Application Shift Up - espace utilisateur">
-            </a>
-            <div class="gallery-caption">Application — Espace Utilisateur</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://dasilosc.tpweb.univ-rouen.fr/Shift-Up/views/admin/admin_dashboard.php" target="_blank" rel="noopener noreferrer">
-              <img loading="lazy" src="images/admin.png" alt="Site web Shift Up - back-office admin">
-            </a>
-            <div class="gallery-caption">Site Web — Back-office Admin</div>
-          </div>
-          <div class="gallery-item">
-            <a href="https://skyal12.github.io/Shift-Up-showcase-site/" target="_blank" rel="noopener noreferrer">
-              <img loading="lazy" src="images/CMS.png" alt="CMS vitrine Shift Up">
-            </a>
-            <div class="gallery-caption">CMS — Site Vitrine</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-block js-scroll" style="margin-top: 40px;">
-        <h3>Compétences Acquises</h3>
-        <div class="skills-grid">
-          <span class="skill-tag">Développement PHP/MySQL</span>
-          <span class="skill-tag">Architecture MVC</span>
-          <span class="skill-tag">Sécurité Web</span>
-          <span class="skill-tag">Design Responsive</span>
-          <span class="skill-tag">Gestion de Base de Données</span>
-          <span class="skill-tag">PrestaShop / Smarty</span>
-          <span class="skill-tag">WordPress</span>
-          <span class="skill-tag">UX / Maquettage</span>
-          <span class="skill-tag">SEO</span>
-          <span class="skill-tag">Application Web Multi-Rôles</span>
-          <span class="skill-tag">Identité Visuelle</span>
-        </div>
-      </div>
-
-      <div class="nav-buttons-row js-scroll">
-        <button class="btn-outline" id="prevProject">← Projet Précédent</button>
-        <button class="btn-outline" id="nextProject">Projet Suivant →</button>
-        <a href="projets.html" class="btn-outline">Retour au Portfolio</a>
-      </div>
-
-    </div>
-  </main>
+</div><div class="pg-grid"><article class="pc" style="--i:0" tabindex="0"><div class="pc-frame"><span class="pc-label">SAE 202</span><img loading="lazy" src="images/site_drap.jpg" alt="Cité Drap'Hier & CMS"></div><h2 class="pc-title">Cité Drap'Hier & CMS</h2><div class="pc-desc"><p>L'objectif était de concevoir un CMS complet pour la ville d'Elbeuf. Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.</p></div><div class="pc-foot"><span class="pc-tech">SAE 202</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Cité Drap'Hier & CMS</h2><div class="dd"><p>L'objectif était de concevoir un CMS complet pour la ville d'Elbeuf. Le site vitrine (<strong>SAE 202</strong>) se concentre sur l'immersion historique, avec des galeries et un blog administrable.</p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/site_drap.jpg" alt="Accueil - Site Vitrine"><figcaption>Accueil - Site Vitrine</figcaption></figure><figure><img loading="lazy" src="images/imageCMS1.png" alt="Interface Admin CMS"><figcaption>Interface Admin CMS</figcaption></figure><figure><img loading="lazy" src="images/image-elbeuf.png" alt="Gestion des articles"><figcaption>Gestion des articles</figcaption></figure><figure><img loading="lazy" src="images/image-elbeuf-2.png" alt="Édition de contenu"><figcaption>Édition de contenu</figcaption></figure></div></div></article><article class="pc" style="--i:1" tabindex="0"><div class="pc-frame"><span class="pc-label">SAE 203</span><img loading="lazy" src="images/sitesae203.jpg" alt="Billetterie (SAE 203)"></div><h2 class="pc-title">Billetterie (SAE 203)</h2><div class="pc-desc"><p>Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données et implémenté toute la logique PHP : inscription, sécurisation, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.</p></div><div class="pc-foot"><span class="pc-tech">PHP</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Billetterie (SAE 203)</h2><div class="dd"><p>Pour la <strong>SAE 203</strong>, j'ai développé une billetterie sur-mesure. J'ai modélisé la base de données et implémenté toute la logique PHP : inscription, sécurisation, gestion des sessions et verrouillage transactionnel pour éviter les sur-réservations.</p><div class="badges"></div></div><div class="dg"><figure><a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" target="_blank" rel="noopener"><img loading="lazy" src="images/sitesae203.jpg" alt="Page d'accueil Billetterie"></a><figcaption>Page d'accueil Billetterie — <a href="https://dasilosc.tpweb.univ-rouen.fr/SAE203_site/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><img loading="lazy" src="images/site-1-reservation-billet.png" alt="Module de Réservation"><figcaption>Module de Réservation</figcaption></figure><figure><img loading="lazy" src="images/sitebilletterie1.png" alt="Back-office Administrateur"><figcaption>Back-office Administrateur</figcaption></figure></div></div></article><article class="pc" style="--i:2" tabindex="0"><div class="pc-frame"><span class="pc-label">SAE 105</span><img loading="lazy" src="images/ods-foodtruck.PNG" alt="Site de Food Truck"></div><h2 class="pc-title">Site de Food Truck</h2><div class="pc-desc"><p>Durant la <strong>SAE 105</strong>, j'ai conçu de A à Z un site de Food Truck en HTML5/CSS3/JS, avec une intégration Google Maps, un tableau de menu, un planning et un formulaire de contact.</p></div><div class="pc-foot"><span class="pc-tech">HTML5 • CSS3 • JavaScript • Google Maps</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Site de Food Truck</h2><div class="dd"><p>Durant la <strong>SAE 105</strong>, j'ai conçu de A à Z un site de Food Truck en HTML5/CSS3/JS, avec une intégration Google Maps, un tableau de menu, un planning et un formulaire de contact.</p><div class="badges"></div></div><div class="dg"><figure><a href="https://oscar2223.github.io/ods-foodtruck/index.html" target="_blank" rel="noopener"><img loading="lazy" src="images/ods-foodtruck.PNG" alt="Site Food Truck"></a><figcaption>Site Food Truck — <a href="https://oscar2223.github.io/ods-foodtruck/index.html" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:3" tabindex="0"><div class="pc-frame"><span class="pc-label">SAE 303</span><img loading="lazy" src="images/dashboard.PNG" alt="Data Analyst"></div><h2 class="pc-title">Data Analyst</h2><div class="pc-desc"><p>Durant la <strong>SAE 303</strong>, j'ai réalisé un dashboard climatique sur l'évolution climatique du département des Bouches-du-Rhône (13), intégrant des KPI, des courbes de tendance, des diagrammes, des filtres interactifs et une carte de stations.</p></div><div class="pc-foot"><span class="pc-tech">SAE 303</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Data Analyst</h2><div class="dd"><p>Durant la <strong>SAE 303</strong>, j'ai réalisé un dashboard climatique sur l'évolution climatique du département des Bouches-du-Rhône (13), intégrant des KPI, des courbes de tendance, des diagrammes, des filtres interactifs et une carte de stations.</p><div class="badges"></div></div><div class="dg"><figure><a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" target="_blank" rel="noopener"><img loading="lazy" src="images/dashboard.PNG" alt="Dashboard Climatique"></a><figcaption>Dashboard Climatique — <a href="https://dasilosc.tpweb.univ-rouen.fr/dashboard-s3/index.php" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:4" tabindex="0"><div class="pc-frame"><span class="pc-label">Stage Digiactif</span><img loading="lazy" src="images/1083-1.png" alt="Intégration Web PrestaShop — Analyse Concurrentielle"></div><h2 class="pc-title">Intégration Web PrestaShop — Analyse Concurrentielle</h2><div class="pc-desc"><p>Dans le cadre de mon stage chez <strong>Digiactif</strong>, j'ai réalisé une veille et une intégration de pages « À Propos » sur PrestaShop en m'appuyant sur l'analyse de sites concurrents (<strong>1083</strong> et <strong>Numon Ring</strong>). Chaque page présente les projets, les compétences et les expériences acquises, avec une intégration HTML/CSS/Smarty fidèle aux maquettes et respectant les contraintes du back-office PrestaShop.</p></div><div class="pc-foot"><span class="pc-tech">PrestaShop</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Intégration Web PrestaShop — Analyse Concurrentielle</h2><div class="dd"><p>Dans le cadre de mon stage chez <strong>Digiactif</strong>, j'ai réalisé une veille et une intégration de pages « À Propos » sur PrestaShop en m'appuyant sur l'analyse de sites concurrents (<strong>1083</strong> et <strong>Numon Ring</strong>). Chaque page présente les projets, les compétences et les expériences acquises, avec une intégration HTML/CSS/Smarty fidèle aux maquettes et respectant les contraintes du back-office PrestaShop.</p><div class="badges"></div></div><div class="dg"><figure><img loading="lazy" src="images/1083-1.png" alt="1083 — Page À Propos"><figcaption>1083 — Page À Propos</figcaption></figure><figure><img loading="lazy" src="images/1083-2.png" alt="1083 — Intégration PrestaShop"><figcaption>1083 — Intégration PrestaShop</figcaption></figure><figure><img loading="lazy" src="images/1083-3.png" alt="1083 — Structure de contenu"><figcaption>1083 — Structure de contenu</figcaption></figure><figure><img loading="lazy" src="images/1083-4.png" alt="1083 — Détail de la page"><figcaption>1083 — Détail de la page</figcaption></figure><figure><img loading="lazy" src="images/numonring1.png" alt="Numon Ring — Page À Propos"><figcaption>Numon Ring — Page À Propos</figcaption></figure><figure><img loading="lazy" src="images/numonring2.png" alt="Numon Ring — Intégration PrestaShop"><figcaption>Numon Ring — Intégration PrestaShop</figcaption></figure><figure><img loading="lazy" src="images/numonring3.png" alt="Numon Ring — Structure de contenu"><figcaption>Numon Ring — Structure de contenu</figcaption></figure><figure><img loading="lazy" src="images/numonring4.png" alt="Numon Ring — Détail de la page"><figcaption>Numon Ring — Détail de la page</figcaption></figure></div></div></article><article class="pc" style="--i:5" tabindex="0"><div class="pc-frame"><span class="pc-label">Stage Digiactif</span><img loading="lazy" src="images/dpsg.png" alt="Maquettes UX — Sites Clients PrestaShop"></div><h2 class="pc-title">Maquettes UX — Sites Clients PrestaShop</h2><div class="pc-desc"><p>Conception de maquettes UX pour des sites clients gérés sous <strong>PrestaShop</strong> chez Digiactif : <strong>DPSG</strong> et <strong>Mes Petites Étiquettes</strong>. Travail sur l'arborescence, la hiérarchie visuelle et l'ergonomie des parcours utilisateurs avant intégration front-end.</p></div><div class="pc-foot"><span class="pc-tech">PrestaShop</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Maquettes UX — Sites Clients PrestaShop</h2><div class="dd"><p>Conception de maquettes UX pour des sites clients gérés sous <strong>PrestaShop</strong> chez Digiactif : <strong>DPSG</strong> et <strong>Mes Petites Étiquettes</strong>. Travail sur l'arborescence, la hiérarchie visuelle et l'ergonomie des parcours utilisateurs avant intégration front-end.</p><div class="badges"></div></div><div class="dg"><figure><a href="https://dpsg.fr/moulinet-spinning-exo/47840-60632-moulinet-penn-wrath-ii.html" target="_blank" rel="noopener"><img loading="lazy" src="images/dpsg.png" alt="DPSG — Maquette UX"></a><figcaption>DPSG — Maquette UX — <a href="https://dpsg.fr/moulinet-spinning-exo/47840-60632-moulinet-penn-wrath-ii.html" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.mespetitesetiquettes.com/fr/" target="_blank" rel="noopener"><img loading="lazy" src="images/petitesetiquettes-digiactif.fr.png" alt="Mes Petites Étiquettes — Maquette UX"></a><figcaption>Mes Petites Étiquettes — Maquette UX — <a href="https://www.mespetitesetiquettes.com/fr/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:6" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - 2024 / Stage Digiactif</span><img loading="lazy" src="images/service-1.png" alt="Smati Paris — Développement Full Stack PrestaShop"></div><h2 class="pc-title">Smati Paris — Développement Full Stack PrestaShop</h2><div class="pc-desc"><p>Développement front-end et back-office complet pour le site <strong>Smati Paris</strong> sur PrestaShop, dans le strict respect du cahier des charges client : titres, espacements, tailles et emplacements des éléments définis en amont, ainsi que la charte graphique. Intégration de pages sur-mesure (« Services Sur-Mesure », « Devenir Revendeur ») avec des templates Smarty et un rendu responsive garanti sur mobile et desktop.</p></div><div class="pc-foot"><span class="pc-tech">PrestaShop</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Smati Paris — Développement Full Stack PrestaShop</h2><div class="dd"><p>Développement front-end et back-office complet pour le site <strong>Smati Paris</strong> sur PrestaShop, dans le strict respect du cahier des charges client : titres, espacements, tailles et emplacements des éléments définis en amont, ainsi que la charte graphique. Intégration de pages sur-mesure (« Services Sur-Mesure », « Devenir Revendeur ») avec des templates Smarty et un rendu responsive garanti sur mobile et desktop.</p><div class="badges"></div></div><div class="dg"><figure><a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener"><img loading="lazy" src="images/service-1.png" alt="Services Sur-Mesure — V1"></a><figcaption>Services Sur-Mesure — V1 — <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener"><img loading="lazy" src="images/service2.png" alt="Services Sur-Mesure — V2"></a><figcaption>Services Sur-Mesure — V2 — <a href="https://www.smati-paris.fr/content/11-service-sur-mesure" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener"><img loading="lazy" src="images/devenirrev-1.png" alt="Devenir Revendeur — V1"></a><figcaption>Devenir Revendeur — V1 — <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener"><img loading="lazy" src="images/devenirrev1.png" alt="Devenir Revendeur — V2"></a><figcaption>Devenir Revendeur — V2 — <a href="https://www.smati-paris.fr/content/10-devenir-revendeur" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><img loading="lazy" src="images/couleur.png" alt="Charte graphique & couleurs"><figcaption>Charte graphique & couleurs</figcaption></figure></div></div></article><article class="pc" style="--i:7" tabindex="0"><div class="pc-frame"><span class="pc-label">Stage Digiactif</span><img loading="lazy" src="images/br1.png" alt="Refontes WordPress — 25+ Sites FR & BR"></div><h2 class="pc-title">Refontes WordPress — 25+ Sites FR & BR</h2><div class="pc-desc"><p>Refonte complète de plus de 25 sites <strong>WordPress</strong> pour des clients Digiactif en France et au Brésil : audit SEO, restructuration des contenus, développement de templates sur-mesure et optimisation des balises Hn et des méta-descriptions.</p></div><div class="pc-foot"><span class="pc-tech">WordPress</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Refontes WordPress — 25+ Sites FR & BR</h2><div class="dd"><p>Refonte complète de plus de 25 sites <strong>WordPress</strong> pour des clients Digiactif en France et au Brésil : audit SEO, restructuration des contenus, développement de templates sur-mesure et optimisation des balises Hn et des méta-descriptions.</p><div class="badges"></div></div><div class="dg"><figure><a href="http://jardinsdapraia.com.br" target="_blank" rel="noopener"><img loading="lazy" src="images/br1.png" alt="Refonte WordPress — Site BR"></a><figcaption>Refonte WordPress — Site BR — <a href="http://jardinsdapraia.com.br" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://infocletico.com.br/" target="_blank" rel="noopener"><img loading="lazy" src="images/infoclitico.png" alt="Infoclínico — Site Santé (BR)"></a><figcaption>Infoclínico — Site Santé (BR) — <a href="https://infocletico.com.br/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://vacinaparnaiba.com.br/" target="_blank" rel="noopener"><img loading="lazy" src="images/vacina.png" alt="Vacina Parnaíba — Site Vaccination (BR)"></a><figcaption>Vacina Parnaíba — Site Vaccination (BR) — <a href="https://vacinaparnaiba.com.br/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.outillage-de-jardin.com/" target="_blank" rel="noopener"><img loading="lazy" src="images/1-jardin.png" alt="Le Jardin — Site FR"></a><figcaption>Le Jardin — Site FR — <a href="https://www.outillage-de-jardin.com/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.association-soins-sante.fr/" target="_blank" rel="noopener"><img loading="lazy" src="images/soins.png" alt="Soins & Bien-être — Site FR"></a><figcaption>Soins & Bien-être — Site FR — <a href="https://www.association-soins-sante.fr/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://www.reduire-votre-impot.com/" target="_blank" rel="noopener"><img loading="lazy" src="images/impot1.png" alt="Impôts — Site FR"></a><figcaption>Impôts — Site FR — <a href="https://www.reduire-votre-impot.com/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:8" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - 2024 / Stage Digiactif</span><img loading="lazy" src="images/user.png" alt="Shift Up — Application, Back-office & CMS"></div><h2 class="pc-title">Shift Up — Application, Back-office & CMS</h2><div class="pc-desc"><p><strong>Shift Up</strong> est une entreprise fictive dont la mission est d'accompagner la transition écologique des entreprises via un collectif, en créant du lien entre les engagements pris par l'entreprise et les actions concrètes de chaque salarié au quotidien.</p><p style="margin-top:16px;">J'ai conçu l'écosystème complet du projet, avec une identité visuelle dédiée et une base de données centralisant les coordonnées des utilisateurs ainsi que leurs performances sur les tâches :</p><p style="margin-top:16px;"><strong>Application (côté clients)</strong> : les salariés y accomplissent des tâches écologiques quotidiennes dans leur environnement de travail.</p><p style="margin-top:16px;"><strong>Site web (côté admins)</strong> : consultation des entreprises et de leurs départements, chiffres détaillés, bannissement/suppression d'employés, gestion des profils, ajout/modification/suppression des tâches ; le super-admin peut en plus créer des entreprises et des badges pour l'application.</p><p style="margin-top:16px;"><strong>CMS</strong> dédié à la promotion de l'entreprise, de ses valeurs et de ses services.</p></div><div class="pc-foot"><span class="pc-tech">BUT MMI - 2024 / Stage Digiactif</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Shift Up — Application, Back-office & CMS</h2><div class="dd"><p><strong>Shift Up</strong> est une entreprise fictive dont la mission est d'accompagner la transition écologique des entreprises via un collectif, en créant du lien entre les engagements pris par l'entreprise et les actions concrètes de chaque salarié au quotidien.</p><p style="margin-top:16px;">J'ai conçu l'écosystème complet du projet, avec une identité visuelle dédiée et une base de données centralisant les coordonnées des utilisateurs ainsi que leurs performances sur les tâches :</p><p style="margin-top:16px;"><strong>Application (côté clients)</strong> : les salariés y accomplissent des tâches écologiques quotidiennes dans leur environnement de travail.</p><p style="margin-top:16px;"><strong>Site web (côté admins)</strong> : consultation des entreprises et de leurs départements, chiffres détaillés, bannissement/suppression d'employés, gestion des profils, ajout/modification/suppression des tâches ; le super-admin peut en plus créer des entreprises et des badges pour l'application.</p><p style="margin-top:16px;"><strong>CMS</strong> dédié à la promotion de l'entreprise, de ses valeurs et de ses services.</p><div class="badges"></div></div><div class="dg"><figure><a href="https://dasilosc.tpweb.univ-rouen.fr/Shift-Up/views/users/index.php" target="_blank" rel="noopener"><img loading="lazy" src="images/user.png" alt="Application Shift Up - espace utilisateur"></a><figcaption>Application Shift Up - espace utilisateur — <a href="https://dasilosc.tpweb.univ-rouen.fr/Shift-Up/views/users/index.php" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://dasilosc.tpweb.univ-rouen.fr/Shift-Up/views/admin/admin_dashboard.php" target="_blank" rel="noopener"><img loading="lazy" src="images/admin.png" alt="Site web Shift Up - back-office admin"></a><figcaption>Site web Shift Up - back-office admin — <a href="https://dasilosc.tpweb.univ-rouen.fr/Shift-Up/views/admin/admin_dashboard.php" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure><figure><a href="https://skyal12.github.io/Shift-Up-showcase-site/" target="_blank" rel="noopener"><img loading="lazy" src="images/CMS.png" alt="CMS vitrine Shift Up"></a><figcaption>CMS vitrine Shift Up — <a href="https://skyal12.github.io/Shift-Up-showcase-site/" target="_blank" rel="noopener">Ouvrir ↗</a></figcaption></figure></div></div></article><article class="pc" style="--i:9" tabindex="0"><div class="pc-frame"><span class="pc-label">BUT MMI - 2024 / Stage Digiactif</span><div class="badges"><span class="skill-tag">Développement PHP/MySQL</span><span class="skill-tag">Architecture MVC</span><span class="skill-tag">Sécurité Web</span><span class="skill-tag">Design Responsive</span><span class="skill-tag">Gestion de Base de Données</span><span class="skill-tag">PrestaShop / Smarty</span><span class="skill-tag">WordPress</span><span class="skill-tag">UX / Maquettage</span><span class="skill-tag">SEO</span><span class="skill-tag">Application Web Multi-Rôles</span><span class="skill-tag">Identité Visuelle</span></div></div><h2 class="pc-title">Compétences Acquises</h2><div class="pc-desc"></div><div class="pc-foot"><span class="pc-tech">Développement PHP/MySQL • Architecture MVC • Sécurité Web • Design Responsive</span><button class="pc-more" type="button">Découvrir ↗</button></div><div class="pc-detail" hidden><h2>Compétences Acquises</h2><div class="dd"><div class="badges"><span class="skill-tag">Développement PHP/MySQL</span><span class="skill-tag">Architecture MVC</span><span class="skill-tag">Sécurité Web</span><span class="skill-tag">Design Responsive</span><span class="skill-tag">Gestion de Base de Données</span><span class="skill-tag">PrestaShop / Smarty</span><span class="skill-tag">WordPress</span><span class="skill-tag">UX / Maquettage</span><span class="skill-tag">SEO</span><span class="skill-tag">Application Web Multi-Rôles</span><span class="skill-tag">Identité Visuelle</span></div></div><div class="dg"></div></div></article></div><div class="nav-buttons-row"><a class="btn-outline" href="projets.html">← Projet Précédent</a><a class="btn-outline" href="projet2.html">Projet Suivant →</a><a class="btn-outline" href="projets.html">Retour au Portfolio</a></div></main><dialog id="dlg"><button class="x" type="button">Fermer ✕</button><div id="dbody"></div></dialog>
 
   <footer>
     <div>© 2026 Oscar Da Silva</div>
@@ -611,89 +325,7 @@ html[data-theme=light] img,html[data-theme=light] video,html[data-theme=light] i
     </div>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Apparition au scroll
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.js-scroll').forEach(el => observer.observe(el));
-
-      // Lightbox
-      const lightbox = document.getElementById('lightbox');
-      const lbImg = document.getElementById('lightboxImage');
-      const lbClose = document.getElementById('lightboxClose');
-      const lbPrev = document.getElementById('lightboxPrev');
-      const lbNext = document.getElementById('lightboxNext');
-
-      let currentGroupImages = [];
-      let currentIndex = 0;
-
-      function openLightbox(imgElement) {
-        const groupContainer = imgElement.closest('.gallery-grid');
-        if (!groupContainer) return;
-        currentGroupImages = Array.from(groupContainer.querySelectorAll('img'));
-        currentIndex = currentGroupImages.indexOf(imgElement);
-
-        updateImage();
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function updateImage() {
-        if (currentGroupImages.length > 0) {
-          lbImg.src = currentGroupImages[currentIndex].src;
-          lbImg.alt = currentGroupImages[currentIndex].alt;
-        }
-      }
-
-      function nextImage() {
-        currentIndex = (currentIndex + 1) % currentGroupImages.length;
-        updateImage();
-      }
-
-      function prevImage() {
-        currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
-        updateImage();
-      }
-
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-        currentGroupImages = [];
-      }
-
-      document.querySelectorAll('.gallery-item img').forEach(img => {
-        img.addEventListener('click', (e) => {
-          if (img.parentElement.tagName === 'A') return;
-          e.stopPropagation();
-          openLightbox(e.target);
-        });
-      });
-
-      if (lbClose) lbClose.addEventListener('click', closeLightbox);
-      if (lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
-      if (lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
-
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-
-      document.addEventListener('keydown', e => {
-        if (lightbox.classList.contains('active')) {
-          if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowRight') nextImage();
-          if (e.key === 'ArrowLeft') prevImage();
-        }
-      });
-
-      // Navigation entre projets
-      document.getElementById('prevProject')?.addEventListener('click', () => { window.location.href = 'projet4.html'; });
-      document.getElementById('nextProject')?.addEventListener('click', () => { window.location.href = 'projet2.html'; });
-    });
-  </script>
+  
 <script>
 (function(){
 const d=document,r=d.documentElement,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -726,6 +358,11 @@ d.addEventListener('DOMContentLoaded',()=>{
   cv.parentElement.addEventListener('mousemove',e=>{const b=cv.getBoundingClientRect();m={x:e.clientX-b.left,y:e.clientY-b.top}});
   (function f(){c.clearRect(0,0,W,H);for(let x=20;x<W;x+=36)for(let y=20;y<H;y+=36){const k=Math.max(0,1-Math.hypot(x-m.x,y-m.y)/160);c.fillStyle=`rgba(154,147,255,${.12+k*.8})`;c.beginPath();c.arc(x,y,1+k*2.4,0,7);c.fill()}requestAnimationFrame(f)})()}
 });})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{const d=document.getElementById('dlg'),b=document.getElementById('dbody');
+document.querySelectorAll('.pc').forEach(c=>{const o=()=>{b.innerHTML=c.querySelector('.pc-detail').innerHTML;d.showModal()};c.addEventListener('click',o);c.addEventListener('keydown',e=>{if(e.key==='Enter')o()})});
+d.addEventListener('click',e=>{if(e.target===d||e.target.classList.contains('x'))d.close()})});
 </script>
 </body>
 </html>
